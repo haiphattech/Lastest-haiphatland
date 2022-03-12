@@ -1,14 +1,14 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-        <a class="sidebar-brand brand-logo" href="index.html"><img style="width: calc(244px - 85px);  height: 50px" src="./assets/images/logo.png" alt="logo" /></a>
-        <a class="sidebar-brand brand-logo-mini" href="index.html"><img style="width: calc(244px - 120px); width: 90%; height: 40px" src="./assets/images/logo-mini.png" alt="logo" /></a>
+        <a class="sidebar-brand brand-logo" href="index.html"><img style="width: calc(244px - 85px);  height: 50px" src="/assets/images/logo.png" alt="logo" /></a>
+        <a class="sidebar-brand brand-logo-mini" href="index.html"><img style="width: calc(244px - 120px); width: 90%; height: 40px" src="/assets/images/logo-mini.png" alt="logo" /></a>
     </div>
     <ul class="nav">
         <li class="nav-item profile">
             <div class="profile-desc">
                 <div class="profile-pic">
                     <div class="count-indicator">
-                        <img class="img-xs rounded-circle " src="./assets/images/faces/man.png" alt="">
+                        <img class="img-xs rounded-circle " src="/assets/images/faces/man.png" alt="">
                         <span class="count bg-success"></span>
                     </div>
                     <div class="profile-name">
@@ -56,27 +56,27 @@
         <li class="nav-item nav-category">
             <span class="nav-link">Navigation</span>
         </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="index.html">
+        <li class="nav-item menu-items {{ request()->is('/') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('home')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item menu-items">
+        <li class="nav-item menu-items {{ (request()->is('permissions') || request()->is('permissions/create')) ? 'active' : '' }}">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
-                <i class="mdi mdi-laptop"></i>
+                <i class="mdi mdi-security"></i>
               </span>
-                <span class="menu-title">Basic UI Elements</span>
+                <span class="menu-title">Phân quyền</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                    <li class="nav-item"> <a class="nav-link {{ (request()->is('permissions')) ? 'active' : '' }}" href="{{route('permissions.index')}}">Danh sách</a></li>
+                    <li class="nav-item"> <a class="nav-link {{ request()->is('permissions/create') ? 'active' : '' }}" href="{{route('permissions.create')}}">Thêm mới</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('type-permissions.index')}}">Loại quyền</a></li>
                 </ul>
             </div>
         </li>
