@@ -13,7 +13,7 @@ class PermissionRepository extends AbstractRepository
 
     public function getPermissions()
     {
-        return $query = $this->model->paginate();
+        return $query = $this->model->orderBy('ID', 'DESC')->paginate();
 
     }
     public function getPermissionByStatus($status)

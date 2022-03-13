@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\PermissionRole;
 use App\Models\Role;
 use App\Repositories\PermissionRepository as PermissionRepo;
-use App\Repositories\RoleStaffRepository as RoleStaffRepo;
-use App\Repositories\StaffRepository as StaffRepo;
+use App\Repositories\RoleUserRepository as RoleUserRepo;
+use App\Repositories\UserRepository as UserRepository;
 use App\Repositories\RoleRepository as RoleRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,22 +15,22 @@ use Illuminate\Support\Facades\Auth;
 class RoleController extends Controller
 {
     protected $roleRepo;
-    protected $staffRepo;
-    protected $roleStaffRepo;
+    protected $userRepo;
+    protected $roleUserRepo;
     protected $permissionRepoRepo;
 
-    public function __construct(RoleStaffRepo $roleStaffRepo,StaffRepo $staffRepo, PermissionRepo $permissionRepoRepo, RoleRepo $roleRepo)
+    public function __construct(RoleUserRepo $roleUserRepo,UserRepository $userRepo, PermissionRepo $permissionRepoRepo, RoleRepo $roleRepo)
     {
         $this->roleRepo = $roleRepo;
-        $this->staffRepo = $staffRepo;
-        $this->roleStaffRepo = $roleStaffRepo;
+        $this->userRepo = $userRepo;
+        $this->roleUserRepo = $roleUserRepo;
         $this->permissionRepoRepo = $permissionRepoRepo;
     }
 
-    public function authorization($staff_id)
+    public function authorization($user_id)
     {
-        $staff = $this->staffRepo->find($staff_id);
-        if(!$staff)
+        $user = $this->userRepo->find($user_id);
+        if(!$user)
             return view('back-end.errors.404');
 //
 //        if(!count($staff->roles))
@@ -47,8 +47,8 @@ class RoleController extends Controller
                 $permissions[$permission['type_permission_id']]['childPermissions'][] = $permission;
             }
         }
-        return view('back-end.roles.authorization',[
-            'staff' => $staff,
+        return view('roles.authorization',[
+            'user' => $user,
             'role' => $role,
             'permissions' => $permissions
         ]);

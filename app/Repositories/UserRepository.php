@@ -16,4 +16,8 @@ class UserRepository extends AbstractRepository
     {
         return User::class;
     }
+    public function  getUsers()
+    {
+        return $this->model->get();
+    }
 }

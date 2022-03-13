@@ -12,7 +12,7 @@ class TypePermissionRepository extends AbstractRepository
     }
     public function getTypePermissions()
     {
-        return $this->model->paginate();
+        return $this->model->orderBy('ID', 'DESC')->paginate();
     }
     public function getTypePermissionByStatus($status)
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\TypePermission;
 use App\Repositories\TypePermissionRepository as TypePermissionRepo;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,10 @@ class TypePermissionController extends Controller
      */
     public function create()
     {
-        return view('type-permissions.create');
+        $typePermission = new TypePermission();
+        return view('type-permissions.create',[
+            'typePermission' => $typePermission
+        ]);
     }
 
     /**
@@ -75,7 +79,11 @@ class TypePermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $typePermission = $this->typePermissionRepoRepo->find($id);
+        if(!$typePermission) return abort(404);
+        return view('type-permissions.update',[
+            'typePermission' => $typePermission
+        ]);
     }
 
     /**
@@ -87,7 +95,14 @@ class TypePermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+        ]);
+        $data['name'] = $request['name'];
+        $data['status'] = isset($request['status']) ? 1 : 0;
+        $this->typePermissionRepoRepo->update($data, $id);
+
+        return redirect(route('type-permissions.index'))->with('success',  'Cập nhật thành công');
     }
 
     /**
@@ -98,6 +113,7 @@ class TypePermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TypePermission::destroy($id);
+        return redirect()->route('type-permissions.index')->with('success','Xóa thành công');
     }
 }

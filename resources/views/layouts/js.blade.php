@@ -11,4 +11,6 @@
 <script src="{{asset('assets/js/settings.js')}}"></script>
 <script src="{{asset('assets/js/todolist.js')}}"></script>
 <script src="{{asset('assets/js/dashboard.js')}}"></script>
+<script src="{{asset('assets/js/notify.min.js')}}"></script>
+<script src="{{asset('assets/js/z_setting.js')}}"></script>
 @stack('scripts')

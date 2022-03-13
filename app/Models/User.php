@@ -38,4 +38,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_users');
+    }
+    public function isSuperAdmin()
+    {
+        return $this->is_admin ? true : false;
+    }
+    public function getCreatedAt()
+    {
+        return date('d/m/Y', strtotime($this['created_at']));
+    }
+
+
 }

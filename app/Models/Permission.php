@@ -10,7 +10,7 @@ class Permission extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'title',
+        'key',
         'user_id',
         'type_permission_id',
         'status'

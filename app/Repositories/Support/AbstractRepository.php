@@ -113,7 +113,7 @@ abstract class AbstractRepository implements InterfaceRepository
      * @param array $columns
      * @return mixed
      */
-    public function paginate($perPage = 15, $columns = array('*'))
+    public function paginate($perPage = 20, $columns = array('*'))
     {
         return $this->model->paginate($perPage, $columns);
     }

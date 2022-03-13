@@ -12,5 +12,8 @@ class TypePermission extends Model
     protected $fillable = [
         'name', 'status'
     ];
-
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class);
+    }
 }

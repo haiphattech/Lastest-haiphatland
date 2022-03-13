@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Permission;
 use App\Repositories\TypePermissionRepository as TypePermissionRepo;
 use App\Repositories\PermissionRepository as PermissionRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\AbstractList;
 
 class PermissionController extends Controller
 {
@@ -40,9 +42,10 @@ class PermissionController extends Controller
     public function create()
     {
         $typePermissions = $this->typePermissionRepoRepo->getTypePermissionByStatus(true);
-
+        $permission = new Permission();
         return view('permissions.create',[
             'typePermissions' => $typePermissions,
+            'permission' => $permission
         ]);
     }
 
@@ -56,13 +59,13 @@ class PermissionController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255|unique:permissions',
-            'title' => 'required|max:255|unique:permissions',
+            'key' => 'required|max:255|unique:permissions',
             'type_permission_id' => 'required',
         ]);
 
-        $data = $request->only('name', 'title', 'type_permission_id');
+        $data = $request->only('name', 'key', 'type_permission_id');
         $data['status'] = isset($request['status']) ? 1 : 0;
-        $data['staff_id'] = Auth::id();
+        $data['user_id'] = Auth::id();
 
         $this->permissionRepoRepo->create($data);
         return redirect(route('permissions.index'))->with('success',  'Thêm quyền thành công');
@@ -87,7 +90,15 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $typePermissions = $this->typePermissionRepoRepo->getTypePermissionByStatus(true);
+        $permission = $this->permissionRepoRepo->find($id);
+
+        if(!$permission) return  abort(404);
+
+        return view('permissions.update',[
+            'typePermissions' => $typePermissions,
+            'permission' => $permission
+        ]);
     }
 
     /**
@@ -99,7 +110,17 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'key' => 'required|max:255',
+            'type_permission_id' => 'required',
+        ]);
+
+        $data = $request->only('name', 'key', 'type_permission_id');
+        $data['status'] = isset($request['status']) ? 1 : 0;
+
+        $this->permissionRepoRepo->update($data, $id);
+        return redirect(route('permissions.index'))->with('success',  'Cập nhật thành công');
     }
 
     /**
@@ -110,6 +131,7 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Permission::destroy($id);
+        return redirect()->route('permissions.index')->with('success','Xóa thành công');
     }
 }
