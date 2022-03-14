@@ -22,4 +22,7 @@
 .icon-mr{
     margin-right: 0!important;
 }
+.card .card-body {
+    padding: 1rem 1.5rem!important;
+}
 

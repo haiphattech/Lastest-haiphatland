@@ -7,13 +7,15 @@ use App\Http\Controllers\TypePermissionController;
 use App\Http\Controllers\Ajax\AjaxController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\CategoryController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resources([
         'type-permissions'  => TypePermissionController::class,
         'permissions'       => PermissionController::class,
-        'users'             => UserController::class
+        'users'             => UserController::class,
+        'categories'        => CategoryController::class
     ]);
 
     //Phân quyền cho nhân viên

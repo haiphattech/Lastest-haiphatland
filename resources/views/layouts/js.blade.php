@@ -19,5 +19,8 @@
     CKEDITOR.replace('content', {
         filebrowserBrowseUrl: '{{route('ckfinder_browser')}}'
     })
+    CKEDITOR.on('content', function(e) {
+        e.editor.addCss( 'body { background-color: red; }' );
+    });
 </script>
 @include('ckfinder::setup')
