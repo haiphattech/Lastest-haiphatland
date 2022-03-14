@@ -23,5 +23,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/role/authorization-update-post', [RoleController::class, 'authorizationUpdatePost'])->name('authorization-user-role-update-post');
     //Ajax
     Route::post('enable-column', [AjaxController::class, 'enableColumn'])->name('enable-column');
+
+    Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+        ->name('ckfinder_connector');
+
+    Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+        ->name('ckfinder_browser');
 });
 require __DIR__.'/auth.php';

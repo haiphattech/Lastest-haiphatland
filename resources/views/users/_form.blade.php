@@ -1,13 +1,15 @@
 <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 grid-margin stretch-card">
+    <div class="col-md-1"></div>
+    <div class="col-md-7 grid-margin">
         <div class="card">
             <div class="card-body">
-                <form class="forms-sample">
+                <h4 class="card-title">Thông tin cá nhân</h4>
+                <hr>
+                <div>
                     <div class="form-group row">
-                        <label for="name" class="col-sm-3 col-form-label">Tên quyền</label>
+                        <label for="name" class="col-sm-3 col-form-label">Họ tên</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="name" placeholder="Tên quyền" name="name" value="{{old('name', $permission['name'])}}">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="vd: Hải Phát Land" value="{{old('name')}}">
                             @if ($errors->has('name'))
                                 <div class="mt-1 notification-error">
                                     {{$errors->first('name')}}
@@ -16,52 +18,57 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="title" class="col-sm-3 col-form-label">Mã quyền</label>
+                        <label for="username" class="col-sm-3 col-form-label">Tên đăng nhập</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="key" name="key" value="{{old('key', $permission['key'])}}" placeholder="Mã quyền (news-post)">
-                            @if ($errors->has('key'))
+                            <input type="text" class="form-control" name="username" id="username" placeholder="vd: hpl2022" value="{{old('username')}}">
+                            @if ($errors->has('username'))
                                 <div class="mt-1 notification-error">
-                                    {{$errors->first('key')}}
+                                    {{$errors->first('username')}}
                                 </div>
                             @endif
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="exampleInputMobile" class="col-sm-3 col-form-label">Loại quyền</label>
+                        <label for="email" class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
-                            <select name="type_permission_id" id="" class="form-control text-white">
-                                <option value="">--chọn--</option>
-                                @foreach($typePermissions as $typePermission)
-                                    <option {{$permission['type_permission_id'] == $typePermission->id ? 'selected="selected"' : ''}} value="{{$typePermission->id}}">{{$typePermission->name}}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('type_permission_id'))
+                            <input type="email" class="form-control" name="email" id="email" placeholder="vd: hpl2022@haiphatland.com.vn" value="{{old('email')}}">
+                            @if ($errors->has('email'))
                                 <div class="mt-1 notification-error">
-                                    {{$errors->first('type_permission_id')}}
+                                    {{$errors->first('email')}}
                                 </div>
                             @endif
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="exampleInputConfirmPassword2" class="col-sm-3 pt-2 col-form-label">Trạng thái</label>
+                        <label for="phone" class="col-sm-3 col-form-label">Số điện thoại</label>
                         <div class="col-sm-9">
-                            <div class="form-check" style="margin-top: 5px;">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" {{$permission['status'] ? "checked" : ''}} value="{{$permission['status']}}" name="status">
-                                    <i class="input-helper"></i>
-                                </label>
-                            </div>
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="vd: 0989 888 999" value="{{old('phone')}}">
+                            @if ($errors->has('phone'))
+                                <div class="mt-1 notification-error">
+                                    {{$errors->first('phone')}}
+                                </div>
+                            @endif
                         </div>
                     </div>
 
                     <hr>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary me-2">Lưu</button>
-                        <a href="{{route('permissions.index')}}" class="btn btn-dark">Quay lại</a>
+                        <a href="{{route('users.index')}}" class="btn btn-dark">Quay lại</a>
                     </div>
 
-                </form>
+                </div>
             </div>
         </div>
     </div>
+    <div class="col-md-3 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hình ảnh</h4>
+                <hr>
+            </div>
+        </div>
+    </div>
+
 </div>
+

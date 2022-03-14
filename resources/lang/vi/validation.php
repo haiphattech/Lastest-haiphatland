@@ -148,6 +148,9 @@ return [
 
     'attributes' => [
         'name' => 'Tên',
+        'email' => 'Email',
+        'username' => 'Tên đăng nhập',
+        'phone' => 'Số điện thoại',
         'key' => 'Mã',
         'type' => 'Loại',
         'type_permission_id' => 'Loại quyền'

@@ -14,3 +14,10 @@
 <script src="{{asset('assets/js/notify.min.js')}}"></script>
 <script src="{{asset('assets/js/z_setting.js')}}"></script>
 @stack('scripts')
+<script src="{{url('ckeditor/ckeditor.js')}}"></script>
+<script>
+    CKEDITOR.replace('content', {
+        filebrowserBrowseUrl: '{{route('ckfinder_browser')}}'
+    })
+</script>
+@include('ckfinder::setup')

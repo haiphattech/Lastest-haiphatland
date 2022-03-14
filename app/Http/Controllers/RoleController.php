@@ -31,7 +31,7 @@ class RoleController extends Controller
     {
         $user = $this->userRepo->find($user_id);
         if(!$user)
-            return view('back-end.errors.404');
+            return abort(404);
 //
 //        if(!count($staff->roles))
 //            return view('back-end.errors.404');
@@ -61,26 +61,27 @@ class RoleController extends Controller
         ]);
         $data_roles['name'] = $request['name'];
         $data_roles['create_by'] = Auth::id();
+        $data_roles['owner_id'] = $request->user_id;
         $role = $this->roleRepo->create($data_roles);
-        $role->staffs()->attach($request->staff_id);
+        $role->users()->attach($request->user_id);
         $role->permissions()->attach($request->select_pre);
-        return redirect(route('staffs.index'))->with('success', 'Cấp quyền thành công');
+        return redirect(route('users.index'))->with('success', 'Cấp quyền thành công');
 //        $role->
     }
 
-    public function authorizationUpdate($staff_id, $role_id)
+    public function authorizationUpdate($user_id, $role_id)
     {
-        $checkPre = $this->roleStaffRepo->checkPermission($staff_id, $role_id);
+        $checkPre = $this->roleUserRepo->checkPermission($user_id, $role_id);
         if(!$checkPre)
-            return view('back-end.errors.404');
+            return abort(404);
 
-        $staff = $this->staffRepo->find($staff_id);
-        if(!$staff)
-            return view('back-end.errors.404');
+        $user = $this->userRepo->find($user_id);
+        if(!$user)
+            return abort(404);
 
         $role = $this->roleRepo->find($role_id);
         if(!$role)
-            return view('back-end.errors.404');
+            return abort(404);
 
         $dataPermissions = $this->permissionRepoRepo->getPermissionByStatus(true);
 
@@ -96,8 +97,8 @@ class RoleController extends Controller
                 $permissions[$permission['type_permission_id']]['childPermissions'][] = $permission;
             }
         }
-        return view('back-end.roles.authorization-update',[
-            'staff' => $staff,
+        return view('roles.authorization-update',[
+            'user' => $user,
             'role' => $role,
             'permissions' => $permissions
         ]);
@@ -116,7 +117,7 @@ class RoleController extends Controller
         $data['name'] = $request['name'];
         $this->roleRepo->update($data, $role_id);
         $role->permissions()->sync($request->select_pre);
-        return redirect(route('staffs.index'))->with('success', 'Cấp nhật quyền thành công');
+        return redirect(route('users.index'))->with('success', 'Cấp nhật quyền thành công');
     }
     /**
      * Display a listing of the resource.

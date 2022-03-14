@@ -18,9 +18,9 @@
     </div>
         <!-- Container-fluid starts-->
     <div class="container-fluid">
-        <form class="theme-form" method="POST" action="{{route('permissions.store')}}">
+        <form class="theme-form" method="POST" action="{{route('users.store')}}">
             @csrf
-            @include('permissions._form',['permission'=> $permission])
+            @include('users._form')
         </form>
     </div>
     </div>

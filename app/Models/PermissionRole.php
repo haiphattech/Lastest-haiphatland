@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PermissionRole extends Model
 {
     use HasFactory;
-    protected $table = 'permission_roles';
+    protected $table = 'permission_role';
 }

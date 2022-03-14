@@ -20,7 +20,7 @@
         <div class="container-fluid">
             <form class="theme-form" method="POST" action="{{route('authorization-user-post')}}" enctype="multipart/form-data">
                 @csrf
-                <input name="staff_id" type="hidden" value="{{$user->id}}">
+                <input name="user_id" type="hidden" value="{{$user->id}}">
                 @include('roles._form',['user'=>$user, 'role' => $role])
             </form>
         </div>

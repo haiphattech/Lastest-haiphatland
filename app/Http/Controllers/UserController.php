@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository as UserRepo;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -38,7 +39,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -49,7 +50,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|max:255|unique:users',
+            'username' => 'required|max:255|unique:users',
+            'phone' => 'required|max:255',
+        ]);
+        $data = $request->only('name', 'email', 'username', 'phone');
+        $data['password'] = Hash::make(substr($data['phone'], 0, 7));
+        $this->userRepo->create($data);
+        return redirect(route('users.index'))->with('success', 'Thêm mới thành công');
     }
 
     /**

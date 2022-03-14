@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'username', 'email', 'password', 'phone'
     ];
 
     /**
@@ -51,6 +51,9 @@ class User extends Authenticatable
     {
         return date('d/m/Y', strtotime($this['created_at']));
     }
-
+    public function role()
+    {
+        return $this->hasOne(Role::class, 'owner_id', 'id');
+    }
 
 }

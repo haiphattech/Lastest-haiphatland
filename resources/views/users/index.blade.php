@@ -52,7 +52,7 @@
                                             <p><i class="mdi mdi-cellphone-iphone"></i>  {{$user->phone}}</p>
                                             @endif
                                             <p><i class="mdi mdi-login"></i>  {{$user->username}}</p>
-                                            @if($user->phone)
+                                            @if($user->address)
                                             <p><i class="mdi mdi-map-marker-radius"></i>  {{$user->address}}</p>
                                             @endif
                                             <p title="Tham gia"><i class="mdi mdi-timer"></i>  {{date('H:i d/m/Y', strtotime($user['created_at']))}}</p>
@@ -64,7 +64,7 @@
                                             @if($user['is_admin'])
                                                 <div class="badge badge-outline-danger badge-pill">Quyền Admin</div>
                                             @else
-                                                <div class="badge badge-outline-success badge-pill">Nhân viên</div>
+                                                <div class="badge badge-outline-success badge-pill">{{isset($user->role) ? $user->role->name : '..........'}}</div>
                                             @endif
                                         </td>
                                         <td role="cell" class="text-center">
@@ -85,7 +85,7 @@
                                                 @else
                                                     @if(count($user->roles) && !empty($user->roles))
 
-                                                        <a href=""
+                                                        <a href="{{route('authorization-user-role',['user_id'=> $user['id'], 'role_id' => $user->roles[0]->id])}}"
                                                            class="btn btn-success btn-sm">
                                                             <i class="fa fa-balance-scale" aria-hidden="true"></i> Cập
                                                             nhật quyền
@@ -98,11 +98,11 @@
                                             </div>
                                             @endif
                                             <a href="{{route('users.edit', $user['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
-                                            <form class="d-inline-block" action="{{ route('users.destroy', $user['id']) }}" method="POST" >
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')"><i class="mdi mdi-delete btn-icon-prepend icon-mr"></i> Xóa</button>
-                                            </form>
+{{--                                            <form class="d-inline-block" action="{{ route('users.destroy', $user['id']) }}" method="POST" >--}}
+{{--                                                @csrf--}}
+{{--                                                @method('DELETE')--}}
+{{--                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')"><i class="mdi mdi-delete btn-icon-prepend icon-mr"></i> Xóa</button>--}}
+{{--                                            </form>--}}
                                         </td>
                                     </tr>
                                 @endforeach
