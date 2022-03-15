@@ -1,5 +1,6 @@
 <div class="row">
-    <div class="col-md-8 grid-margin">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 grid-margin">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Thông tin chung</h5>
@@ -58,6 +59,33 @@
         </div>
         <div class="card mt-4">
             <div class="card-body">
+                <h5 class="card-title">Hình ảnh</h5>
+                <hr>
+                <div class="form-group">
+                    <label for="firstname">Ảnh bìa</label>
+                    <div class="upload_image" data-name="avatar">
+                        <input type="hidden" class="avatar" name="avatar">
+                        <img src="/assets/images/department.jpg" width="180px" alt=""
+                             class="image-avatar">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">Ảnh khác</label>
+                    <div class="upload_image" data-name="avatar">
+                        <input type="hidden" class="avatar" name="avatar">
+                        <img src="/assets/images/department.jpg" width="180px" alt=""
+                             class="image-avatar">
+                    </div>
+                    <div class="img col-md-3 col-sm-6 col-xs-6">
+                        <span class="thumb choose_image" data-input="gallery[]" data-name="article_images">
+                            <img src="/assets/images/image_upload.png">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-4">
+            <div class="card-body">
                 <h5 class="card-title">Mô tả</h5>
                 <hr>
                 <div class="form-group">
@@ -65,12 +93,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4 grid-margin">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Hình ảnh</h5>
-                <hr>
+
+        <div class="card mt-4">
+            <div class="card-body text-center">
+                <button type="submit" class="btn btn-primary me-2">Lưu</button>
+                <a href="{{route('users.index')}}" class="btn btn-dark">Quay lại</a>
             </div>
         </div>
     </div>

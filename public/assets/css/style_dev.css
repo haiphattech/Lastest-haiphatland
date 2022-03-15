@@ -25,4 +25,9 @@
 .card .card-body {
     padding: 1rem 1.5rem!important;
 }
+.upload_image{
+    display: table-cell;
+    border: 1px dashed;
+    padding: 3px;
+}
 
