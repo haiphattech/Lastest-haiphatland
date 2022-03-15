@@ -2,7 +2,7 @@
     <div class="col-md-8 grid-margin">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Thông tin chung</h4>
+                <h5 class="card-title">Thông tin chung</h5>
                 <hr>
                 <div>
                     <div class="form-group row">
@@ -58,7 +58,7 @@
         </div>
         <div class="card mt-4">
             <div class="card-body">
-                <h4 class="card-title">Mô tả</h4>
+                <h5 class="card-title">Mô tả</h5>
                 <hr>
                 <div class="form-group">
                     <textarea id="content"></textarea>
@@ -69,7 +69,7 @@
     <div class="col-md-4 grid-margin">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Hình ảnh</h4>
+                <h5 class="card-title">Hình ảnh</h5>
                 <hr>
             </div>
         </div>
