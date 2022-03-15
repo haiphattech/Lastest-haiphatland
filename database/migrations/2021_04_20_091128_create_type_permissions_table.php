@@ -17,7 +17,6 @@ class CreateTypePermissionsTable extends Migration
             $table->id();
             $table->string('name');
             $table->tinyInteger('status')->default(0)->index();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

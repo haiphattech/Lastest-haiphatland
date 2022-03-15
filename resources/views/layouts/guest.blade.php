@@ -4,53 +4,26 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
         <title>@yield('title')</title>
 
-        <link rel="stylesheet" href="{{asset('assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/vendors/css/vendor.bundle.base.css')}}">
-        <!-- endinject -->
-        <!-- Plugin css for this page -->
-        <!-- End plugin css for this page -->
-        <!-- inject:css -->
-        <!-- endinject -->
-        <!-- Layout styles -->
-        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+              id="bootstrap-css">
+        <!------ Include the above in your HEAD tag ---------->
+        <script src="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"></script>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+        <!-- Include the above in your HEAD tag -->
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{asset('assets/css/style_login.css')}}">
         <!-- End layout styles -->
-        <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
-        <style>
-            .form-control:focus{
-                color: #FFF;
-            }
-            .alert-fill-danger {
-                color: white;
-                background: #fc424a;
-            }
-            .alert {
-                font-size: 0.875rem;
-            }
-            .alert {
-                position: relative;
-                padding: 1rem 1rem;
-                margin-bottom: 1rem;
-                border: 1px solid transparent;
-                border-radius: 0.25rem;
-            }
-        </style>
     </head>
     <body>
-        <div class="container-scroller">
+        <div class="main">
             @yield('content')
         </div>
-        <script src="{{asset('assets/vendors/js/vendor.bundle.base.js')}}"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page -->
-        <!-- End plugin js for this page -->
-        <!-- inject:js -->
-        <script src="{{asset('assets/js/off-canvas.js')}}"></script>
-        <script src="{{asset('/assets/js/hoverable-collapse.js')}}"></script>
-        <script src="{{asset('assets/js/misc.js')}}"></script>
-        <script src="{{asset('assets/js/settings.js')}}"></script>
-        <script src="{{asset('assets/js/todolist.js')}}"></script>
     </body>
 </html>

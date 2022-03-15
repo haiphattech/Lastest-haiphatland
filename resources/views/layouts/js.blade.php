@@ -11,4 +11,16 @@
 <script src="{{asset('assets/js/settings.js')}}"></script>
 <script src="{{asset('assets/js/todolist.js')}}"></script>
 <script src="{{asset('assets/js/dashboard.js')}}"></script>
+<script src="{{asset('assets/js/notify.min.js')}}"></script>
+<script src="{{asset('assets/js/z_setting.js')}}"></script>
 @stack('scripts')
+<script src="{{url('ckeditor/ckeditor.js')}}"></script>
+<script>
+    CKEDITOR.replace('content', {
+        filebrowserBrowseUrl: '{{route('ckfinder_browser')}}'
+    })
+    CKEDITOR.on('content', function(e) {
+        e.editor.addCss( 'body { background-color: red; }' );
+    });
+</script>
+@include('ckfinder::setup')

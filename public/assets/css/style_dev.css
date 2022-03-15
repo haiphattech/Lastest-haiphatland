@@ -1,3 +1,28 @@
 .form-control:focus{
     color: #FFF;
 }
+.notification-error{
+    color: red;
+    font-size: 13px;
+    font-weight: inherit;
+    font-style: italic;
+}
+.btn-add{
+    right: 0;
+    top: -6px;
+}
+.notifyjs-corner {
+   font-weight: inherit;
+    font-size: 13px;
+}
+.css-switch{
+    height: 1.5em;
+    width: 3em!important;
+}
+.icon-mr{
+    margin-right: 0!important;
+}
+.card .card-body {
+    padding: 1rem 1.5rem!important;
+}
+

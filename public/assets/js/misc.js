@@ -23,10 +23,10 @@
       } else {
         //for other url
         if (element.attr('href').indexOf(current) !== -1) {
-          element.parents('.nav-item').last().addClass('active');
+          element.parents('.nav-item').last().addClass('');
           if (element.parents('.sub-menu').length) {
             element.closest('.collapse').addClass('show');
-            element.addClass('active');
+            element.addClass('');
           }
           if (element.parents('.submenu-item').length) {
             element.addClass('active');
@@ -116,7 +116,7 @@
       document.querySelector('#proBanner').classList.add('d-none');
       document.querySelector('#proBanner').classList.remove('d-flex');
       var date = new Date();
-      date.setTime(date.getTime() + 24 * 60 * 60 * 1000); 
+      date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
       $.cookie('corona-free-banner', "true", { expires: date });
     });
   });
