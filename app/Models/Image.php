@@ -13,6 +13,7 @@ class Image extends Model
         'created_by',
         'project_id',
         'journal_id',
+        'category_id',
     ];
 
 }

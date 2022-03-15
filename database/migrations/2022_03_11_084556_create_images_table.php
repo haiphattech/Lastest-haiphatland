@@ -19,6 +19,7 @@ class CreateImagesTable extends Migration
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('project_id')->nullable();
             $table->unsignedInteger('journal_id')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
             $table->timestamps();
         });
     }
