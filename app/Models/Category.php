@@ -10,7 +10,7 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'name',
         'slug',
         'avatar',
         'description',
@@ -22,4 +22,16 @@ class Category extends Model
         'status',
         'created_by'
     ];
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id', 'id');
+    }
+    public function parentLanguage()
+    {
+        return $this->belongsTo(Category::class, 'parent_lang', 'id');
+    }
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }

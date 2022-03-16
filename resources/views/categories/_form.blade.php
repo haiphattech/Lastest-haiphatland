@@ -6,10 +6,13 @@
                 <h5 class="card-title">Thông tin chung</h5>
                 <hr>
                 <div>
+                    <input type="hidden" name="lang" value="{{$lang}}">
+                    <input type="hidden" name="parent_lang" value="{{$category_parent_lang}}">
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label">Tên danh mục</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" id="name" placeholder="vd: Hải Phát Land" value="{{old('name')}}">
+                            <input type="text" class="form-control" name="name" id="name"
+                                   placeholder="Tin tức, Tuyển dụng,..." value="{{old('name', $category['name'])}}">
                             @if ($errors->has('name'))
                                 <div class="mt-1 notification-error">
                                     {{$errors->first('name')}}
@@ -18,40 +21,51 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="username" class="col-sm-3 col-form-label">Thể loại</label>
+                        <label for="parent_id" class="col-sm-3 col-form-label">Danh mục cha</label>
                         <div class="col-sm-9">
-                            <select name="" id="" class="form-control">
-                                <option value="">Chọn</option>
+                            <select name="parent_id" id="parent_id" class="form-control">
+                                <option value="">--ROOT--</option>
+                                @php \App\Helpers\FunctionHelpers::showCategorySelect($categories,  $category['parent_id']) @endphp
                             </select>
-                            @if ($errors->has('username'))
+                            @if ($errors->has('parent_id'))
                                 <div class="mt-1 notification-error">
-                                    {{$errors->first('username')}}
+                                    {{$errors->first('parent_id')}}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="type" class="col-sm-3 col-form-label">Thể loại</label>
+                        <div class="col-sm-9">
+                            <select name="type" id="type" class="form-control" >
+                                <option value="">Chọn</option>
+                                <option {{$category['type'] == 'news' ? 'selected' : ''}} value="news">Tin tức</option>
+                                <option {{$category['type'] == 'activities' ? 'selected' : ''}} value="activities">Lĩnh vực hoạt động</option>
+                                <option {{$category['type'] == 'project' ? 'selected' : ''}} value="project">Dự án</option>
+                                <option {{$category['type'] == 'system' ? 'selected' : ''}} value="system">Hệ thống HPL</option>
+                                <option {{$category['type'] == 'introduces' ? 'selected' : ''}} value="introduces">Giới thiệu chung</option>
+                                <option {{$category['type'] == 'recruit' ? 'selected' : ''}} value="recruit">Tuyển dụng</option>
+                                <option {{$category['type'] == 'journal' ? 'selected' : ''}} value="journal">Tạp chí</option>
+                                <option {{$category['type'] == 'contact' ? 'selected' : ''}} value="contact">Liên hệ</option>
+                                <option {{$category['type'] == 'events' ? 'selected' : ''}} value="events">Sự kiện</option>
+                            </select>
+                            @if ($errors->has('type'))
+                                <div class="mt-1 notification-error">
+                                    {{$errors->first('type')}}
                                 </div>
                             @endif
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="email" class="col-sm-3 col-form-label">Danh mục cha</label>
+                        <label for="username" class="col-sm-3 col-form-label">Trạng thái</label>
                         <div class="col-sm-9">
-                            <select name="" id="" class="form-control">
-                                <option value="">Chọn</option>
-                            </select>
-                            @if ($errors->has('email'))
-                                <div class="mt-1 notification-error">
-                                    {{$errors->first('email')}}
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="phone" class="col-sm-3 col-form-label">Số điện thoại</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="phone" id="phone" placeholder="vd: 0989 888 999" value="{{old('phone')}}">
-                            @if ($errors->has('phone'))
-                                <div class="mt-1 notification-error">
-                                    {{$errors->first('phone')}}
-                                </div>
-                            @endif
+                            <div class="form-check" style="margin-top: 5px;">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" {{isset($category['status']) ? "checked" : ''}} value="" name="status">
+                                    <i class="input-helper"></i>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -63,24 +77,22 @@
                 <hr>
                 <div class="form-group">
                     <label for="firstname">Ảnh bìa</label>
-                    <div class="upload_image" data-name="avatar">
-                        <input type="hidden" class="avatar" name="avatar">
-                        <img src="/assets/images/department.jpg" width="180px" alt=""
-                             class="image-avatar">
+                    <div class="upload_image" data-name="cover">
+                        <input type="hidden" class="cover" name="cover">
+                        <img src="{{($category && $category['cover'])  ? $category['cover'] : '/assets/images/department.jpg'}}" width="180px" alt=""
+                             class="image-cover">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-4">
                     <label for="firstname">Ảnh khác</label>
-                    <div class="upload_image" data-name="avatar">
-                        <input type="hidden" class="avatar" name="avatar">
-                        <img src="/assets/images/department.jpg" width="180px" alt=""
-                             class="image-avatar">
+                    <div class="multiple_images row">
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <div class="box-image">
+                                <i size="40" class="mdi mdi-plus"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="img col-md-3 col-sm-6 col-xs-6">
-                        <span class="thumb choose_image" data-input="gallery[]" data-name="article_images">
-                            <img src="/assets/images/image_upload.png">
-                        </span>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -89,7 +101,7 @@
                 <h5 class="card-title">Mô tả</h5>
                 <hr>
                 <div class="form-group">
-                    <textarea id="content"></textarea>
+                    <textarea id="content" class="form-control" name="description">{!! $category['description'] !!}</textarea>
                 </div>
             </div>
         </div>

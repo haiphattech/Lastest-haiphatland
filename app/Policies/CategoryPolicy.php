@@ -10,6 +10,12 @@ class CategoryPolicy
 {
     use HandlesAuthorization;
 
+    public function before($user, $ability)
+    {
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
+    }
     /**
      * Determine whether the user can view any models.
      *
@@ -18,7 +24,7 @@ class CategoryPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('category_views');
     }
 
     /**
@@ -41,7 +47,7 @@ class CategoryPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('category_add');
     }
 
     /**
@@ -53,7 +59,7 @@ class CategoryPolicy
      */
     public function update(User $user, Category $categories)
     {
-        //
+        return $user->hasPermission('category_edit');
     }
 
     /**
@@ -65,7 +71,7 @@ class CategoryPolicy
      */
     public function delete(User $user, Category $categories)
     {
-        //
+        return $user->hasPermission('category_delete');
     }
 
     /**

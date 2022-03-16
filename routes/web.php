@@ -17,7 +17,7 @@ Route::middleware(['auth'])->group(function () {
         'users'             => UserController::class,
         'categories'        => CategoryController::class
     ]);
-
+    Route::get('/categories/create/{lang}/{category_id}', [CategoryController::class, 'createLanguage'])->name('categories-create.lang');
     //Phân quyền cho nhân viên
     Route::get('/role/authorization/{user_id}', [RoleController::class, 'authorization'])->name('authorization-user');
     Route::post('/role/authorization-post', [RoleController::class, 'authorizationPost'])->name('authorization-user-post');

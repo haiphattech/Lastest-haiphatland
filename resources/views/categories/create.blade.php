@@ -10,7 +10,7 @@
                     <a href="{{route('home')}}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{route('permissions.index')}}">Danh sách</a>
+                    <a href="{{route('categories.index')}}">Danh sách</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
             </ol>

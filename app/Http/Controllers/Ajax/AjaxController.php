@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Models\Category;
 use App\Models\CustomerReview;
-use App\Models\Event;
+use App\Models\Events;
 use App\Models\Permission;
-use App\Models\Product;
+use App\Models\News;
 use App\Models\Slide;
 use App\Models\Post;
 use App\Models\Staff;

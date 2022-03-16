@@ -1,4 +1,4 @@
-.form-control:focus{
+.form-control:focus, select.form-control{
     color: #FFF;
 }
 .notification-error{
@@ -29,5 +29,33 @@
     display: table-cell;
     border: 1px dashed;
     padding: 3px;
+    cursor: pointer;
 }
-
+.box-image{
+    border: 1px dashed;
+    height: 200px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+}
+.box-image i{
+    position: absolute;
+    font-size: 50px;
+    top: 28%;
+    left: 34%;
+}
+.box-image-show {
+    border: 1px dashed;
+    text-align: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+.remove-image{
+    background: #f1f1f1;
+    color: red;
+    padding: 0px 3px 0px;
+    border-radius: 4px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
