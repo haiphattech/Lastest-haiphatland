@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Image;
 use AWS\CRT\HTTP\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -102,7 +103,6 @@ class CategoryController extends Controller
             foreach ($request->gallery as $v_image):
                 $image['url'] = $v_image;
                 $image['category_id'] = $result['id'];
-                $image['created_by'] = Auth::id();
                 $this->imageRepo->create($image);
             endforeach;
         endif;
@@ -128,14 +128,17 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $this->authorize('update', $category);
-        $lang = 'vi';
         if(!$category) return abort(404);
+        $category_parent_lang = 0;
         $images = $this->imageRepo->getImageByCategoryId($category['id']);
+        $lang = $category['lang'];
         $categories = $this->categoryRepo->getAllCategories($lang);
         return view('categories.update', [
             'category' => $category,
             'categories' => $categories,
-            'images' => $images
+            'images' => $images,
+            'lang'     => $lang,
+            'category_parent_lang' => $category_parent_lang
         ]);
 
 
@@ -145,12 +148,24 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateCategoryRequest  $request
-     * @param  \App\Models\Category  $categories
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, Category $categories)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $data = $request->only('name', 'parent_id', 'type', 'cover', 'description', 'lang');
+        $data['slug'] = Str::slug($request->get('name'), '-');
+        $data['status'] = isset($request['status']) ? 1 : 0;
+        $this->categoryRepo->update($data, $category['id']);
+        Image::where('category_id', $category['id'])->delete();
+        if($request->gallery && !empty($request->gallery)):
+            foreach ($request->gallery as $v_image):
+                $image['url'] = $v_image;
+                $image['category_id'] = $category['id'];
+                $this->imageRepo->create($image);
+            endforeach;
+        endif;
+        return redirect(route('categories.index'))->with('success',  'Cập nhật thành công');
     }
 
     /**
@@ -161,7 +176,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        dd($category);
+        $this->authorize('delete', $category);
         $category->delete();
         return redirect()->route('type-permissions.index')->with('success','Xóa thành công');
     }

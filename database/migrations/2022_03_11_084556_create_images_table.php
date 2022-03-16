@@ -15,8 +15,7 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('url')->unique();
-            $table->unsignedInteger('created_by');
+            $table->string('url');
             $table->unsignedInteger('project_id')->nullable();
             $table->unsignedInteger('journal_id')->nullable();
             $table->unsignedInteger('category_id')->nullable();

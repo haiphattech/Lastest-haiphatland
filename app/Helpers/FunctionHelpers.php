@@ -113,7 +113,7 @@ class FunctionHelpers
     }
     public static function checkLangCategoryExist($lang, $category_id)
     {
-        $query = Category::where([['lang', $lang], ['parent_lang', $category_id]])->get();
+        $query = Category::where([['lang', $lang], ['parent_lang', $category_id]])->first();
         if($query)
             return false;
         return true;

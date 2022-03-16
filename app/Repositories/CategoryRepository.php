@@ -30,6 +30,6 @@ class CategoryRepository extends AbstractRepository
     }
     public function checkLangExist($lang, $category_id)
     {
-        return $this->model->where([['lang', $lang], ['parent_lang', $category_id]])->get();
+        return $this->model->where([['lang', $lang], ['parent_lang', $category_id]])->first();
     }
 }

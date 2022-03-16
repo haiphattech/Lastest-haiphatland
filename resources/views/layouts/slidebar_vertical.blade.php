@@ -53,8 +53,8 @@
                 </div>
             </div>
         </li>
-        <li class="nav-item nav-category">
-            <span class="nav-link">Navigation</span>
+        <li class="nav-item nav-category pb-0">
+            <span class="nav-link">Chung</span>
         </li>
         <li class="nav-item menu-items {{ request()->is('/') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('home')}}">
@@ -64,7 +64,7 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item menu-items {{ (request()->is('users/')) ? 'active' : '' }}">
+        <li class="nav-item menu-items {{ (request()->is('users/*') || request()->is('role/*')) ? 'active' : '' }}">
             <a class="nav-link" data-bs-toggle="collapse" href="#user" aria-expanded="false" aria-controls="user">
               <span class="menu-icon">
                 <i class="mdi mdi-account-multiple"></i>
@@ -72,14 +72,14 @@
                 <span class="menu-title">Nhân viên</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="user">
+            <div class="collapse {{ (request()->is('users') || request()->is('users/create') || request()->is('role/*')) ? 'show' : '' }}" id="user">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link {{ (request()->is('users')) ? 'active' : '' }}" href="{{route('users.index')}}">Danh sách</a></li>
                     <li class="nav-item"> <a class="nav-link {{ request()->is('users/create') ? 'active' : '' }}" href="{{route('users.create')}}">Thêm mới</a></li>
                 </ul>
             </div>
         </li>
-        <li class="nav-item menu-items {{ (request()->is('permissions') || request()->is('permissions/create') || request()->is('type-permissions/*') || request()->is('permissions/*')) ? 'active' : '' }}">
+        <li class="nav-item menu-items {{ (request()->is('permissions') || request()->is('permissions/create') || request()->is('type-permissions') || request()->is('type-permissions/create')) ? 'active' : '' }}">
             <a class="nav-link" data-bs-toggle="collapse" href="#permission" aria-expanded="false" aria-controls="permission">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
@@ -87,13 +87,46 @@
                 <span class="menu-title">Phân quyền</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="permission">
+            <div class="collapse {{ (request()->is('permissions') || request()->is('permissions/create') || request()->is('type-permissions') || request()->is('type-permissions/create')) ? 'show' : '' }}" id="permission">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link {{ (request()->is('permissions')) ? 'active' : '' }}" href="{{route('permissions.index')}}">Danh sách</a></li>
                     <li class="nav-item"> <a class="nav-link {{ request()->is('permissions/create') ? 'active' : '' }}" href="{{route('permissions.create')}}">Thêm mới</a></li>
                     <li class="nav-item"> <a class="nav-link {{ request()->is('type-permissions') ? 'active' : '' }}" href="{{route('type-permissions.index')}}">Loại quyền</a></li>
                 </ul>
             </div>
+        </li>
+        <li class="nav-item menu-items {{ (request()->is('categories')||request()->is('categories/*')) ? 'active' : '' }}">
+            <a class="nav-link" data-bs-toggle="collapse" href="#categories" aria-expanded="false" aria-controls="categories">
+              <span class="menu-icon">
+                <i class="mdi mdi-dns"></i>
+              </span>
+                <span class="menu-title">Danh mục</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse {{ (request()->is('categories') || request()->is('categories/create') ||request()->is('categories/*')) ? 'show' : ''}}" id="categories">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link {{ (request()->is('categories')) ? 'active' : '' }}" href="{{route('categories.index')}}"> Danh sách </a></li>
+                    <li class="nav-item"> <a class="nav-link {{ request()->is('categories/create') ? 'active' : '' }}" href="{{route('categories.create')}}"> Thêm mới </a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item menu-items {{ (request()->is('menus')||request()->is('menus/*')) ? 'active' : '' }}">
+            <a class="nav-link" data-bs-toggle="collapse" href="#menus" aria-expanded="false" aria-controls="menus">
+              <span class="menu-icon">
+                <i class="mdi mdi-dns"></i>
+              </span>
+                <span class="menu-title">Menu</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse {{ (request()->is('menus') || request()->is('menus/create') ||request()->is('menus/*')) ? 'show' : ''}}" id="menus">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link {{ (request()->is('menus')) ? 'active' : '' }}" href="{{route('menus.index')}}"> Danh sách </a></li>
+                    <li class="nav-item"> <a class="nav-link {{ request()->is('menus/create') ? 'active' : '' }}" href="{{route('menus.create')}}"> Thêm mới </a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item nav-category  pb-0">
+            <span class="nav-link">Dự án</span>
         </li>
         <li class="nav-item menu-items">
             <a class="nav-link" href="pages/forms/basic_elements.html">

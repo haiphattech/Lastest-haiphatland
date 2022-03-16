@@ -9,7 +9,12 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class StatusProjectPolicy
 {
     use HandlesAuthorization;
-
+    public function before($user, $ability)
+    {
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
+    }
     /**
      * Determine whether the user can view any models.
      *

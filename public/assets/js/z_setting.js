@@ -109,7 +109,7 @@ $(document).ready(function () {
             }
         });
     });
-    $('.multiple_images').on('click','.remove-  image',function(event){
+    $('.multiple_images').on('click','.remove-image',function(event){
         $(this).closest('.img').remove();
     });
 });

@@ -8,6 +8,7 @@ use App\Http\Controllers\Ajax\AjaxController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MenuController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -15,7 +16,8 @@ Route::middleware(['auth'])->group(function () {
         'type-permissions'  => TypePermissionController::class,
         'permissions'       => PermissionController::class,
         'users'             => UserController::class,
-        'categories'        => CategoryController::class
+        'categories'        => CategoryController::class,
+        'menus'             => MenuController::class,
     ]);
     Route::get('/categories/create/{lang}/{category_id}', [CategoryController::class, 'createLanguage'])->name('categories-create.lang');
     //Phân quyền cho nhân viên

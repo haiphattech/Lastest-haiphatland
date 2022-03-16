@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
+use App\Repositories\MenuRepository as MenuRepo;
 
 class MenuController extends Controller
 {
+    protected $menuRepoRepo;
+
+    public function __construct(MenuRepo $menuRepoRepo)
+    {
+        $this->menuRepoRepo = $menuRepoRepo;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,11 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $menus = $this->menuRepoRepo->getMenus();
+
+        return view('menus.index',[
+            'menus' => $menus
+        ]);
     }
 
     /**
@@ -23,9 +34,17 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Menu $menu)
     {
-        //
+        $this->authorize('create', $menu);
+        $lang = 'vi';
+        $parent_lang = 0;
+        $menu = new Menu();
+        return view('menus.create', [
+            'menu' => $menu,
+            'lang'     => $lang,
+            'parent_lang' => $parent_lang
+        ]);
     }
 
     /**

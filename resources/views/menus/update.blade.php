@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Thêm mới quyền')
+@section('title', 'Cập nhập menu')
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
@@ -10,7 +10,7 @@
                         <a href="{{route('home')}}">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{route('categories.index')}}">Danh sách</a>
+                        <a href="{{route('menus.index')}}">Danh sách</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Cập nhật</li>
                 </ol>
@@ -18,10 +18,10 @@
         </div>
         <!-- Container-fluid starts-->
         <div class="container-fluid">
-            <form class="theme-form" method="POST" action="{{route('categories.update', $category['id'])}}">
+            <form class="theme-form" method="POST" action="{{route('menus.update', $menu['id'])}}">
                 @csrf
                 @method('PATCH')
-                @include('categories._form')
+                @include('menus._form',['menu'=> $menu])
             </form>
         </div>
     </div>
