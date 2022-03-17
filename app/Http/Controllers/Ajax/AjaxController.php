@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Ajax;
 
 use App\Models\Category;
-use App\Models\CustomerReview;
 use App\Models\Events;
+use App\Models\Menu;
 use App\Models\Permission;
 use App\Models\News;
-use App\Models\Slide;
-use App\Models\Post;
-use App\Models\Staff;
 use App\Models\TypePermission;
 use App\Models\User;
 use App\Models\Video;
@@ -54,6 +51,9 @@ class AjaxController extends BaseController
                 break;
             case 'videos':
                 $model = Video::find($id);
+                break;
+            case 'menus':
+                $model = Menu::find($id);
                 break;
             default:
                 break;

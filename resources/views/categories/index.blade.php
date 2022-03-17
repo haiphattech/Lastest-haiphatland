@@ -25,7 +25,9 @@
                         <div>
                             <h4 class="card-title">
                                 Danh sách
+                                @can('create', \App\Models\Category::class)
                                 <a href="{{route('categories.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
+                                @endcan
                             </h4>
 
                         </div>
@@ -60,17 +62,23 @@
                                             </div>
                                         </td>
                                         <td class="text-center">
+                                            @can('update', $category)
                                             <a href="{{route('categories.edit', $category['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
+                                            @endcan
+                                            @can('delete', $category)
                                             <form class="d-inline-block" action="{{ route('categories.destroy', $category['id']) }}" method="POST" >
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')"><i class="mdi mdi-delete btn-icon-prepend icon-mr"></i> Xóa</button>
                                             </form>
+                                            @endcan
+                                            @can('create', $category)
                                             @if(!$category['parent_lang'])
                                                 @if(\App\Helpers\FunctionHelpers::checkLangCategoryExist('en', $category['id']))
                                                     <a href="{{route('categories-create.lang',['lang'=> 'en', 'category_id' => $category['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
                                                 @endif
                                             @endif
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

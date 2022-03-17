@@ -3,6 +3,7 @@ namespace App\Helpers;
 
 use App\Models\Category;
 use App\Models\General;
+use App\Models\Menu;
 use App\Models\Notification;
 
 class FunctionHelpers
@@ -114,6 +115,13 @@ class FunctionHelpers
     public static function checkLangCategoryExist($lang, $category_id)
     {
         $query = Category::where([['lang', $lang], ['parent_lang', $category_id]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangMenuExist($lang, $menu_id)
+    {
+        $query = Menu::where([['lang', $lang], ['parent_lang', $menu_id]])->first();
         if($query)
             return false;
         return true;

@@ -1,6 +1,9 @@
 .form-control:focus, select.form-control{
     color: #FFF;
 }
+.form-control:disabled{
+    background-color: #2A3038!important;
+}
 .notification-error{
     color: red;
     font-size: 13px;

@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Models\Menu;
 use App\Models\News;
 use App\Models\Recruit;
+use App\Policies\CategoryPolicy;
+use App\Policies\MenuPolicy;
 use App\Policies\NewsPolicy;
 use App\Policies\RecruitPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -20,6 +24,8 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         News::class => NewsPolicy::class,
         Recruit::class => RecruitPolicy::class,
+        Menu::class => MenuPolicy::class,
+        Category::class => CategoryPolicy::class,
     ];
 
     /**
@@ -30,7 +36,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
     }
 }

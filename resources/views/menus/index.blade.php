@@ -25,7 +25,9 @@
                         <div>
                             <h4 class="card-title">
                                 Danh sách
+                                @can('create', \App\Models\Menu::class)
                                 <a href="{{route('menus.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
+                                @endcan
                             </h4>
 
                         </div>
@@ -57,12 +59,20 @@
 
                                         </td>
                                         <td>
-                                            <a href="{{route('menus.edit', $menu['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
-                                            <form class="d-inline-block" action="{{ route('permissions.destroy', $menu['id']) }}" method="POST" >
+                                            @can('update', $menu)
+                                                <a href="{{route('menus.edit', $menu['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
+                                            @endcan
+                                                <form class="d-inline-block" action="{{ route('permissions.destroy', $menu['id']) }}" method="POST" >
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')"><i class="mdi mdi-delete btn-icon-prepend icon-mr"></i> Xóa</button>
                                             </form>
+                                            @if(!$menu['parent_lang'])
+                                                @if(\App\Helpers\FunctionHelpers::checkLangMenuExist('en', $menu['id']))
+                                                    <a href="{{route('menus-create.lang',['lang'=> 'en', 'menu_id' => $menu['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
+                                                @endif
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach
