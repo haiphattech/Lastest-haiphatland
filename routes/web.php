@@ -9,6 +9,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\StatusProjectController;
+use Ty
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -18,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
         'users'             => UserController::class,
         'categories'        => CategoryController::class,
         'menus'             => MenuController::class,
+        'projects'          => MenuController::class,
     ]);
     Route::get('/categories/create/{lang}/{category_id}', [CategoryController::class, 'createLanguage'])->name('categories-create.lang');
     Route::get('/menus/create/{lang}/{menu_id}', [MenuController::class, 'createLanguage'])->name('menus-create.lang');

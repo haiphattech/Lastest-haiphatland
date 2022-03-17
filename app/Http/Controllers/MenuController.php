@@ -53,6 +53,27 @@ class MenuController extends Controller
             'categories' => $categories
         ]);
     }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createLanguage(Menu $menu, $lang, $menu_id)
+    {
+        $this->authorize('create', $menu);
+        $check = $this->menuRepo->checkLangExist($lang, $menu_id);
+        if($check)
+            return abort(404);
+        $parent_lang = $menu_id;
+        $menu = new Menu();
+        $categories = $this->categoryRepo->getAllCategories($lang);
+        return view('menus.create', [
+            'menu' => $menu,
+            'lang'     => $lang,
+            'parent_lang' => $parent_lang,
+            'categories' => $categories
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -62,7 +83,7 @@ class MenuController extends Controller
      */
     public function store(StoreMenuRequest $request)
     {
-        $data = $request->only('name', 'key', 'parent_lang', 'lang');
+        $data = $request->only('name', 'key', 'lang');
         $data['status'] = isset($request['status']) ? 1 : 0;
         $data['created_by'] = Auth::id();
         $array_menus = [];
@@ -70,6 +91,8 @@ class MenuController extends Controller
             $array_menus[] = json_decode(json_encode($dat),true);
         }
         $data['data'] = serialize($array_menus);
+        if($request->parent_lang)
+            $data['parent_lang'] = $request->parent_lang;
         $this->menuRepo->create($data);
         return redirect(route('menus.index'))->with('success',  'Thêm thành công');
     }
@@ -137,6 +160,8 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        //
+        $this->authorize('delete', $menu);
+        $menu->delete();
+        return redirect()->route('menus.index')->with('success','Xóa thành công');
     }
 }

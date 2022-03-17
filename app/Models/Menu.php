@@ -17,4 +17,8 @@ class Menu extends Model
         'lang',
         'created_by',
     ];
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }

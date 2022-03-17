@@ -129,19 +129,19 @@
             <span class="nav-link">Dự án</span>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
+            <a class="nav-link" href="{{route('projects.index')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
-                <span class="menu-title">Form Elements</span>
+                <span class="menu-title">Danh sách</span>
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/tables/basic-table.html">
+            <a class="nav-link" href="{{route('projects.create')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
-                <span class="menu-title">Tables</span>
+                <span class="menu-title">Thêm mới</span>
             </a>
         </li>
         <li class="nav-item menu-items">
@@ -161,20 +161,32 @@
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" data-bs-toggle="collapse" href="#statusProject" aria-expanded="false" aria-controls="statusProject">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
-                <span class="menu-title">User Pages</span>
+                <span class="menu-title">Trạng thái dự án</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="auth">
+            <div class="collapse" id="statusProject">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('status-projects.index')}}"> Danh sách</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('status-projects.create')}}"> Thêm mới </a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" data-bs-toggle="collapse" href="#statusProject" aria-expanded="false" aria-controls="statusProject">
+              <span class="menu-icon">
+                <i class="mdi mdi-security"></i>
+              </span>
+                <span class="menu-title">Loại hình dự án</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="statusProject">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{route('type-projects.index')}}"> Danh sách</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('type-projects.create')}}"> Thêm mới </a></li>
                 </ul>
             </div>
         </li>
