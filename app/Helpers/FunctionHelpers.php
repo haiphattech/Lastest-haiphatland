@@ -3,8 +3,11 @@ namespace App\Helpers;
 
 use App\Models\Category;
 use App\Models\General;
+use App\Models\Investor;
 use App\Models\Menu;
 use App\Models\Notification;
+use App\Models\StatusProject;
+use App\Models\TypeProject;
 
 class FunctionHelpers
 {
@@ -122,6 +125,27 @@ class FunctionHelpers
     public static function checkLangMenuExist($lang, $menu_id)
     {
         $query = Menu::where([['lang', $lang], ['parent_lang', $menu_id]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangStatusProjectExist($lang, $parent_lang)
+    {
+        $query = StatusProject::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangTypeProjectExist($lang, $parent_lang)
+    {
+        $query = TypeProject::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangInvestorExist($lang, $parent_lang)
+    {
+        $query = Investor::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
         if($query)
             return false;
         return true;

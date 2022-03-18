@@ -1,20 +1,20 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\StatusProject;
-use App\Repositories\Support\AbstractRepository;
+use App\Models\Investor;
+    use App\Repositories\Support\AbstractRepository;
 use Illuminate\Support\Facades\Auth;
 
-class StatusProjectRepository extends AbstractRepository
+class InvestorRepository extends AbstractRepository
 {
     public function model(){
-        return StatusProject::class;
+        return Investor::class;
     }
     public function getData()
     {
         return $this->model->orderBy('ID', 'DESC')->paginate();
     }
-    public function getByStatus($status)
+    public function getByStatus($status = true)
     {
         return $query = $this->model->where('status', $status)->get();
 

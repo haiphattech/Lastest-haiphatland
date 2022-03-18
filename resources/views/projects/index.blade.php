@@ -3,7 +3,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Loại hình dự án</h3>
+            <h3 class="page-title">Dự án</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
@@ -25,8 +25,8 @@
                         <div>
                             <h4 class="card-title">
                                 Danh sách
-                                @can('create', \App\Models\TypeProject::class)
-                                <a href="{{route('type-projects.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
+                                @can('create', \App\Models\Project::class)
+                                <a href="{{route('projects.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
                                 @endcan
                             </h4>
 
@@ -36,36 +36,45 @@
                                 <thead>
                                 <tr>
                                     <th scope="col" class="text-center">STT</th>
-                                    <th scope="col" class="text-center">Tên</th>
+                                    <th scope="col">Thông tin</th>
                                     <th scope="col" class="text-center">Ngày tạo</th>
                                     <th scope="col" class="text-center">Ngôn ngữ</th>
-                                    <th scope="col" class="text-center">Ngôn ngữ cha</th>
                                     <th scope="col" class="text-center">Trạng thái</th>
                                     <th scope="col" class="text-center">Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($typeProjects as $item)
-                                    <tr role="row" class="text-center">
-                                        <td role="cell" class="">{{$loop->iteration}}</td>
-                                        <td role="cell" class="">{{$item->name}}</td>
-                                        <td role="cell">{{date('H:i d/m/Y', strtotime($item->created_at))}}</td>
-                                        <td role="cell"><img src="{{$item->langs->icon}}" alt="icon"></td>
-                                        <td role="cell" class="text-center">{{$item->parent_lang ? $item->parentLanguage->name : '' }}</td>
+                                @foreach($projects as $item)
+                                    <tr role="row">
+                                        <td role="cell" class="text-center">{{$loop->iteration}}</td>
                                         <td role="cell" class="">
+                                            <p><i class="mdi mdi-houzz-box"></i>{{$item->name_company}}</p>
+                                            @if($item->email)
+                                                <p><i class="mdi mdi mdi-email"></i>  {{$item->email}}</p>
+                                            @endif
+                                            @if($item->phone)
+                                                <p><i class="mdi mdi-cellphone-iphone"></i>  {{$item->phone}}</p>
+                                            @endif
+                                            @if($item->address)
+                                                <p><i class="mdi mdi-map-marker-radius"></i>  {{$item->address}}</p>
+                                            @endif
+                                        </td>
+                                        <td role="cell" class="text-center">{{date('H:i d/m/Y', strtotime($item->created_at))}}</td>
+                                        <td role="cell" class="text-center"><img src="{{$item->langs->icon}}" alt="icon"></td>
+                                        <td role="cell" class="text-center">
                                             <div class="form-check form-switch" style="display: inline-block">
                                                 <input name="my-checkbox" type="checkbox" class="form-check-input css-switch" data-id="{{$item['id']}}"
-                                                       data-api="{{route('enable-column')}}" data-table="type-projects" data-column="status"
+                                                       data-api="{{route('enable-column')}}" data-table="investors" data-column="status"
                                                     {{ $item['status'] ? 'checked="checked"' : '' }}>
                                             </div>
 
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             @can('update', $item)
-                                                <a href="{{route('type-projects.edit', $item['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
+                                                <a href="{{route('investors.edit', $item['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
                                             @endcan
                                             @can('delete', $item)
-                                                <form class="d-inline-block" action="{{ route('type-projects.destroy', $item['id']) }}" method="POST" >
+                                                <form class="d-inline-block" action="{{ route('investors.destroy', $item['id']) }}" method="POST" >
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')"><i class="mdi mdi-delete btn-icon-prepend icon-mr"></i> Xóa</button>
@@ -73,8 +82,8 @@
                                             @endcan
                                             @can('create', $item)
                                             @if(!$item['parent_lang'])
-                                                @if(\App\Helpers\FunctionHelpers::checkLangTypeProjectExist('en', $item['id']))
-                                                    <a href="{{route('type-projects-create.lang',['lang'=> 'en', 'item_id' => $item['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
+                                                @if(\App\Helpers\FunctionHelpers::checkLangInvestorExist('en', $item['id']))
+                                                    <a href="{{route('investors-create.lang',['lang'=> 'en', 'item_id' => $item['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
                                                 @endif
                                             @endif
                                             @endcan
@@ -85,11 +94,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        @if(!count($typeProjects))
+                        @if(!count($projects))
                             @include('components.data-empty')
                         @endif
                         <div class="text-center mt-3 float-end">
-                            {{ $typeProjects->links() }}
+                            {{ $projects->links() }}
                         </div>
                     </div>
                 </div>

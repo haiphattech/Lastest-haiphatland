@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Phân quyền')
+@section('title', 'Trạng thái dự án')
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">TÊN MENU</h3>
+            <h3 class="page-title">Trạng thái dự án</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
@@ -25,8 +25,8 @@
                         <div>
                             <h4 class="card-title">
                                 Danh sách
-                                @can('create', \App\Models\Menu::class)
-                                <a href="{{route('menus.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
+                                @can('create', \App\Models\StatusProject::class)
+                                <a href="{{route('status-projects.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
                                 @endcan
                             </h4>
 
@@ -37,55 +37,58 @@
                                 <tr>
                                     <th scope="col" class="text-center">STT</th>
                                     <th scope="col" class="text-center">Tên</th>
-                                    <th scope="col" class="text-center">Mã</th>
                                     <th scope="col" class="text-center">Ngày tạo</th>
                                     <th scope="col" class="text-center">Ngôn ngữ</th>
+                                    <th scope="col" class="text-center">Ngôn ngữ cha</th>
                                     <th scope="col" class="text-center">Trạng thái</th>
                                     <th scope="col" class="text-center">Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($menus as $menu)
+                                @foreach($statusProjects as $item)
                                     <tr role="row" class="text-center">
                                         <td role="cell" class="">{{$loop->iteration}}</td>
-                                        <td role="cell" class="">{{$menu->name}}</td>
-                                        <td role="cell" class="">{{$menu->key}}</td>
-                                        <td role="cell">{{date('H:i d/m/Y', strtotime($menu->created_at))}}</td>
-                                        <td role="cell"><img src="{{$menu->langs->icon}}" alt="icon"></td>
+                                        <td role="cell" class="">{{$item->name}}</td>
+                                        <td role="cell">{{date('H:i d/m/Y', strtotime($item->created_at))}}</td>
+                                        <td role="cell"><img src="{{$item->langs->icon}}" alt="icon"></td>
+                                        <td role="cell" class="text-center">{{$item->parent_lang ? $item->parentLanguage->name : '' }}</td>
                                         <td role="cell" class="">
                                             <div class="form-check form-switch" style="display: inline-block">
-                                                <input name="my-checkbox" type="checkbox" class="form-check-input css-switch" data-id="{{$menu['id']}}"
-                                                       data-api="{{route('enable-column')}}" data-table="menus" data-column="status"
-                                                    {{ $menu['status'] ? 'checked="checked"' : '' }}>
+                                                <input name="my-checkbox" type="checkbox" class="form-check-input css-switch" data-id="{{$item['id']}}"
+                                                       data-api="{{route('enable-column')}}" data-table="status-projects" data-column="status"
+                                                    {{ $item['status'] ? 'checked="checked"' : '' }}>
                                             </div>
 
                                         </td>
                                         <td>
-                                            @can('update', $menu)
-                                                <a href="{{route('menus.edit', $menu['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
+                                            @can('update', $item)
+                                                <a href="{{route('status-projects.edit', $item['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
                                             @endcan
-                                                <form class="d-inline-block" action="{{ route('menus.destroy', $menu['id']) }}" method="POST" >
+                                            @can('delete', $item)
+                                                <form class="d-inline-block" action="{{ route('status-projects.destroy', $item['id']) }}" method="POST" >
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')"><i class="mdi mdi-delete btn-icon-prepend icon-mr"></i> Xóa</button>
                                             </form>
-                                            @if(!$menu['parent_lang'])
-                                                @if(\App\Helpers\FunctionHelpers::checkLangMenuExist('en', $menu['id']))
-                                                    <a href="{{route('menus-create.lang',['lang'=> 'en', 'menu_id' => $menu['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
+                                            @endcan
+                                            @can('create', $item)
+                                            @if(!$item['parent_lang'])
+                                                @if(\App\Helpers\FunctionHelpers::checkLangStatusProjectExist('en', $item['id']))
+                                                    <a href="{{route('status-projects-create.lang',['lang'=> 'en', 'item_id' => $item['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
                                                 @endif
                                             @endif
-
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        @if(!count($menus))
+                        @if(!count($statusProjects))
                             @include('components.data-empty')
                         @endif
                         <div class="text-center mt-3 float-end">
-                            {{ $menus->links() }}
+                            {{ $statusProjects->links() }}
                         </div>
                     </div>
                 </div>

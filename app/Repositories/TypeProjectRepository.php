@@ -1,14 +1,14 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\StatusProject;
+use App\Models\TypeProject;
 use App\Repositories\Support\AbstractRepository;
 use Illuminate\Support\Facades\Auth;
 
-class StatusProjectRepository extends AbstractRepository
+class TypeProjectRepository extends AbstractRepository
 {
     public function model(){
-        return StatusProject::class;
+        return TypeProject::class;
     }
     public function getData()
     {

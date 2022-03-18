@@ -11,7 +11,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StatusProjectController;
-use Ty
+use App\Http\Controllers\TypeProjectController;
+use App\Http\Controllers\InvestorController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -21,10 +22,16 @@ Route::middleware(['auth'])->group(function () {
         'users'             => UserController::class,
         'categories'        => CategoryController::class,
         'menus'             => MenuController::class,
-        'projects'          => MenuController::class,
+        'projects'          => ProjectController::class,
+        'status-projects'   => StatusProjectController::class,
+        'type-projects'     => TypeProjectController::class,
+        'investors'          => InvestorController::class,
     ]);
     Route::get('/categories/create/{lang}/{category_id}', [CategoryController::class, 'createLanguage'])->name('categories-create.lang');
     Route::get('/menus/create/{lang}/{menu_id}', [MenuController::class, 'createLanguage'])->name('menus-create.lang');
+    Route::get('/status-projects/create/{lang}/{item_id}', [StatusProjectController::class, 'createLanguage'])->name('status-projects-create.lang');
+    Route::get('/type-projects/create/{lang}/{item_id}', [TypeProjectController::class, 'createLanguage'])->name('type-projects-create.lang');
+    Route::get('/investors/create/{lang}/{item_id}', [InvestorController::class, 'createLanguage'])->name('investors-create.lang');
     //Phân quyền cho nhân viên
     Route::get('/role/authorization/{user_id}', [RoleController::class, 'authorization'])->name('authorization-user');
     Route::post('/role/authorization-post', [RoleController::class, 'authorizationPost'])->name('authorization-user-post');

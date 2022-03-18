@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Project;
+use App\Models\Investor;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProjectPolicy
+class InvestorPolicy
 {
     use HandlesAuthorization;
     public function before($user, $ability)
@@ -23,17 +23,17 @@ class ProjectPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasPermission('project-views');
+        return $user->hasPermission('investor-views');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Investor  $investor
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Project $project)
+    public function view(User $user, Investor $investor)
     {
         //
     }
@@ -46,31 +46,31 @@ class ProjectPolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermission('Project-add');
+        return $user->hasPermission('investor-add');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Investor  $investor
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Project $project)
+    public function update(User $user, Investor $investor)
     {
-        return $user->hasPermission('project-edit');
+        return $user->hasPermission('investor-edit');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Investor  $investor
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Project $project)
+    public function delete(User $user, Investor $investor)
     {
-        return $user->hasPermission('project-delete');
+        return $user->hasPermission('investor-delete');
 
     }
 
@@ -78,10 +78,10 @@ class ProjectPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Investor  $investor
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Project $project)
+    public function restore(User $user, Investor $investor)
     {
         //
     }
@@ -90,10 +90,10 @@ class ProjectPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Investor  $investor
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Project $project)
+    public function forceDelete(User $user, Investor $investor)
     {
         //
     }

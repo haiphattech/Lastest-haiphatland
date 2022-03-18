@@ -86,7 +86,7 @@
             <div class="card-body">
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary me-2">Lưu</button>
-                    <a href="{{route('permissions.index')}}" class="btn btn-dark">Quay lại</a>
+                    <a href="{{route('menus.index')}}" class="btn btn-dark">Quay lại</a>
                 </div>
             </div>
         </div>

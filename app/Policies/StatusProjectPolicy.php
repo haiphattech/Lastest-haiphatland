@@ -2,13 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\StatusProject;
 use App\Models\User;
+use App\Models\statusProject;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class StatusProjectPolicy
 {
     use HandlesAuthorization;
+
     public function before($user, $ability)
     {
         if ($user->isSuperAdmin()) {
@@ -30,10 +31,10 @@ class StatusProjectPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\StatusProject  $statusProject
+     * @param  \App\Models\statusProject  $statusProject
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, StatusProject $statusProject)
+    public function view(User $user, statusProject $statusProject)
     {
         //
     }
@@ -53,10 +54,10 @@ class StatusProjectPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\StatusProject  $statusProject
+     * @param  \App\Models\statusProject  $statusProject
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, StatusProject $statusProject)
+    public function update(User $user, statusProject $statusProject)
     {
         return $user->hasPermission('status-project-edit');
     }
@@ -65,22 +66,22 @@ class StatusProjectPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\StatusProject  $statusProject
+     * @param  \App\Models\statusProject  $statusProject
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, StatusProject $statusProject)
+    public function delete(User $user, statusProject $statusProject)
     {
-        return $user->hasPermission('status-project-delete');
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\StatusProject  $statusProject
+     * @param  \App\Models\statusProject  $statusProject
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, StatusProject $statusProject)
+    public function restore(User $user, statusProject $statusProject)
     {
         //
     }
@@ -89,11 +90,11 @@ class StatusProjectPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\StatusProject  $statusProject
+     * @param  \App\Models\statusProject  $statusProject
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, StatusProject $statusProject)
+    public function forceDelete(User $user, statusProject $statusProject)
     {
-        //
+        return $user->hasPermission('status-project-delete');
     }
 }

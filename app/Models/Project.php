@@ -34,4 +34,8 @@ class Project extends Model
         'status_project_id',
         'category_id',
     ];
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }

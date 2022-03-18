@@ -69,7 +69,7 @@ class MenuController extends Controller
         $categories = $this->categoryRepo->getAllCategories($lang);
         return view('menus.create', [
             'menu' => $menu,
-            'lang'     => $lang,
+            'lang' => $lang,
             'parent_lang' => $parent_lang,
             'categories' => $categories
         ]);
@@ -117,8 +117,10 @@ class MenuController extends Controller
     public function edit(Menu $menu)
     {
         $this->authorize('update', $menu);
-        $lang = 'vi';
-        $parent_lang = 0;
+        if(!$menu)
+            return abort(404);
+        $lang = $menu['lang'];
+        $parent_lang = $menu['parent_lang'];
         if($menu['data']){
             $categories = unserialize($menu['data']);
         }else{

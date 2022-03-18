@@ -5,17 +5,33 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectsRequest;
 use App\Http\Requests\UpdateProjectsRequest;
+use App\Repositories\InvestorRepository as InvestorRepo;
+use App\Repositories\ProjectRepository as ProjectRepo;
 
 class ProjectController extends Controller
 {
+    protected $view = 'projects';
+    protected $investorRepo;
+    protected $projectRepo;
+
+    public function __construct(InvestorRepo $investorRepo, ProjectRepo $projectRepo)
+    {
+        $this->projectRepo = $projectRepo;
+        $this->investorRepo = $investorRepo;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Project $project)
     {
-        //
+        $this->authorize('viewAny', $project);
+        $projects = $this->projectRepo->getData();
+
+        return view($this->view.'.index',[
+            'projects' => $projects
+        ]);
     }
 
     /**
@@ -23,9 +39,15 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project)
     {
-        //
+        $this->authorize('create', $project);
+        $investors = $this->projectRepo->getByStatus();
+        $project = new Project();
+        return view($this->view.'.create',[
+            'investors' => $investors,
+            'project'   => $project
+        ]);
     }
 
     /**

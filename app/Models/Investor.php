@@ -5,15 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TypeProject extends Model
+class Investor extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
+        'name_company',
+        'avatar',
+        'phone',
+        'fax',
+        'email',
+        'address',
+        'description',
         'lang',
         'parent_lang',
+        'created_by',
         'status',
-        'created_by'
     ];
     public function langs()
     {
@@ -21,6 +27,6 @@ class TypeProject extends Model
     }
     public function parentLanguage()
     {
-        return $this->belongsTo(TypeProject::class, 'parent_lang', 'id');
+        return $this->belongsTo(Investor::class, 'parent_lang', 'id');
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Thêm mới trạng thái dự án')
+@section('title', 'Thêm mới loại hình dự án')
 @section('content')
     <div class="content-wrapper">
     <div class="page-header">
@@ -10,16 +10,23 @@
                     <a href="{{route('home')}}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{route('status-projects.index')}}">Danh sách</a>
+                    <a href="{{route('investors.index')}}">Danh sách</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
             </ol>
         </nav>
     </div>
     <div class="container-fluid">
-        <form class="theme-form" method="POST" action="{{route('status-projects.store')}}">
+        <div class="col-lg-12">
+            @if (session('success'))
+                <div class="alert alert-success notification-submit">
+                    {{ session('success') }}
+                </div>
+            @endif
+        </div>
+        <form class="theme-form" method="POST" action="{{route('investors.store')}}">
             @csrf
-            @include('projects.status-projects._form',['statusProject'=> $statusProject])
+            @include($view.'._form',['investor'=> $investor])
         </form>
     </div>
     </div>

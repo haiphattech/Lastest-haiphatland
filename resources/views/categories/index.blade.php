@@ -73,11 +73,11 @@
                                             </form>
                                             @endcan
                                             @can('create', $category)
-                                            @if(!$category['parent_lang'])
-                                                @if(\App\Helpers\FunctionHelpers::checkLangCategoryExist('en', $category['id']))
-                                                    <a href="{{route('categories-create.lang',['lang'=> 'en', 'category_id' => $category['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
+                                                @if(!$category['parent_lang'])
+                                                    @if(\App\Helpers\FunctionHelpers::checkLangCategoryExist('en', $category['id']))
+                                                        <a href="{{route('categories-create.lang',['lang'=> 'en', 'category_id' => $category['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
+                                                    @endif
                                                 @endif
-                                            @endif
                                             @endcan
                                         </td>
                                     </tr>

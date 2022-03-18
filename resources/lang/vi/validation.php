@@ -153,7 +153,8 @@ return [
         'phone' => 'Số điện thoại',
         'key' => 'Mã',
         'type' => 'Thể loại',
-        'type_permission_id' => 'Loại quyền'
+        'type_permission_id' => 'Loại quyền',
+        'name_company' => 'Tên công ty',
     ],
 
 ];
