@@ -4,6 +4,9 @@
 .form-control:disabled{
     background-color: #2A3038!important;
 }
+textarea.form-control{
+    height: unset!important;
+}
 .notification-error{
     color: red;
     font-size: 13px;

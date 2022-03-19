@@ -7,17 +7,24 @@ use App\Http\Requests\StoreProjectsRequest;
 use App\Http\Requests\UpdateProjectsRequest;
 use App\Repositories\InvestorRepository as InvestorRepo;
 use App\Repositories\ProjectRepository as ProjectRepo;
+use App\Repositories\CategoryRepository as CategoryRepo;
+use App\Repositories\StatusProjectRepository as StatusProjectRepo;
+
 
 class ProjectController extends Controller
 {
     protected $view = 'projects';
     protected $investorRepo;
     protected $projectRepo;
+    protected $categoryRepo;
+    protected $statusProjectRepo;
 
-    public function __construct(InvestorRepo $investorRepo, ProjectRepo $projectRepo)
+    public function __construct(StatusProjectRepo $statusProjectRepo, InvestorRepo $investorRepo, ProjectRepo $projectRepo, CategoryRepo $categoryRepo)
     {
         $this->projectRepo = $projectRepo;
         $this->investorRepo = $investorRepo;
+        $this->categoryRepo = $categoryRepo;
+        $this->statusProjectRepo = $statusProjectRepo;
     }
     /**
      * Display a listing of the resource.
@@ -43,10 +50,19 @@ class ProjectController extends Controller
     {
         $this->authorize('create', $project);
         $investors = $this->projectRepo->getByStatus();
+        $lang = 'vi';
+        $parent_lang = 0;
+        $categories = $this->categoryRepo->getCategoryByType('project', $lang);
+        $statusProjects = $this->statusProjectRepo->getByStatus($lang);
         $project = new Project();
         return view($this->view.'.create',[
             'investors' => $investors,
-            'project'   => $project
+            'project'   => $project,
+            'view'      => $this->view,
+            'lang'      => $lang,
+            'parent_lang' => $parent_lang,
+            'categories' => $categories,
+            'statusProjects' => $statusProjects
         ]);
     }
 

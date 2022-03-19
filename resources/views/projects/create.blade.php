@@ -10,7 +10,7 @@
                     <a href="{{route('home')}}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{route('investors.index')}}">Danh sách</a>
+                    <a href="{{route('projects.index')}}">Danh sách</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
             </ol>
@@ -24,9 +24,9 @@
                 </div>
             @endif
         </div>
-        <form class="theme-form" method="POST" action="{{route('investors.store')}}">
+        <form class="theme-form" method="POST" action="{{route('projects.store')}}">
             @csrf
-            @include($view.'._form',['investor'=> $investor])
+            @include($view.'._form',['project'=> $project])
         </form>
     </div>
     </div>

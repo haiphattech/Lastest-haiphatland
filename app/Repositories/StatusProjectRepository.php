@@ -14,9 +14,9 @@ class StatusProjectRepository extends AbstractRepository
     {
         return $this->model->orderBy('ID', 'DESC')->paginate();
     }
-    public function getByStatus($status)
+    public function getByStatus($lang, $status = true)
     {
-        return $query = $this->model->where('status', $status)->get();
+        return $this->model->where([['status', $status],['lang', $lang]])->get();
 
     }
     public function checkLangExist($lang, $parent_lang)

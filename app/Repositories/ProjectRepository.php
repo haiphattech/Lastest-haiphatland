@@ -17,8 +17,7 @@ class ProjectRepository extends AbstractRepository
     }
     public function getByStatus($status = true)
     {
-        return $query = $this->model->where('status', $status)->get();
-
+        return $this->model->where('status', $status)->get();
     }
     public function checkLangExist($lang, $parent_lang)
     {
