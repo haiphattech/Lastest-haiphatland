@@ -25,8 +25,8 @@
                         <div>
                             <h4 class="card-title">
                                 Danh sách
-                                @can('create', \App\Models\Project::class)
-                                <a href="{{route('projects.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
+                                @can('create', \App\Models\Activity::class)
+                                <a href="{{route('activities.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
                                 @endcan
                             </h4>
 
@@ -44,7 +44,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($projects as $item)
+                                @foreach($activities as $item)
                                     <tr role="row">
                                         <td role="cell" class="text-center">{{$loop->iteration}}</td>
                                         <td role="cell" class="">
@@ -64,17 +64,17 @@
                                         <td role="cell" class="text-center">
                                             <div class="form-check form-switch" style="display: inline-block">
                                                 <input name="my-checkbox" type="checkbox" class="form-check-input css-switch" data-id="{{$item['id']}}"
-                                                       data-api="{{route('enable-column')}}" data-table="projects" data-column="status"
+                                                       data-api="{{route('enable-column')}}" data-table="field_activities" data-column="status"
                                                     {{ $item['status'] ? 'checked="checked"' : '' }}>
                                             </div>
 
                                         </td>
                                         <td class="text-center">
                                             @can('update', $item)
-                                                <a href="{{route('projects.edit', $item['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
+                                                <a href="{{route('activities.edit', $item['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
                                             @endcan
                                             @can('delete', $item)
-                                                <form class="d-inline-block" action="{{ route('projects.destroy', $item['id']) }}" method="POST" >
+                                                <form class="d-inline-block" action="{{ route('activities.destroy', $item['id']) }}" method="POST" >
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')"><i class="mdi mdi-delete btn-icon-prepend icon-mr"></i> Xóa</button>
@@ -82,8 +82,8 @@
                                             @endcan
                                             @can('create', $item)
                                             @if(!$item['parent_lang'])
-                                                @if(\App\Helpers\FunctionHelpers::checkLangInvestorExist('en', $item['id']))
-                                                    <a href="{{route('projects-create.lang',['lang'=> 'en', 'item_id' => $item['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
+                                                @if(\App\Helpers\FunctionHelpers::checkLangActivityExist('en', $item['id']))
+                                                    <a href="{{route('activities-create.lang',['lang'=> 'en', 'item_id' => $item['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
                                                 @endif
                                             @endif
                                             @endcan
@@ -94,11 +94,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        @if(!count($projects))
+                        @if(!count($activities))
                             @include('components.data-empty')
                         @endif
                         <div class="text-center mt-3 float-end">
-                            {{ $projects->links() }}
+                            {{ $activities->links() }}
                         </div>
                     </div>
                 </div>

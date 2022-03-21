@@ -155,6 +155,10 @@ return [
         'type' => 'Thể loại',
         'type_permission_id' => 'Loại quyền',
         'name_company' => 'Tên công ty',
+        'status_project_id' => 'Trạng thái dự án',
+        'description' => 'Mô tả',
+        'avatar' => 'Ảnh đại diện',
+        'cover'  => 'Ảnh bìa'
     ],
 
 ];

@@ -5,7 +5,7 @@ use App\Models\Category;
 use App\Models\General;
 use App\Models\Investor;
 use App\Models\Menu;
-use App\Models\Notification;
+use App\Models\Activity;
 use App\Models\StatusProject;
 use App\Models\TypeProject;
 
@@ -146,6 +146,13 @@ class FunctionHelpers
     public static function checkLangInvestorExist($lang, $parent_lang)
     {
         $query = Investor::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangActivityExist($lang, $parent_lang)
+    {
+        $query = Activity::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
         if($query)
             return false;
         return true;

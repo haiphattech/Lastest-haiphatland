@@ -41,9 +41,9 @@
                                 <option value="{{$statusProject['id']}}">{{$statusProject['name']}}</option>
                             @endforeach
                         </select>
-                        @if ($errors->has('parent_id'))
+                        @if ($errors->has('status_project_id'))
                             <div class="mt-1 notification-error">
-                                {{$errors->first('parent_id')}}
+                                {{$errors->first('status_project_id')}}
                             </div>
                         @endif
                     </div>
@@ -57,13 +57,9 @@
                 <div class="form-group row mb-3">
                     <label for="name" class="col-sm-3 col-form-label">Số điện thoại</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="name" placeholder="" name="name"
+                        <input type="text" class="form-control" id="" placeholder="" name=""
                                value="{{old('name_company', $project['name'])}}">
-                        @if ($errors->has('name'))
-                            <div class="mt-1 notification-error">
-                                {{$errors->first('name')}}
-                            </div>
-                        @endif
+
                     </div>
                 </div>
 
@@ -76,6 +72,11 @@
                 <div class="form-group">
                     <textarea  rows="9" cols="70" id="description" class="form-control"
                               name="description">{!! $project['description'] !!}</textarea>
+                    @if ($errors->has('description'))
+                        <div class="mt-1 notification-error">
+                            {{$errors->first('description')}}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -102,9 +103,8 @@
                         <input type="checkbox" class="form-check-input" {{$project['status'] ? "checked" : ''}} value="{{$project['status']}}" name="status"> Trạng thái <i class="input-helper"></i></label>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary me-2" name="submit" value="save&exit">Lưu và Thoát</button>
-                    <button type="submit" class="btn btn-danger me-2" name="submit" value="save&continue">Lưu và Tiếp tục</button>
-                    <a href="{{route('projects.index')}}" class="btn btn-dark mt-4">Quay lại</a>
+                    <button type="submit" class="btn btn-primary me-2" value="save&exit">Lưu</button>
+                    <a href="{{route('projects.index')}}" class="btn btn-dark">Quay lại</a>
                 </div>
             </div>
         </div>
@@ -118,13 +118,23 @@
                         <input type="hidden" class="avatar" name="avatar" value="">
                         <img src="/assets/images/department.jpg" width="180px" alt="" class="image-avatar">
                     </div>
+                    @if ($errors->has('avatar'))
+                        <div class="mt-1 notification-error">
+                            {{$errors->first('avatar')}}
+                        </div>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="">Ảnh bìa</label>
-                    <div class="upload_image" data-name="avatar">
-                        <input type="hidden" class="avatar" name="avatar" value="">
-                        <img src="/assets/images/department.jpg" width="180px" alt="" class="image-avatar">
+                    <div class="upload_image" data-name="cover">
+                        <input type="hidden" class="cover" name="cover" value="">
+                        <img src="/assets/images/department.jpg" width="180px" alt="" class="image-cover">
                     </div>
+                    @if ($errors->has('cover'))
+                        <div class="mt-1 notification-error">
+                            {{$errors->first('cover')}}
+                        </div>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="exampleInputUsername1">Link video</label>

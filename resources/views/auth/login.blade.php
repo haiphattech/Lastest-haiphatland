@@ -3,11 +3,18 @@
 @section('content')
     <div class="container">
         <div class="row">
+            @if ($errors->has('username'))
+                <div class="alert alert-danger" role="alert">
+                    <i class="mdi mdi-alert-circle"></i> {{$errors->first('username')}}
+                </div>
+            @endif
             <div class="col">
                 <center>
+
                     <div class="login-heading"><p>ĐĂNG NHẬP HỆ THỐNG</p></div>
                     <div class="middle">
                         <div id="login">
+
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <fieldset class="clearfix">

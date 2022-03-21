@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\FieldActivities;
+use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FieldActivitiesPolicy
+class ActivityPolicy
 {
     use HandlesAuthorization;
     public function before($user, $ability)
@@ -23,17 +23,17 @@ class FieldActivitiesPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('activity-views');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\FieldActivities  $fieldActivities
+     * @param  \App\Models\Activity  $fieldActivity
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, FieldActivities $fieldActivities)
+    public function view(User $user, Activity $fieldActivity)
     {
         //
     }
@@ -46,41 +46,41 @@ class FieldActivitiesPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('activity-add');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\FieldActivities  $fieldActivities
+     * @param  \App\Models\Activity  $fieldActivity
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, FieldActivities $fieldActivities)
+    public function update(User $user, Activity $fieldActivity)
     {
-        //
+        return $user->hasPermission('activity-edit');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\FieldActivities  $fieldActivities
+     * @param  \App\Models\Activity  $fieldActivity
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, FieldActivities $fieldActivities)
+    public function delete(User $user, Activity $fieldActivity)
     {
-        //
+        return $user->hasPermission('activity-delete');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\FieldActivities  $fieldActivities
+     * @param  \App\Models\Activity  $fieldActivity
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, FieldActivities $fieldActivities)
+    public function restore(User $user, Activity $fieldActivity)
     {
         //
     }
@@ -89,10 +89,10 @@ class FieldActivitiesPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\FieldActivities  $fieldActivities
+     * @param  \App\Models\Activity  $fieldActivity
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, FieldActivities $fieldActivities)
+    public function forceDelete(User $user, Activity $fieldActivity)
     {
         //
     }

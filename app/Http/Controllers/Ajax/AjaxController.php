@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Ajax;
 
 use App\Models\Category;
-use App\Models\Events;
 use App\Models\Investor;
 use App\Models\Menu;
 use App\Models\Permission;
 use App\Models\News;
+use App\Models\Project;
 use App\Models\statusProject;
 use App\Models\TypePermission;
 use App\Models\TypeProject;
@@ -67,9 +67,9 @@ class AjaxController extends BaseController
             case 'type_projects':
                 $model = TypeProject::find($id);
                 break;
-//            case 'menus':
-//                $model = Menu::find($id);
-//                break;
+            case 'projects':
+                $model = Project::find($id);
+                break;
             default:
                 break;
         }
@@ -79,10 +79,10 @@ class AjaxController extends BaseController
                 $column => $model[$column] ? 0 : 1
             ]);
 
-            return $this->sendResponse($result, 'Product created successfully.');
+            return $this->sendResponse($result, 'successfully.');
         }
 
-        return $this->sendResponse(false, 'Product created successfully.');
+        return $this->sendResponse(false, 'successfully.');
     }
 
 }

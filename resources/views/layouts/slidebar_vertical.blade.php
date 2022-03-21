@@ -211,13 +211,29 @@
         </li>
         @endcanany
 
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
+        <li class="nav-item nav-category  pb-0">
+            <span class="nav-link">Lĩnh vực hoạt động</span>
+        </li>
+        @can( 'viewAny', \App\Models\Activity::class)
+        <li class="nav-item menu-items {{ (request()->is('activities')) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('activities.index')}}">
               <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
+                <i class="mdi mdi-playlist-play"></i>
               </span>
-                <span class="menu-title">Documentation</span>
+                <span class="menu-title">Danh sách</span>
             </a>
         </li>
+        @endcan
+        @can( 'create', \App\Models\Activity::class)
+        <li class="nav-item menu-items {{ (request()->is('activities/create')) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('activities.create')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+                <span class="menu-title">Thêm mới</span>
+            </a>
+        </li>
+        @endcan
+
     </ul>
 </nav>

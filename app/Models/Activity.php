@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FieldActivity extends Model
+class Activity extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -21,5 +21,8 @@ class FieldActivity extends Model
         'created_by',
         'category_id',
     ];
-
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }
