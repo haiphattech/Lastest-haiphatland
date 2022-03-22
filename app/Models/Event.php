@@ -5,25 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class Event extends Model
 {
     use HasFactory;
     protected $fillable = [
         'name',
         'slug',
         'avatar',
+        'cover',
+        'place',
+        'address',
+        'start_time',
+        'end_time',
         'description',
-        'content',
-        'view',
-        'noi_bat',
-        'start',
-        'status',
-        'published',
-        'time_published',
         'lang',
         'parent_lang',
         'created_by',
         'category_id',
+        'status',
     ];
     public function langs()
     {

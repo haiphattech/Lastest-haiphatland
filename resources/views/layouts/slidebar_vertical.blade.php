@@ -53,15 +53,20 @@
                 </div>
             </div>
         </li>
-        <li class="nav-item nav-category pb-0">
-            <span class="nav-link">Chung</span>
-        </li>
         <li class="nav-item menu-items {{ request()->is('/') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('home')}}">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
                 <span class="menu-title">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items {{ request()->is('/aboutUs') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('aboutUs.index')}}">
+              <span class="menu-icon">
+                <i class="mdi  mdi-information-outline"></i>
+              </span>
+                <span class="menu-title">Thông tin chung</span>
             </a>
         </li>
         <li class="nav-item menu-items {{ (request()->is('users/*') || request()->is('role/*')) ? 'active' : '' }}">
@@ -233,6 +238,53 @@
                 <span class="menu-title">Thêm mới</span>
             </a>
         </li>
+        @endcan
+
+        <li class="nav-item nav-category  pb-0">
+            <span class="nav-link">Sự kiện</span>
+        </li>
+        @can( 'viewAny', \App\Models\Event::class)
+            <li class="nav-item menu-items {{ (request()->is('events')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('events.index')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+                    <span class="menu-title">Danh sách</span>
+                </a>
+            </li>
+        @endcan
+        @can( 'create', \App\Models\Event::class)
+            <li class="nav-item menu-items {{ (request()->is('events/create')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('events.create')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+                    <span class="menu-title">Thêm mới</span>
+                </a>
+            </li>
+        @endcan
+        <li class="nav-item nav-category  pb-0">
+            <span class="nav-link">Ứng dụng</span>
+        </li>
+        @can( 'viewAny', \App\Models\Application::class)
+            <li class="nav-item menu-items {{ (request()->is('applications')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('applications.index')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+                    <span class="menu-title">Danh sách</span>
+                </a>
+            </li>
+        @endcan
+        @can( 'create', \App\Models\Application::class)
+            <li class="nav-item menu-items {{ (request()->is('applications/create')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('applications.create')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+                    <span class="menu-title">Thêm mới</span>
+                </a>
+            </li>
         @endcan
 
     </ul>

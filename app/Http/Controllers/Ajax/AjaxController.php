@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ajax;
 
 use App\Models\Category;
+use App\Models\Event;
 use App\Models\Investor;
 use App\Models\Menu;
 use App\Models\Permission;
@@ -69,6 +70,9 @@ class AjaxController extends BaseController
                 break;
             case 'projects':
                 $model = Project::find($id);
+                break;
+            case 'events':
+                $model = Event::find($id);
                 break;
             default:
                 break;

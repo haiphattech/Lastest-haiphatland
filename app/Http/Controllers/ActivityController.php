@@ -95,7 +95,6 @@ class ActivityController extends Controller
         $this->activityRepo->update($data, $result['id']);
         return redirect(route('activities.index'))->with('success',  'Thêm thành công');
     }
-
     /**
      * Display the specified resource.
      *
@@ -137,7 +136,12 @@ class ActivityController extends Controller
      */
     public function update(UpdateActivityRequest $request, Activity $activity)
     {
-        //
+        $data = $request->only('name', 'category_id', 'avatar', 'description');
+        $data['status'] = isset($request['status']) ? 1 : 0;
+        $data['display_home'] = isset($request['display_home']) ? 1 : 0;
+        $data['slug'] = Str::slug($request->name).'-'.$activity['id'];
+        $this->activityRepo->update($data, $activity['id']);
+        return redirect(route('activities.index'))->with('success',  'Cập nhật thành công');
     }
 
     /**
@@ -148,6 +152,8 @@ class ActivityController extends Controller
      */
     public function destroy(Activity $activity)
     {
-        //
+        $this->authorize('delete', $activity);
+        $activity->delete();
+        return redirect()->route('activities.index')->with('success','Xóa thành công');
     }
 }

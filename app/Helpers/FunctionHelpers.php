@@ -1,7 +1,10 @@
 <?php
 namespace App\Helpers;
 
+use App\Models\AboutU;
+use App\Models\Application;
 use App\Models\Category;
+use App\Models\Event;
 use App\Models\General;
 use App\Models\Investor;
 use App\Models\Menu;
@@ -153,6 +156,27 @@ class FunctionHelpers
     public static function checkLangActivityExist($lang, $parent_lang)
     {
         $query = Activity::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangEventExist($lang, $parent_lang)
+    {
+        $query = Event::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangApplicationExist($lang, $parent_lang)
+    {
+        $query = Application::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangAboutUsExist($lang, $parent_lang)
+    {
+        $query = AboutU::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
         if($query)
             return false;
         return true;

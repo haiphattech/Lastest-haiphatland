@@ -16,4 +16,8 @@ class Manager extends Model
         'status',
         'created_by',
     ];
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }

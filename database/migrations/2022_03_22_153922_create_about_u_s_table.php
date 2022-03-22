@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAboutUsTable extends Migration
+class CreateAboutUSTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAboutUsTable extends Migration
      */
     public function up()
     {
-        Schema::create('about_us', function (Blueprint $table) {
+        Schema::create('about_u_s', function (Blueprint $table) {
             $table->id();
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
@@ -24,20 +24,21 @@ class CreateAboutUsTable extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();
+            $table->text('description')->nullable();
 
-            $table->string('meta_header')->unique();
+            $table->string('meta_header')->nullable();
             $table->string('meta_keywords')->nullable();
             $table->text('meta_description')->nullable();
 
             $table->text('video_intro')->nullable();
-            $table->string('facebook')->unique();
+            $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('youtube')->nullable();
 
             $table->string('lang')->nullable();
             $table->integer('parent_lang')->nullable();
 
-            $table->unsignedInteger('created_by');
+            $table->unsignedInteger('created_by')->nullable();
             $table->timestamps();
         });
     }
@@ -49,6 +50,6 @@ class CreateAboutUsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('about_us');
+        Schema::dropIfExists('about_u_s');
     }
 }

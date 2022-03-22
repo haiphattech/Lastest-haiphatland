@@ -14,6 +14,9 @@ use App\Http\Controllers\StatusProjectController;
 use App\Http\Controllers\TypeProjectController;
 use App\Http\Controllers\InvestorController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\AboutUController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -28,6 +31,9 @@ Route::middleware(['auth'])->group(function () {
         'type-projects'     => TypeProjectController::class,
         'investors'         => InvestorController::class,
         'activities'        => ActivityController::class,
+        'events'            => EventController::class,
+        'applications'      => ApplicationController::class,
+        'aboutUs'           => AboutUController::class,
     ]);
     Route::get('/categories/create/{lang}/{category_id}', [CategoryController::class, 'createLanguage'])->name('categories-create.lang');
     Route::get('/menus/create/{lang}/{menu_id}', [MenuController::class, 'createLanguage'])->name('menus-create.lang');
@@ -36,6 +42,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/investors/create/{lang}/{item_id}', [InvestorController::class, 'createLanguage'])->name('investors-create.lang');
     Route::get('/projects/create/{lang}/{item_id}', [ProjectController::class, 'createLanguage'])->name('projects-create.lang');
     Route::get('/activities/create/{lang}/{item_id}', [ActivityController::class, 'createLanguage'])->name('activities-create.lang');
+    Route::get('/events/create/{lang}/{item_id}', [EventController::class, 'createLanguage'])->name('events-create.lang');
+    Route::get('/applications/create/{lang}/{item_id}', [ApplicationController::class, 'createLanguage'])->name('applications-create.lang');
+    Route::get('/about-us/create/{lang}/{item_id}', [AboutUController::class, 'createLanguage'])->name('about-us-create.lang');
     //Phân quyền cho nhân viên
     Route::get('/role/authorization/{user_id}', [RoleController::class, 'authorization'])->name('authorization-user');
     Route::post('/role/authorization-post', [RoleController::class, 'authorizationPost'])->name('authorization-user-post');

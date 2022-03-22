@@ -1,15 +1,14 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Project;
-use App\Models\StatusProject;
+use App\Models\AboutU;
 use App\Repositories\Support\AbstractRepository;
 use Illuminate\Support\Facades\Auth;
 
-class ProjectRepository extends AbstractRepository
+class AboutURepository extends AbstractRepository
 {
     public function model(){
-        return Project::class;
+        return AboutU::class;
     }
     public function getData()
     {
@@ -22,9 +21,5 @@ class ProjectRepository extends AbstractRepository
     public function checkLangExist($lang, $parent_lang)
     {
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
-    }
-    public function getProjectShowHome($lang)
-    {
-        return $this->model->where([['lang', $lang], ['display_home', true]])->first();
     }
 }

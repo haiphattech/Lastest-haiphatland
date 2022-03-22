@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\About_us;
+use App\Models\AboutU;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AboutUsPolicy
+class AboutUPolicy
 {
     use HandlesAuthorization;
     public function before($user, $ability)
@@ -30,10 +30,10 @@ class AboutUsPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\About_us  $aboutUs
+     * @param  \App\Models\AboutU  $aboutU
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, About_us $aboutUs)
+    public function view(User $user, AboutU $aboutU)
     {
         //
     }
@@ -53,10 +53,10 @@ class AboutUsPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\About_us  $aboutUs
+     * @param  \App\Models\AboutU  $aboutU
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, About_us $aboutUs)
+    public function update(User $user, AboutU $aboutU)
     {
         //
     }
@@ -65,10 +65,10 @@ class AboutUsPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\About_us  $aboutUs
+     * @param  \App\Models\AboutU  $aboutU
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, About_us $aboutUs)
+    public function delete(User $user, AboutU $aboutU)
     {
         //
     }
@@ -77,10 +77,10 @@ class AboutUsPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\About_us  $aboutUs
+     * @param  \App\Models\AboutU  $aboutU
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, About_us $aboutUs)
+    public function restore(User $user, AboutU $aboutU)
     {
         //
     }
@@ -89,10 +89,10 @@ class AboutUsPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\About_us  $aboutUs
+     * @param  \App\Models\AboutU  $aboutU
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, About_us $aboutUs)
+    public function forceDelete(User $user, AboutU $aboutU)
     {
         //
     }
