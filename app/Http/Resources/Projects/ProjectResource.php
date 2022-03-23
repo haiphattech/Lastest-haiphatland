@@ -19,8 +19,8 @@ class ProjectResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'avatar' => $this->avatar,
-            'cover' => $this->cover,
+            'avatar' => env('APP_URL').$this->avatar,
+            'cover' => env('APP_URL').$this->cover,
             'video' => $this->video,
             'category' => new CategoryResource($this->category)
         ];

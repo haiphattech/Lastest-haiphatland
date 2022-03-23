@@ -42,12 +42,9 @@ class HomeController extends Controller
         $this->aboutURepo   = $aboutURepo;
         $this->applicationRepo   = $applicationRepo;
     }
-    public function getDataHome(Request $request)
+    public function getDataHome(Request $request, $lang='vi')
     {
         try {
-            $lang = 'vi';
-            if($request->lang)
-                $lang = $request->lang;
             $data = [
                 'menu' => [],
                 'project_header' => [],
@@ -95,12 +92,9 @@ class HomeController extends Controller
         }
 
     }
-    public function getDataFooter(Request $request)
+    public function getDataFooter(Request $request, $lang='vi')
     {
         try {
-            $lang = 'vi';
-            if($request->lang)
-                $lang = $request->lang;
             $data = [
                 'aboutU' => [],
                 'applications' => [],

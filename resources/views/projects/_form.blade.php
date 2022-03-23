@@ -10,7 +10,7 @@
                     <label for="name" class="col-sm-3 col-form-label">Tên dự án</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="name" placeholder="" name="name"
-                               value="{{old('name_company', $project['name'])}}">
+                               value="{{old('name', $project['name'])}}">
                         @if ($errors->has('name'))
                             <div class="mt-1 notification-error">
                                 {{$errors->first('name')}}
