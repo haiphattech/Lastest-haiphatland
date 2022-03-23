@@ -58,6 +58,7 @@ class UserController extends Controller
             'phone' => 'required|max:255',
         ]);
         $data = $request->only('name', 'email', 'username', 'phone');
+        $data['is_admin'] = isset($request['is_admin']) ? 1 : 0;
         $data['created_by'] = Auth::id();
         $data['password'] = Hash::make(substr($data['phone'], 0, 7));
         $this->userRepo->create($data);

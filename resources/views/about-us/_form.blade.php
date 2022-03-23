@@ -85,7 +85,7 @@
                     <div class="form-group row mb-3">
                         <label for="facebook" class="col-sm-3 col-form-label">Facebook</label>
                         <div class="col-sm-9">
-                            <input type="email" class="form-control" id="facebook" placeholder="" name="facebook"
+                            <input type="text" class="form-control" id="facebook" placeholder="" name="facebook"
                                    value="{{$aboutU['facebook']}}">
                         </div>
                     </div>
