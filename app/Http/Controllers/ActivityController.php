@@ -49,7 +49,7 @@ class ActivityController extends Controller
         $categories = $this->categoryRepo->getCategoryByType('activities', $lang);
         $activity = new Activity();
         return view($this->view.'.create',[
-            'Activity'   => $activity,
+            'activity'   => $activity,
             'view'      => $this->view,
             'lang'      => $lang,
             'parent_lang' => $parent_lang,
@@ -69,7 +69,7 @@ class ActivityController extends Controller
         $categories = $this->categoryRepo->getCategoryByType('activities', $lang);
         $activity = new Activity();
         return view($this->view.'.create',[
-            'Activity'      => $activity,
+            'activity'      => $activity,
             'view'          => $this->view,
             'lang'          => $lang,
             'parent_lang'   => $parent_lang,

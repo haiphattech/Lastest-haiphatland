@@ -40,10 +40,7 @@
                                     <th scope="col">logo</th>
                                     <th scope="col">favicon</th>
                                     <th scope="col">thumbnail</th>
-                                    <th scope="col" class="text-center">Email</th>
-                                    <th scope="col" class="text-center">Số điện thoại</th>
-                                    <th scope="col" class="text-center">Fax</th>
-                                    <th scope="col" class="text-center">Địa chỉ</th>
+                                    <th scope="col" class="text-center">Ngày tạo</th>
                                     <th scope="col" class="text-center">Trạng thái</th>
                                     <th scope="col" class="text-center">Hành động</th>
                                 </tr>
@@ -62,7 +59,9 @@
                                                 <p><i class="mdi mdi-map-marker-radius"></i>  {{$item->address}}</p>
                                             @endif
                                         </td>
-                                        <td><a target="_blank" href="{{$item->url}}">{{$item->url}}</a></td>
+                                        <td><img class="img-customer" src="{{$item['logo']}}" alt="logo"></td>
+                                        <td><img class="img-customer" src="{{$item['favicon']}}" alt="favicon"></td>
+                                        <td><img class="img-customer" src="{{$item['thumbnail']}}" alt="thumbnail"></td>
                                         <td role="cell" class="text-center">{{date('H:i d/m/Y', strtotime($item->created_at))}}</td>
                                         <td role="cell" class="text-center"><img src="{{$item->langs->icon}}" alt="icon"></td>
                                         <td class="text-center">

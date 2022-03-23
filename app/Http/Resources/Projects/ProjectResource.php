@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Projects;
 
+use App\Http\Resources\Categories\CategoryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProjectResource extends JsonResource
@@ -15,7 +16,13 @@ class ProjectResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'avatar' => $this->avatar,
+            'cover' => $this->cover,
+            'video' => $this->video,
+            'category' => new CategoryResource($this->category)
         ];
     }
 }

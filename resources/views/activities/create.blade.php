@@ -26,7 +26,7 @@
         </div>
         <form class="theme-form" method="POST" action="{{route('activities.store')}}">
             @csrf
-            @include($view.'._form',['fieldActivity'=> $fieldActivity])
+            @include($view.'._form',['activity'=> $activity])
         </form>
     </div>
     </div>

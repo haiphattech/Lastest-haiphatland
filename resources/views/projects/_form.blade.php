@@ -1,6 +1,5 @@
 <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-7">
+    <div class="col-md-7 col-xxl-8">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Thông tin chung</h5>
@@ -48,6 +47,12 @@
                         @endif
                     </div>
                 </div>
+                <div class="form-group row mb-3">
+                    <label for="parent_id" class="col-sm-3 col-form-label">Ngôn ngữ</label>
+                    <div class="col-sm-9">
+                        <img width="30px" src="{{$lang == 'en' ? '/assets/images/English.png' : '/assets/images/vietnam.png'}}" alt="">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card mt-4">
@@ -81,7 +86,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-xxl-4">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Chức năng</h5>
@@ -137,8 +142,8 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputUsername1">Link video</label>
-                    <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
+                    <label for="video">Link video hiển thị trang chủ</label>
+                    <input type="text" class="form-control" id="video" placeholder="video" value="{{$project['video']}}">
                 </div>
             </div>
         </div>

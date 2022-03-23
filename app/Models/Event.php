@@ -28,4 +28,8 @@ class Event extends Model
     {
         return $this->belongsTo(Language::class, 'lang', 'key');
     }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

@@ -22,4 +22,10 @@ class ApplicationRepository extends AbstractRepository
     {
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
     }
+
+    //API FRONTEND
+    public function getApplicationFooter($lang)
+    {
+        return $this->model->where([['lang', $lang], ['status', true]])->get();
+    }
 }

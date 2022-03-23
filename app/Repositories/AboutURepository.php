@@ -22,4 +22,10 @@ class AboutURepository extends AbstractRepository
     {
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
     }
+
+    //API FRONTEND
+    public function getAboutUFooter($lang)
+    {
+        return $this->model->where([['lang', $lang]])->first();
+    }
 }

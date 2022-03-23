@@ -22,4 +22,11 @@ class EventRepository extends AbstractRepository
     {
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
     }
+
+    //API FRONTEND
+    public function getEventShowHome($lang)
+    {
+        $time_current = date('Y-m-d H:i:s');
+        return $this->model->where([['lang', $lang],['start_time', '<=', $time_current], ['end_time', '>=', $time_current]])->orderBy('start_time', 'ASC')->limit(4)->get();
+    }
 }

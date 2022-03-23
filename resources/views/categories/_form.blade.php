@@ -82,6 +82,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row mb-3">
+                        <label for="parent_id" class="col-sm-3 col-form-label">Ngôn ngữ</label>
+                        <div class="col-sm-9">
+                            <img width="30px" src="{{$lang == 'en' ? '/assets/images/English.png' : '/assets/images/vietnam.png'}}" alt="">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

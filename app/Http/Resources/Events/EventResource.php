@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Events;
 
+use App\Http\Resources\Categories\CategoryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MenuResource extends JsonResource
+class EventResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,7 +16,10 @@ class MenuResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'cate_slug' => new CategoryResource($this->category)
         ];
     }
 }

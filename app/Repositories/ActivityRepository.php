@@ -22,4 +22,10 @@ class ActivityRepository extends AbstractRepository
     {
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
     }
+
+    //API FRONTEND
+    public function getDataShowHome($lang)
+    {
+        return $this->model->where([['lang', $lang], ['status', true],['display_home', true]])->orderBy('id')->get();
+    }
 }

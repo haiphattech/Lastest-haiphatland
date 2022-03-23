@@ -18,4 +18,5 @@ use App\Http\Controllers\Api\HomeController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/menu', [HomeController::class, 'getHearder']);
+Route::post('/home', [HomeController::class, 'getDataHome']);
+Route::post('/footer', [HomeController::class, 'getDataFooter']);

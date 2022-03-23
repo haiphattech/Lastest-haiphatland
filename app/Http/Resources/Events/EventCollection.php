@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Events;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class MenuCollection extends ResourceCollection
+class EventCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -14,8 +14,6 @@ class MenuCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-        ];
+        return parent::toArray($request);
     }
 }

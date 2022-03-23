@@ -23,8 +23,19 @@ class ProjectRepository extends AbstractRepository
     {
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
     }
+
+    //API FRONTEND
     public function getProjectShowHome($lang)
     {
         return $this->model->where([['lang', $lang], ['display_home', true]])->first();
     }
+    public function getProjectTienPhong($lang)
+    {
+        return $this->model->where([['lang', $lang], ['tien_phong', true]])->first();
+    }
+    public function getProjectTieuBieu($lang)
+    {
+        return $this->model->where([['lang', $lang], ['tieu_bieu', true]])->first();
+    }
+
 }
