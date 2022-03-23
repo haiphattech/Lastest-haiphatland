@@ -17,5 +17,8 @@ class IntroduceDetail extends Model
         'created_by',
         'introduce_id',
     ];
-
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }

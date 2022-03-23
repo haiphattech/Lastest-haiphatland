@@ -16,5 +16,8 @@ class Application extends Model
         'parent_lang',
         'created_by',
     ];
-
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }

@@ -53,9 +53,6 @@
                 </div>
             </div>
         </li>
-        <li class="nav-item nav-category">
-            <span class="nav-link">Navigation</span>
-        </li>
         <li class="nav-item menu-items {{ request()->is('/') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('home')}}">
               <span class="menu-icon">
@@ -64,7 +61,15 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item menu-items {{ (request()->is('users/')) ? 'active' : '' }}">
+        <li class="nav-item menu-items {{ request()->is('/aboutUs') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('aboutUs.index')}}">
+              <span class="menu-icon">
+                <i class="mdi  mdi-information-outline"></i>
+              </span>
+                <span class="menu-title">Thông tin chung</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items {{ (request()->is('users/*') || request()->is('role/*')) ? 'active' : '' }}">
             <a class="nav-link" data-bs-toggle="collapse" href="#user" aria-expanded="false" aria-controls="user">
               <span class="menu-icon">
                 <i class="mdi mdi-account-multiple"></i>
@@ -72,14 +77,14 @@
                 <span class="menu-title">Nhân viên</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="user">
+            <div class="collapse {{ (request()->is('users') || request()->is('users/create') || request()->is('role/*')) ? 'show' : '' }}" id="user">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link {{ (request()->is('users')) ? 'active' : '' }}" href="{{route('users.index')}}">Danh sách</a></li>
                     <li class="nav-item"> <a class="nav-link {{ request()->is('users/create') ? 'active' : '' }}" href="{{route('users.create')}}">Thêm mới</a></li>
                 </ul>
             </div>
         </li>
-        <li class="nav-item menu-items {{ (request()->is('permissions') || request()->is('permissions/create') || request()->is('type-permissions/*') || request()->is('permissions/*')) ? 'active' : '' }}">
+        <li class="nav-item menu-items {{ (request()->is('permissions') || request()->is('permissions/create') || request()->is('type-permissions') || request()->is('type-permissions/create')) ? 'active' : '' }}">
             <a class="nav-link" data-bs-toggle="collapse" href="#permission" aria-expanded="false" aria-controls="permission">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
@@ -87,7 +92,7 @@
                 <span class="menu-title">Phân quyền</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="permission">
+            <div class="collapse {{ (request()->is('permissions') || request()->is('permissions/create') || request()->is('type-permissions') || request()->is('type-permissions/create')) ? 'show' : '' }}" id="permission">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link {{ (request()->is('permissions')) ? 'active' : '' }}" href="{{route('permissions.index')}}">Danh sách</a></li>
                     <li class="nav-item"> <a class="nav-link {{ request()->is('permissions/create') ? 'active' : '' }}" href="{{route('permissions.create')}}">Thêm mới</a></li>
@@ -95,63 +100,192 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
-                <span class="menu-title">Form Elements</span>
-            </a>
+        <li class="nav-item nav-category  pb-0">
+            <span class="nav-link">Cài đặt</span>
         </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/tables/basic-table.html">
+        <li class="nav-item menu-items {{ (request()->is('categories')||request()->is('categories/*')) ? 'active' : '' }}">
+            <a class="nav-link" data-bs-toggle="collapse" href="#categories" aria-expanded="false" aria-controls="categories">
               <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
+                <i class="mdi mdi-dns"></i>
               </span>
-                <span class="menu-title">Tables</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/charts/chartjs.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
-                <span class="menu-title">Charts</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/icons/mdi.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-contacts"></i>
-              </span>
-                <span class="menu-title">Icons</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
-                <span class="menu-title">User Pages</span>
+                <span class="menu-title">Danh mục</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="auth">
+            <div class="collapse {{ (request()->is('categories') || request()->is('categories/create') ||request()->is('categories/*')) ? 'show' : ''}}" id="categories">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+                    <li class="nav-item"> <a class="nav-link {{ (request()->is('categories')) ? 'active' : '' }}" href="{{route('categories.index')}}"> Danh sách </a></li>
+                    <li class="nav-item"> <a class="nav-link {{ request()->is('categories/create') ? 'active' : '' }}" href="{{route('categories.create')}}"> Thêm mới </a></li>
                 </ul>
             </div>
         </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
+        <li class="nav-item menu-items {{ (request()->is('menus')||request()->is('menus/*')) ? 'active' : '' }}">
+            <a class="nav-link" data-bs-toggle="collapse" href="#menus" aria-expanded="false" aria-controls="menus">
               <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
+                <i class="mdi mdi-dns"></i>
               </span>
-                <span class="menu-title">Documentation</span>
+                <span class="menu-title">Menu</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse {{ (request()->is('menus') || request()->is('menus/create') ||request()->is('menus/*')) ? 'show' : ''}}" id="menus">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link {{ (request()->is('menus')) ? 'active' : '' }}" href="{{route('menus.index')}}"> Danh sách </a></li>
+                    <li class="nav-item"> <a class="nav-link {{ request()->is('menus/create') ? 'active' : '' }}" href="{{route('menus.create')}}"> Thêm mới </a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item nav-category  pb-0">
+            <span class="nav-link">Dự án</span>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{route('projects.index')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+                <span class="menu-title">Danh sách</span>
             </a>
         </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{route('projects.create')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+                <span class="menu-title">Thêm mới</span>
+            </a>
+        </li>
+        @canany(['create', 'viewAny'], \App\Models\Investor::class)
+            <li class="nav-item menu-items {{ (request()->is('investors')||request()->is('investors/*')) ? 'active' : '' }}">
+                <a class="nav-link" data-bs-toggle="collapse" href="#investors" aria-expanded="false" aria-controls="investors">
+              <span class="menu-icon">
+                <i class="mdi mdi-security"></i>
+              </span>
+                    <span class="menu-title">Chủ đầu tư</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse {{ (request()->is('investors') || request()->is('investors/create')) ? 'show' : ''}}" id="investors">
+                    <ul class="nav flex-column sub-menu">
+                        @can('viewAny', \App\Models\Investor::class)
+                            <li class="nav-item"> <a class="nav-link" href="{{route('investors.index')}}"> Danh sách</a></li>
+                        @endcan
+                        @can('create', App\Models\Investor::class)
+                            <li class="nav-item"> <a class="nav-link" href="{{route('investors.create')}}"> Thêm mới </a></li>
+                        @endcan
+                    </ul>
+                </div>
+            </li>
+        @endcanany
+        @canany(['create', 'viewAny'], \App\Models\statusProject::class)
+        <li class="nav-item menu-items {{ (request()->is('status-projects')||request()->is('status-projects/*')) ? 'active' : '' }}">
+            <a class="nav-link" data-bs-toggle="collapse" href="#statusProject" aria-expanded="false" aria-controls="statusProject">
+              <span class="menu-icon">
+                <i class="mdi mdi-security"></i>
+              </span>
+                <span class="menu-title">Trạng thái dự án</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse {{ (request()->is('status-projects') || request()->is('status-projects/create') ||request()->is('status-projects/*')) ? 'show' : ''}}" id="statusProject">
+                <ul class="nav flex-column sub-menu">
+                    @can('viewAny', \App\Models\statusProject::class)
+                        <li class="nav-item"> <a class="nav-link {{ (request()->is('status-projects')) ? 'active' : '' }}" href="{{route('status-projects.index')}}"> Danh sách</a></li>
+                    @endcan
+                    @can('create', \App\Models\statusProject::class)
+                        <li class="nav-item"> <a class="nav-link {{ (request()->is('status-projects/create')) ? 'active' : '' }}" href="{{route('status-projects.create')}}"> Thêm mới </a></li>
+                    @endcan
+                </ul>
+            </div>
+        </li>
+        @endcanany
+        @canany(['create', 'viewAny'], \App\Models\TypeProject::class)
+        <li class="nav-item menu-items {{ (request()->is('type-projects')||request()->is('type-projects/*')) ? 'active' : '' }}">
+            <a class="nav-link" data-bs-toggle="collapse" href="#typeProject" aria-expanded="false" aria-controls="typeProject">
+              <span class="menu-icon">
+                <i class="mdi mdi-security"></i>
+              </span>
+                <span class="menu-title">Loại hình dự án</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse {{ (request()->is('type-projects') || request()->is('type-projects/create') ||request()->is('type-projects/*')) ? 'show' : ''}}" id="typeProject">
+                <ul class="nav flex-column sub-menu">
+                    @can('viewAny', \App\Models\TypeProject::class)
+                    <li class="nav-item"> <a class="nav-link" href="{{route('type-projects.index')}}"> Danh sách</a></li>
+                    @endcan
+                    @can('create', App\Models\TypeProject::class)
+                    <li class="nav-item"> <a class="nav-link" href="{{route('type-projects.create')}}"> Thêm mới </a></li>
+                    @endcan
+                </ul>
+            </div>
+        </li>
+        @endcanany
+
+        <li class="nav-item nav-category  pb-0">
+            <span class="nav-link">Lĩnh vực hoạt động</span>
+        </li>
+        @can( 'viewAny', \App\Models\Activity::class)
+        <li class="nav-item menu-items {{ (request()->is('activities')) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('activities.index')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+                <span class="menu-title">Danh sách</span>
+            </a>
+        </li>
+        @endcan
+        @can( 'create', \App\Models\Activity::class)
+        <li class="nav-item menu-items {{ (request()->is('activities/create')) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('activities.create')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+                <span class="menu-title">Thêm mới</span>
+            </a>
+        </li>
+        @endcan
+
+        <li class="nav-item nav-category  pb-0">
+            <span class="nav-link">Sự kiện</span>
+        </li>
+        @can( 'viewAny', \App\Models\Event::class)
+            <li class="nav-item menu-items {{ (request()->is('events')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('events.index')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+                    <span class="menu-title">Danh sách</span>
+                </a>
+            </li>
+        @endcan
+        @can( 'create', \App\Models\Event::class)
+            <li class="nav-item menu-items {{ (request()->is('events/create')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('events.create')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+                    <span class="menu-title">Thêm mới</span>
+                </a>
+            </li>
+        @endcan
+        <li class="nav-item nav-category  pb-0">
+            <span class="nav-link">Ứng dụng</span>
+        </li>
+        @can( 'viewAny', \App\Models\Application::class)
+            <li class="nav-item menu-items {{ (request()->is('applications')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('applications.index')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+                    <span class="menu-title">Danh sách</span>
+                </a>
+            </li>
+        @endcan
+        @can( 'create', \App\Models\Application::class)
+            <li class="nav-item menu-items {{ (request()->is('applications/create')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('applications.create')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+                    <span class="menu-title">Thêm mới</span>
+                </a>
+            </li>
+        @endcan
+
     </ul>
 </nav>

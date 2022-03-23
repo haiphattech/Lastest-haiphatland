@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository as UserRepo;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -57,6 +58,7 @@ class UserController extends Controller
             'phone' => 'required|max:255',
         ]);
         $data = $request->only('name', 'email', 'username', 'phone');
+        $data['created_by'] = Auth::id();
         $data['password'] = Hash::make(substr($data['phone'], 0, 7));
         $this->userRepo->create($data);
         return redirect(route('users.index'))->with('success', 'Thêm mới thành công');

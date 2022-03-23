@@ -17,4 +17,8 @@ class Candidate extends Model
         'created_by',
         'recruit_id',
     ];
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }

@@ -10,9 +10,12 @@ class Image extends Model
     use HasFactory;
     protected $fillable = [
         'url',
-        'created_by',
         'project_id',
         'journal_id',
+        'category_id',
     ];
-
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }

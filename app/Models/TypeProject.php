@@ -15,4 +15,12 @@ class TypeProject extends Model
         'status',
         'created_by'
     ];
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
+    public function parentLanguage()
+    {
+        return $this->belongsTo(TypeProject::class, 'parent_lang', 'id');
+    }
 }

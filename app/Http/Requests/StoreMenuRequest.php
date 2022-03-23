@@ -13,7 +13,7 @@ class StoreMenuRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreMenuRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|max:255',
+            'key' => 'required|unique:menus|max:255',
         ];
     }
 }

@@ -28,175 +28,88 @@ $("[name='my-checkbox']").on('change', function () {
         }
     });
 });
+
 function show_alert() {
-    if(!confirm("Do you really want to do this?")) {
+    if (!confirm("Do you really want to do this?")) {
         return false;
     }
     this.form.submit();
 }
-setTimeout(function() {
+
+setTimeout(function () {
     $('.notification-submit').fadeOut('fast');
 }, 5000); // <-- time in milliseconds
 // Crop-image
 $(document).ready(function () {
-    var height = $('.height_image').val();
-    var width = $('.with_image').val();
-    if(width)
-        $('.modal-lg').css('max-width', '1300px');
+    $('.upload_image').on('click', function () {
+        const name = $(this).attr('data-name');
+        const domain = window.location.protocol + '//' + window.location.host;
+        CKFinder.popup({
+            chooseFiles: true,
+            width: 800,
+            height: 600,
+            onInit: function (finder) {
+                finder.on('files:choose', function (evt) {
+                    var file = evt.data.files.first();
+                    const source = file.getUrl().replace(domain, "");
+                    $('.' + name).val(source);
+                    $(".image-" + name).attr("src", source);
+                    finder.request('closePopup');
 
-    let $image_crop = $('#image_demo').croppie({
-        enableExif: true,
-        viewport: {
-            height: height ? height : 450,
-            width: width ? width : 450,
-            type: 'square' //circle
-        },
-        boundary: {
-            width: width ? 1200 : 500,
-            height: 500
-        }
-    });
-    $('.upload_image').on('change', function () {
-        $('.stt').val($(this).data('id'));
-        var reader = new FileReader();
-        reader.onload = function (event) {
-            $image_crop.croppie('bind', {
-                url: event.target.result
-            }).then(function () {
-                console.log('jQuery bind complete');
-            });
-        }
-        reader.readAsDataURL(this.files[0]);
-        $('#uploadimageModal').modal('show');
-    });
-
-    $('.crop_image').click(function (event) {
-        let stt = $('.stt').val();
-        $image_crop.croppie('result', {
-            type: 'canvas',
-            size: 'viewport'
-        }).then(function (response) {
-            $('#uploadimageModal').modal('hide');
-            $('.image-value-' + stt).val(response);
-            $('.image-' + stt).attr('src', response);
-            $('.remove-'+stt).css('display', 'block');
-        })
-    });
-
-    $('.delete-permission').click(function (e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        swal({
-            title: "Bạn có muốn xóa quyền của người này?",
-            text: "Sau khi xóa, bạn sẽ không thể khôi phục tệp tin này!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                $.ajax({
-                    type: "POST",
-                    url: "/admin/roles/delete",
-                    data: {
-                        id: id,
-                        _token: $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (data) {
-                        if (data) {
-                            swal("Thành công! Dữ liệu đã được xóa an toàn!", {
-                                icon: "success",
-                            });
-                            window.location.reload();
-                        }else{
-                            swal("Dữ liệu được chọn tạm thời không xóa được!");
-                        }
-                    }
                 });
             }
         });
     });
-    $('.delete-record').click(function (e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        swal({
-            title: "Bạn có muốn thực hiện thao tác này?",
-            text: "Sau khi xóa, bạn sẽ không thể khôi phục tệp tin này!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        type: "POST",
-                        url: $(this).data('api'),
-                        data: {
-                            id: $(this).data('id'),
-                            table: $(this).data('table'),
-                            column: $(this).data('column'),
-                            _token: $('meta[name="csrf-token"]').attr('content')
 
-                        },
-                        success: function (res) {
-                            console.log(res);
-                            if (res) {
-                                window.location.reload();
-                            }else{
-                                swal("Dữ liệu được chọn tạm thời không xóa được!");
-                            }
-                        }
-                    });
-                }
-            });
-    });
-    $('.remove-image').click(function (e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        let id_delete = $('.image_delete').val();
-        let r = confirm('Bạn có muốn xóa ảnh này')
-        if(r){
-            $('.image-'+id).attr('src','/back-end/images/department.jpg');
-            $('.remove-'+id).css('display', 'none');
-            $('.image-value-'+id).val('');
-
-            if(!id_delete){
-                id_delete = id;
-                $('.image_delete').val(id_delete)
-            }else{
-                id_delete = id_delete+','+id;
-                $('.image_delete').val(id_delete)
-            }
-        }
-    });
-    $('.upload_image_general').change(function(){
+    // $('.remove-image').click(function (e) {
+    //     e.preventDefault();
+    //     var id = $(this).data('id');
+    //     let id_delete = $('.image_delete').val();
+    //     let r = confirm('Bạn có muốn xóa ảnh này')
+    //     if (r) {
+    //         $('.image-' + id).attr('src', '/back-end/images/department.jpg');
+    //         $('.remove-' + id).css('display', 'none');
+    //         $('.image-value-' + id).val('');
+    //
+    //         if (!id_delete) {
+    //             id_delete = id;
+    //             $('.image_delete').val(id_delete)
+    //         } else {
+    //             id_delete = id_delete + ',' + id;
+    //             $('.image_delete').val(id_delete)
+    //         }
+    //     }
+    // });
+    $('.upload_image_general').change(function () {
         let id = $(this).data('id');
         readURL(this, id);
     });
-    function readURL(input, id) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('.image-'+id).attr('src', e.target.result);
+    $('.multiple_images').on('click', '.box-image', function (event) {
+        const domain = window.location.protocol + '//' + window.location.host;
+        CKFinder.popup({
+            chooseFiles: true,
+            onInit: function (finder) {
+                finder.on('files:choose', function (evt) {
+                    var file = evt.data.files.first();
+                    const source = file.getUrl().replace(domain, "");
+                    const html = `
+                        <div class="img col-md-2 col-sm-6 col-xs-6">
+                            <div class="box-image-show">
+                                <img src="${source}" width="100%" alt="">
+                                <a href="javascript:;" class="remove-image">
+                                   <i class="mdi mdi-delete btn-icon-prepend"></i>
+                                </a>
+                                <input type="hidden" name="gallery[]" value="${source}">
+                            </div>
+                        </div>
+                    `
+                    $('.multiple_images').prepend(html);
+                    finder.request('closePopup');
+                });
             }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+        });
+    });
+    $('.multiple_images').on('click','.remove-image',function(event){
+        $(this).closest('.img').remove();
+    });
 });
-
-function dataURLtoFile(dataurl, filename) {
-
-    var arr = dataurl.split(','),
-        mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]),
-        n = bstr.length,
-        u8arr = new Uint8Array(n);
-
-    while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-
-    return new File([u8arr], filename, {type: mime});
-}

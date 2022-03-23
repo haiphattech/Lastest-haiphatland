@@ -12,4 +12,8 @@ class Language extends Model
     protected $fillable = [
         'title', 'key', 'icon', 'created_by' , 'status'
     ];
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }

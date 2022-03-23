@@ -9,7 +9,12 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class MenuPolicy
 {
     use HandlesAuthorization;
-
+    public function before($user, $ability)
+    {
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
+    }
     /**
      * Determine whether the user can view any models.
      *
@@ -18,7 +23,7 @@ class MenuPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('menu-views');
     }
 
     /**
@@ -30,7 +35,7 @@ class MenuPolicy
      */
     public function view(User $user, Menu $menu)
     {
-        //
+        return $user->hasPermission('menu-views');
     }
 
     /**
@@ -41,7 +46,7 @@ class MenuPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('menu-add');
     }
 
     /**
@@ -53,7 +58,7 @@ class MenuPolicy
      */
     public function update(User $user, Menu $menu)
     {
-        //
+        return $user->hasPermission('menu-edit');
     }
 
     /**
@@ -65,7 +70,7 @@ class MenuPolicy
      */
     public function delete(User $user, Menu $menu)
     {
-        //
+        return $user->hasPermission('menu-delete');
     }
 
     /**

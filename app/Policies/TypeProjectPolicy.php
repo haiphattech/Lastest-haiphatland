@@ -9,7 +9,12 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class TypeProjectPolicy
 {
     use HandlesAuthorization;
-
+    public function before($user, $ability)
+    {
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
+    }
     /**
      * Determine whether the user can view any models.
      *
@@ -18,7 +23,7 @@ class TypeProjectPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('type-project-views');
     }
 
     /**
@@ -30,7 +35,7 @@ class TypeProjectPolicy
      */
     public function view(User $user, TypeProject $typeProjects)
     {
-        //
+//        return $user->hasPermission('type-project-add');
     }
 
     /**
@@ -41,7 +46,7 @@ class TypeProjectPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('type-project-add');
     }
 
     /**
@@ -53,7 +58,7 @@ class TypeProjectPolicy
      */
     public function update(User $user, TypeProject $typeProjects)
     {
-        //
+        return $user->hasPermission('type-project-edit');
     }
 
     /**
@@ -65,7 +70,7 @@ class TypeProjectPolicy
      */
     public function delete(User $user, TypeProject $typeProjects)
     {
-        //
+        return $user->hasPermission('type-project-delete');
     }
 
     /**

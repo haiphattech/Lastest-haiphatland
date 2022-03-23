@@ -10,7 +10,7 @@
                         <a href="{{route('home')}}">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{route('permissions.index')}}">Danh sách</a>
+                        <a href="{{route('categories.index')}}">Danh sách</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Cập nhật</li>
                 </ol>
@@ -18,10 +18,10 @@
         </div>
         <!-- Container-fluid starts-->
         <div class="container-fluid">
-            <form class="theme-form" method="POST" action="{{route('permissions.update', $permission['id'])}}">
+            <form class="theme-form" method="POST" action="{{route('categories.update', $category['id'])}}">
                 @csrf
                 @method('PATCH')
-                @include('permissions._form',['permission'=> $permission])
+                @include('categories._form')
             </form>
         </div>
     </div>

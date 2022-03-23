@@ -17,4 +17,5 @@ class Video extends Model
         'created_by',
         'project_id',
     ];
+
 }

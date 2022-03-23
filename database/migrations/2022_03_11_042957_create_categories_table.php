@@ -15,9 +15,9 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('name');
             $table->string('slug')->unique();
-            $table->string('avatar')->nullable();
+            $table->string('cover')->nullable();
             $table->text('description')->nullable();
             $table->integer('parent_id')->nullable();
             $table->tinyInteger('serial')->nullable();
@@ -25,7 +25,7 @@ class CreateCategoriesTable extends Migration
             $table->string('lang')->nullable();
             $table->integer('parent_lang')->nullable();
 
-            $table->enum('type', ['news', 'system', 'project', 'recruit', 'application', 'journal', 'open_letter', 'activities', 'introduces'])->default('news');
+            $table->enum('type', ['news', 'system', 'project', 'recruit', 'application', 'journal', 'open_letter', 'activities', 'introduces','events'])->default('news');
             $table->tinyInteger('status')->default(0);
             $table->unsignedInteger('created_by');
             $table->timestamps();

@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Ajax;
 
 use App\Models\Category;
-use App\Models\CustomerReview;
 use App\Models\Event;
+use App\Models\Investor;
+use App\Models\Menu;
 use App\Models\Permission;
-use App\Models\Product;
-use App\Models\Slide;
-use App\Models\Post;
-use App\Models\Staff;
+use App\Models\News;
+use App\Models\Project;
+use App\Models\statusProject;
 use App\Models\TypePermission;
+use App\Models\TypeProject;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -55,6 +56,24 @@ class AjaxController extends BaseController
             case 'videos':
                 $model = Video::find($id);
                 break;
+            case 'menus':
+                $model = Menu::find($id);
+                break;
+            case 'investors':
+                $model = Investor::find($id);
+                break;
+            case 'status_projects':
+                $model = statusProject::find($id);
+                break;
+            case 'type_projects':
+                $model = TypeProject::find($id);
+                break;
+            case 'projects':
+                $model = Project::find($id);
+                break;
+            case 'events':
+                $model = Event::find($id);
+                break;
             default:
                 break;
         }
@@ -64,47 +83,10 @@ class AjaxController extends BaseController
                 $column => $model[$column] ? 0 : 1
             ]);
 
-            return $this->sendResponse($result, 'Product created successfully.');
+            return $this->sendResponse($result, 'successfully.');
         }
 
-        return $this->sendResponse(false, 'Product created successfully.');
+        return $this->sendResponse(false, 'successfully.');
     }
 
-    public function removeRows(Request $request)
-    {
-        $id = $request->get('id');
-        $model = null;
-        switch ($request->get('table')) {
-            case 'categories':
-                $model = Category::find($id);
-                break;
-            case 'products':
-                $model = Product::find($id);
-                break;
-            case 'staffs':
-                $model = Staff::find($id);
-                break;
-            case 'posts':
-                $model = Post::find($id);
-                break;
-            case 'slides':
-                $model = Slide::find($id);
-                break;
-            case 'videos':
-                $model = Video::find($id);
-                break;
-            case 'customer-reviews':
-                $model = CustomerReview::find($id);
-                break;
-            default:
-                break;
-        }
-
-        if($model){
-            $model->delete();
-            return $this->sendResponse('', 'Success.');
-        }
-
-        return $this->sendResponse('', 'Faild.');
-    }
 }

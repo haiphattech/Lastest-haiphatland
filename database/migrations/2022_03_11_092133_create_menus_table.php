@@ -18,7 +18,7 @@ class CreateMenusTable extends Migration
             $table->string('name');
             $table->string('key');
 
-            $table->text('data');
+            $table->text('data')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->string('lang')->nullable();
             $table->integer('parent_lang')->nullable();

@@ -25,4 +25,8 @@ class News extends Model
         'created_by',
         'category_id',
     ];
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }

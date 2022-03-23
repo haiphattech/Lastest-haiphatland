@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('slug')->unique();
             $table->string('avatar')->nullable();
             $table->string('cover')->nullable();
+            $table->string('video')->nullable();
 
             $table->string('phone')->nullable();
             $table->string('email')->nullable();

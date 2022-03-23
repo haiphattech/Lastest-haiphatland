@@ -12,4 +12,8 @@ class Contact extends Model
     protected $fillable = [
         'name', 'email', 'phone', 'content' , 'status'
     ];
+    public function langs()
+    {
+        return $this->belongsTo(Language::class, 'lang', 'key');
+    }
 }
