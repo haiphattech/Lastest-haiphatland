@@ -25,10 +25,10 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Permission $permission)
     {
+        $this->authorize('viewAny', $permission);
         $permissions = $this->permissionRepoRepo->getPermissions();
-
         return view('permissions.index',[
             'permissions'  => $permissions,
         ]);
@@ -39,8 +39,9 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create(Permission $permission)
     {
+        $this->authorize('create', $permission);
         $typePermissions = $this->typePermissionRepoRepo->getTypePermissionByStatus(true);
         $permission = new Permission();
         return view('permissions.create',[
@@ -88,13 +89,11 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Permission $permission)
     {
+        $this->authorize('update', $permission);
         $typePermissions = $this->typePermissionRepoRepo->getTypePermissionByStatus(true);
-        $permission = $this->permissionRepoRepo->find($id);
-
         if(!$permission) return  abort(404);
-
         return view('permissions.update',[
             'typePermissions' => $typePermissions,
             'permission' => $permission

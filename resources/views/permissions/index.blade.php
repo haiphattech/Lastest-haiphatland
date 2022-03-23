@@ -25,7 +25,9 @@
                         <div>
                             <h4 class="card-title">
                                 Danh sách
+                                @can('create', \App\Models\Permission::class)
                                 <a href="{{route('permissions.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
+                                @endcan
                             </h4>
 
                         </div>
@@ -59,12 +61,14 @@
 
                                         </td>
                                         <td>
+                                            @can('update', $permission)
                                             <a href="{{route('permissions.edit', $permission['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
-                                            <form class="d-inline-block" action="{{ route('permissions.destroy', $permission['id']) }}" method="POST" >
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')"><i class="mdi mdi-delete btn-icon-prepend icon-mr"></i> Xóa</button>
-                                            </form>
+                                            @endcan
+                                                {{--                                            <form class="d-inline-block" action="{{ route('permissions.destroy', $permission['id']) }}" method="POST" >--}}
+{{--                                                @csrf--}}
+{{--                                                @method('DELETE')--}}
+{{--                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')"><i class="mdi mdi-delete btn-icon-prepend icon-mr"></i> Xóa</button>--}}
+{{--                                            </form>--}}
                                         </td>
                                     </tr>
                                 @endforeach

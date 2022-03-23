@@ -25,9 +25,6 @@
                         <div>
                             <h4 class="card-title">
                                 Danh sách
-                                @can('create', \App\Models\AboutU::class)
-                                <a href="{{route('applications.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
-                                @endcan
                             </h4>
 
                         </div>

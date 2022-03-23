@@ -61,6 +61,7 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
+        @can('viewAny', \App\Models\AboutU::class)
         <li class="nav-item menu-items {{ request()->is('/aboutUs') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('aboutUs.index')}}">
               <span class="menu-icon">
@@ -69,6 +70,7 @@
                 <span class="menu-title">Thông tin chung</span>
             </a>
         </li>
+        @endcan
         <li class="nav-item menu-items {{ (request()->is('users/*') || request()->is('role/*')) ? 'active' : '' }}">
             <a class="nav-link" data-bs-toggle="collapse" href="#user" aria-expanded="false" aria-controls="user">
               <span class="menu-icon">
@@ -84,6 +86,7 @@
                 </ul>
             </div>
         </li>
+        @canany(['create', 'viewAny'], \App\Models\Permission::class)
         <li class="nav-item menu-items {{ (request()->is('permissions') || request()->is('permissions/create') || request()->is('type-permissions') || request()->is('type-permissions/create')) ? 'active' : '' }}">
             <a class="nav-link" data-bs-toggle="collapse" href="#permission" aria-expanded="false" aria-controls="permission">
               <span class="menu-icon">
@@ -94,12 +97,17 @@
             </a>
             <div class="collapse {{ (request()->is('permissions') || request()->is('permissions/create') || request()->is('type-permissions') || request()->is('type-permissions/create')) ? 'show' : '' }}" id="permission">
                 <ul class="nav flex-column sub-menu">
+                    @can('viewAny', \App\Models\Permission::class)
                     <li class="nav-item"> <a class="nav-link {{ (request()->is('permissions')) ? 'active' : '' }}" href="{{route('permissions.index')}}">Danh sách</a></li>
+                    @endcan
+                    @can('create', \App\Models\Permission::class)
                     <li class="nav-item"> <a class="nav-link {{ request()->is('permissions/create') ? 'active' : '' }}" href="{{route('permissions.create')}}">Thêm mới</a></li>
+                    @endcan
                     <li class="nav-item"> <a class="nav-link {{ request()->is('type-permissions') ? 'active' : '' }}" href="{{route('type-permissions.index')}}">Loại quyền</a></li>
                 </ul>
             </div>
         </li>
+        @endcanany
         <li class="nav-item nav-category  pb-0">
             <span class="nav-link">Cài đặt</span>
         </li>
@@ -215,7 +223,7 @@
             </div>
         </li>
         @endcanany
-
+        @canany(['create', 'viewAny'], \App\Models\Activity::class)
         <li class="nav-item nav-category  pb-0">
             <span class="nav-link">Lĩnh vực hoạt động</span>
         </li>
@@ -239,7 +247,8 @@
             </a>
         </li>
         @endcan
-
+        @endcanany
+        @canany(['create', 'viewAny'], \App\Models\Event::class)
         <li class="nav-item nav-category  pb-0">
             <span class="nav-link">Sự kiện</span>
         </li>
@@ -263,6 +272,8 @@
                 </a>
             </li>
         @endcan
+        @endcanany
+        @canany(['create', 'viewAny'], \App\Models\Application::class)
         <li class="nav-item nav-category  pb-0">
             <span class="nav-link">Ứng dụng</span>
         </li>
@@ -286,6 +297,6 @@
                 </a>
             </li>
         @endcan
-
+        @endcanany
     </ul>
 </nav>
