@@ -50,7 +50,17 @@
                             @endif
                         </div>
                     </div>
-
+                    <div class="form-group row">
+                        <label for="exampleInputConfirmPassword2" class="col-sm-3 pt-2 col-form-label">Quyền Admin</label>
+                        <div class="col-sm-9">
+                            <div class="form-check" style="margin-top: 5px;">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" value="" name="is_admin">
+                                    <i class="input-helper"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <hr>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary me-2">Lưu</button>
