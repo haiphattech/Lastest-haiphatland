@@ -29,8 +29,8 @@ $config['authentication'] = '\App\Http\Middleware\CustomCKFinderAuth';
 /*============================ License Key ============================================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_licenseKey
 
-$config['licenseName'] = 'localhost';
-$config['licenseKey']  = '5CTCT65RLFKECMEJFQ2J4J7EQWGPD';
+$config['licenseName'] = 'admin.haiphatland.com.vn';
+$config['licenseKey']  = 'XFJFMKLHBCHFDCK3VKG4QE8CCUXP1';
 
 /*============================ CKFinder Internal Directory ============================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_privateDir
