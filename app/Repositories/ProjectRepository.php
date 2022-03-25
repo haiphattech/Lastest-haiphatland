@@ -37,5 +37,9 @@ class ProjectRepository extends AbstractRepository
     {
         return $this->model->where([['lang', $lang], ['tieu_bieu', true]])->first();
     }
+    public function getListProjectTieuBieus($lang)
+    {
+        return $this->model->where([['lang', $lang], ['tieu_bieu', true]])->orderBy('id', 'DESC')->limit(6)->get();
+    }
 
 }

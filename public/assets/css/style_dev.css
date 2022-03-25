@@ -6,6 +6,7 @@
 }
 textarea.form-control{
     height: unset!important;
+    line-height: 20px;
 }
 .notification-error{
     color: red;

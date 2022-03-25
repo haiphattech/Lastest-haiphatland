@@ -37,7 +37,7 @@
                         <select name="status_project_id" id="status_project_id" class="form-control">
                             <option value="">--Chọn--</option>
                             @foreach($statusProjects as $statusProject)
-                                <option value="{{$statusProject['id']}}">{{$statusProject['name']}}</option>
+                                <option {{$statusProject['id'] == old('status_project_id', $project['status_project_id']) ? 'selected="selected"' : ''}} value="{{$statusProject['id']}}">{{$statusProject['name']}}</option>
                             @endforeach
                         </select>
                         @if ($errors->has('status_project_id'))
@@ -60,10 +60,10 @@
                 <h5 class="card-title">Thông tin liên hệ</h5>
                 <hr>
                 <div class="form-group row mb-3">
-                    <label for="name" class="col-sm-3 col-form-label">Số điện thoại</label>
+                    <label for="phone" class="col-sm-3 col-form-label">Số điện thoại</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="" placeholder="" name=""
-                               value="{{old('name_company', $project['name'])}}">
+                        <input type="text" class="form-control" id="phone" placeholder="" name="phone"
+                               value="{{old('phone', $project['phone'])}}">
 
                     </div>
                 </div>
@@ -120,8 +120,8 @@
                 <div class="form-group">
                     <label for="">Ảnh đại diện</label>
                     <div class="upload_image" data-name="avatar">
-                        <input type="hidden" class="avatar" name="avatar" value="">
-                        <img src="/assets/images/department.jpg" width="180px" alt="" class="image-avatar">
+                        <input type="hidden" class="avatar" name="avatar" value="{{old('avatar', $project['avatar'])}}">
+                        <img src="{{$project['avatar'] ? old('avatar', $project['avatar']) : old('avatar', '/assets/images/department.jpg')}}" width="180px" alt="" class="image-avatar">
                     </div>
                     @if ($errors->has('avatar'))
                         <div class="mt-1 notification-error">
@@ -132,8 +132,8 @@
                 <div class="form-group">
                     <label for="">Ảnh bìa</label>
                     <div class="upload_image" data-name="cover">
-                        <input type="hidden" class="cover" name="cover" value="">
-                        <img src="/assets/images/department.jpg" width="180px" alt="" class="image-cover">
+                        <input type="hidden" class="cover" name="cover" value="{{old('cover', $project['cover'])}}">
+                        <img src="{{$project['cover'] ? old('cover', $project['cover']) : old('cover', '/assets/images/department.jpg')}}" width="180px" alt="" class="image-cover">
                     </div>
                     @if ($errors->has('cover'))
                         <div class="mt-1 notification-error">

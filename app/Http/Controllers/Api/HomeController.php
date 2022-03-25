@@ -50,10 +50,9 @@ class HomeController extends Controller
                 'project_header' => [],
                 'project_tien_phong' => [],
                 'project_tieu_bieu' => [],
+                'list_project_tieu_bieus' => [],
                 'activities' => [],
                 'events' => [],
-                'aboutU' => [],
-                'applications' => [],
             ];
             $menu = $this->menuRepo->getMenuByLang($lang);
             if($menu)
@@ -62,10 +61,14 @@ class HomeController extends Controller
             $project_header = $this->projectRepo->getProjectShowHome($lang);
             if($project_header)
                 $data['project_header'] = new ProjectResource($project_header);
-            $project_tieu_bieu = $this->projectRepo->getProjectTieuBieu($lang);
 
+            $project_tieu_bieu = $this->projectRepo->getProjectTieuBieu($lang);
             if($project_tieu_bieu)
                 $data['project_tieu_bieu'] = new ProjectResource($project_tieu_bieu);
+
+            $list_project_tieu_bieus = $this->projectRepo->getListProjectTieuBieus($lang);
+            if(!empty($list_project_tieu_bieus))
+                $data['list_project_tieu_bieus'] = ProjectResource::collection($list_project_tieu_bieus);
 
             $project_tien_phong = $this->projectRepo->getProjectTienPhong($lang);
             if($project_tien_phong)

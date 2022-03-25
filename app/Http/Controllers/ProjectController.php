@@ -100,7 +100,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectsRequest $request)
     {
-        $data = $request->only('name', 'category_id', 'status_project_id', 'avatar', 'cover', 'description', 'lang', 'parent_lang');
+        $data = $request->only('name', 'category_id', 'status_project_id', 'avatar', 'cover', 'description', 'lang', 'parent_lang', 'phone');
         $data['status'] = isset($request['status']) ? 1 : 0;
         $data['tien_phong'] = isset($request['tien_phong']) ? 1 : 0;
         $data['tieu_bieu'] = isset($request['tieu_bieu']) ? 1 : 0;
@@ -131,21 +131,42 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $projects
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $projects)
+    public function edit(Project $project)
     {
-        //
+        $this->authorize('create', $project);
+        $investors = $this->projectRepo->getByStatus();
+        $lang = $project['lang'];
+        $parent_lang = $project['parent_lang'];
+        $categories = $this->categoryRepo->getCategoryByType('project', $lang);
+        $statusProjects = $this->statusProjectRepo->getByStatus($lang);
+        return view($this->view.'.update',[
+            'investors' => $investors,
+            'project'   => $project,
+            'view'      => $this->view,
+            'lang'      => $lang,
+            'parent_lang' => $parent_lang,
+            'categories' => $categories,
+            'statusProjects' => $statusProjects
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateProjectsRequest  $request
-     * @param  \App\Models\Project  $projects
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProjectsRequest $request, Project $projects)
+    public function update(UpdateProjectsRequest $request, Project $project)
     {
-        //
+        $data = $request->only('name', 'category_id', 'status_project_id', 'avatar', 'cover', 'description', 'phone');
+        $data['status'] = isset($request['status']) ? 1 : 0;
+        $data['tien_phong'] = isset($request['tien_phong']) ? 1 : 0;
+        $data['tieu_bieu'] = isset($request['tieu_bieu']) ? 1 : 0;
+        $data['display_home'] = isset($request['display_home']) ? 1 : 0;
+        $data['slug'] = Str::slug($request->name).'-'.$project['id'];
+        $this->projectRepo->update($data, $project['id']);
+        return redirect(route('projects.index'))->with('success',  'Thêm thành công');
     }
 
     /**

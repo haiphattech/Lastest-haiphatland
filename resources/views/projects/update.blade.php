@@ -10,7 +10,7 @@
                         <a href="{{route('home')}}">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{route('investors.index')}}">Danh sách</a>
+                        <a href="{{route('projects.index')}}">Danh sách</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Cập nhật</li>
                 </ol>
@@ -18,10 +18,10 @@
         </div>
         <!-- Container-fluid starts-->
         <div class="container-fluid">
-            <form class="theme-form" method="POST" action="{{route('investors.update', $investor['id'])}}">
+            <form class="theme-form" method="POST" action="{{route('projects.update', $project['id'])}}">
                 @csrf
                 @method('PATCH')
-                @include($view.'._form',['investor'=> $investor])
+                @include($view.'._form',['project'=> $project])
             </form>
         </div>
     </div>

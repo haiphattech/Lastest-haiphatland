@@ -22,6 +22,7 @@ class ProjectResource extends JsonResource
             'avatar' => env('APP_URL').$this->avatar,
             'cover' => env('APP_URL').$this->cover,
             'video' => $this->video,
+            'description' => $this->description,
             'category' => new CategoryResource($this->category)
         ];
     }
