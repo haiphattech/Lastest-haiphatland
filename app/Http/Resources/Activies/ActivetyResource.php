@@ -19,7 +19,7 @@ class ActivetyResource extends JsonResource
             'id'            => $this->id,
             'name'          => $this->name,
             'slug'          => $this->slug,
-            'avatar'        => $this->avatar,
+            'avatar'        => env('APP_URL').$this->avatar,
             'description'   => $this->description,
             'content'       => $this->content,
             'display_home'  => $this->display_home,
