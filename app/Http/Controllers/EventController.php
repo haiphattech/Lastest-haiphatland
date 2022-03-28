@@ -84,18 +84,18 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        $data = $request->only('name', 'category_id', 'avatar', 'cover', 'place', 'address', 'description', 'lang', 'parent_lang');
-        $data['status'] = isset($request['status']) ? 1 : 0;
-        $data['start_time'] = date('Y-m-d H:i:s', strtotime($request['start_time']));
-        $data['end_time'] = date('Y-m-d H:i:s', strtotime($request['end_time']));
-        $data['status'] = isset($request['status']) ? 1 : 0;
-        $data['created_by'] = Auth::id();
-        $data['slug'] = Str::slug($request->name);
-        $result = $this->eventRepo->create($data);
-        $data = [];
-        $data['slug'] = $result['slug'].'-'.$result['id'];
-        $this->eventRepo->update($data, $result['id']);
-        return redirect(route('events.index'))->with('success',  'Thêm thành công');
+            $data = $request->only('name', 'category_id', 'avatar', 'cover', 'place', 'address', 'description', 'lang', 'parent_lang');
+            $data['status'] = isset($request['status']) ? 1 : 0;
+            $data['start_time'] = date('Y-m-d H:i:s', strtotime($request['start_time']));
+            $data['end_time'] = date('Y-m-d H:i:s', strtotime($request['end_time']));
+            $data['status'] = isset($request['status']) ? 1 : 0;
+            $data['created_by'] = Auth::id();
+            $data['slug'] = Str::slug($request->name);
+            $result = $this->eventRepo->create($data);
+            $data = [];
+            $data['slug'] = $result['slug'].'-'.$result['id'];
+            $this->eventRepo->update($data, $result['id']);
+            return redirect(route('events.index'))->with('success',  'Thêm thành công');
     }
     /**
      * Display the specified resource.
@@ -143,7 +143,7 @@ class EventController extends Controller
         $data['start_time'] = date('Y-m-d H:i:s', strtotime($request['start_time']));
         $data['end_time'] = date('Y-m-d H:i:s', strtotime($request['end_time']));
         $data['status'] = isset($request['status']) ? 1 : 0;
-        $data['slug'] = Str::slug($request->name);
+        $data['slug'] = Str::slug($request->name).'-'.$event['id'];
         $result = $this->eventRepo->update($data, $event['id']);
         $data = [];
         $data['slug'] = $request->name.'-'.$event['id'];

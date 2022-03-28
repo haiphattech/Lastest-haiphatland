@@ -23,7 +23,7 @@ class NewsPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('news-views');
     }
 
     /**
@@ -46,7 +46,7 @@ class NewsPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('news-add');
     }
 
     /**
@@ -58,7 +58,7 @@ class NewsPolicy
      */
     public function update(User $user, News $news)
     {
-        //
+        return $user->hasPermission('news-update');
     }
 
     /**
@@ -70,7 +70,7 @@ class NewsPolicy
      */
     public function delete(User $user, News $news)
     {
-        //
+        return $user->hasPermission('news-delete');
     }
 
     /**

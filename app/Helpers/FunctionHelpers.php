@@ -9,6 +9,7 @@ use App\Models\General;
 use App\Models\Investor;
 use App\Models\Menu;
 use App\Models\Activity;
+use App\Models\News;
 use App\Models\StatusProject;
 use App\Models\TypeProject;
 
@@ -177,6 +178,13 @@ class FunctionHelpers
     public static function checkLangAboutUsExist($lang, $parent_lang)
     {
         $query = AboutU::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangNewsExist($lang, $parent_lang)
+    {
+        $query = News::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
         if($query)
             return false;
         return true;

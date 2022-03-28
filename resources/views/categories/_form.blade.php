@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="username" class="col-sm-3 col-form-label">Trạng thái</label>
+                        <label for="status" class="col-sm-3 col-form-label">Trạng thái</label>
                         <div class="col-sm-9">
                             <div class="form-check" style="margin-top: 5px;">
                                 <label class="form-check-label">
