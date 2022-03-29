@@ -160,6 +160,7 @@ return [
         'avatar' => 'Ảnh đại diện',
         'cover'  => 'Ảnh bìa',
         'url'  => 'Đường dẫn',
+        'address' => 'Địa chỉ'
     ],
 
 ];

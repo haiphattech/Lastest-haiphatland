@@ -25,7 +25,7 @@
                         <select name="category_id" id="category_id" class="form-control">
                             @php \App\Helpers\FunctionHelpers::showCategorySelect($categories,  $activity['category_id']) @endphp
                         </select>
-                        @if ($errors->has('parent_id'))
+                        @if ($errors->has('category_id'))
                             <div class="mt-1 notification-error">
                                 {{$errors->first('parent_id')}}
                             </div>

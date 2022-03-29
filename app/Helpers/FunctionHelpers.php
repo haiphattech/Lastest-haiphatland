@@ -11,6 +11,7 @@ use App\Models\Menu;
 use App\Models\Activity;
 use App\Models\News;
 use App\Models\StatusProject;
+use App\Models\System;
 use App\Models\TypeProject;
 
 class FunctionHelpers
@@ -185,6 +186,13 @@ class FunctionHelpers
     public static function checkLangNewsExist($lang, $parent_lang)
     {
         $query = News::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangSystemsExist($lang, $parent_lang)
+    {
+        $query = System::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
         if($query)
             return false;
         return true;

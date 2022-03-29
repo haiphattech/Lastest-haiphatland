@@ -2,20 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Models\System;
 use App\Http\Requests\StoreSystemRequest;
 use App\Http\Requests\UpdateSystemRequest;
+use App\Repositories\CategoryRepository as CategoryRepo;
+use App\Repositories\SystemRepository as SystemRepo;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class SystemController extends Controller
 {
+    protected $view = 'systems';
+    protected $systemRepo;
+    protected $categoryRepo;
+
+    public function __construct(SystemRepo $systemRepo,  CategoryRepo $categoryRepo)
+    {
+        $this->systemRepo = $systemRepo;
+        $this->categoryRepo = $categoryRepo;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(System $system)
     {
-        //
+        $this->authorize('viewAny', $system);
+        $systems = $this->systemRepo->getData();
+        return view($this->view.'.index',[
+            'systems' => $systems
+        ]);
     }
 
     /**
@@ -23,9 +42,20 @@ class SystemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(System $system)
     {
-        //
+//        $this->authorize('create', $system);
+        $lang = 'vi';
+        $parent_lang = 0;
+        $categories = $this->categoryRepo->getCategoryByType('system', $lang);
+        $system = new System();
+        return view($this->view.'.create',[
+            'system'        => $system,
+            'view'          => $this->view,
+            'lang'          => $lang,
+            'parent_lang'   => $parent_lang,
+            'categories'    => $categories,
+        ]);
     }
 
     /**
@@ -36,7 +66,12 @@ class SystemController extends Controller
      */
     public function store(StoreSystemRequest $request)
     {
-        //
+        $data = $request->only('name', 'category_id', 'address', 'lang', 'parent_lang');
+        $data['status'] = isset($request['status']) ? 1 : 0;
+        $data['created_by'] = Auth::id();
+        $data['slug'] = Str::slug($request->name);
+        $this->systemRepo->create($data);
+        return redirect(route('systems.index'))->with('success',  'Thêm thành công');
     }
 
     /**

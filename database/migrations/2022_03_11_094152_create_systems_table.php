@@ -15,7 +15,7 @@ class CreateSystemsTable extends Migration
     {
         Schema::create('systems', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('name');
             $table->string('address');
             $table->string('lang')->nullable();
             $table->integer('parent_lang')->nullable();

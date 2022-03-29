@@ -9,7 +9,7 @@ class System extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title',
+        'name',
         'address',
         'lang',
         'parent_lang',
@@ -19,5 +19,9 @@ class System extends Model
     public function langs()
     {
         return $this->belongsTo(Language::class, 'lang', 'key');
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

@@ -348,5 +348,30 @@
                 </li>
             @endcan
         @endcanany
+        @canany(['create', 'viewAny'], \App\Models\System::class)
+            <li class="nav-item nav-category  pb-0">
+                <span class="nav-link">Hệ thống Hải Phát Land</span>
+            </li>
+            @can( 'viewAny', \App\Models\System::class)
+                <li class="nav-item menu-items {{ (request()->is('systems')) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('systems.index')}}">
+                          <span class="menu-icon">
+                            <i class="mdi mdi-playlist-play"></i>
+                          </span>
+                        <span class="menu-title">Danh sách</span>
+                    </a>
+                </li>
+            @endcan
+            @can( 'create', \App\Models\System::class)
+                <li class="nav-item menu-items {{ (request()->is('systems/create')) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('systems.create')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+                        <span class="menu-title">Thêm mới</span>
+                    </a>
+                </li>
+            @endcan
+        @endcanany
     </ul>
 </nav>
