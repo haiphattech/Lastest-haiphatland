@@ -27,6 +27,6 @@ class EventRepository extends AbstractRepository
     public function getEventShowHome($lang)
     {
         $time_current = date('Y-m-d H:i:s');
-        return $this->model->where([['lang', $lang],['start_time', '<=', $time_current]])->orderBy('start_time', 'ASC')->limit(4)->get();
+        return $this->model->where([['lang', $lang],['start_time', '<=', $time_current]])->orderBy('start_time', 'DESC')->limit(4)->get();
     }
 }
