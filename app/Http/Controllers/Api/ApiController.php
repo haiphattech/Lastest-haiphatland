@@ -70,7 +70,6 @@ class ApiController extends Controller
                         "data" =>  []
                     ]);
                 endif;
-                $check = false;
                 if($slug) {
                     $news = $this->newsRepo->getNewsBySlugAndCateId($slug, $category['id']);
                     if (!$news) {
@@ -85,15 +84,11 @@ class ApiController extends Controller
                     $data['relates'] = $list_news;
                 }else {
                     foreach ($list_categories as $key => $cate):
-                        if ($cate['noi_bat']) {
+                        if ($cate['slug'] === $cate_slug) {
                             $list_categories[$key]['news'] = $this->newsRepo->getNews($cate['id']);
-                            $check = true;
                             break;
                         }
                     endforeach;
-                    if (!$check && isset($list_categories[0])):
-                        $list_categories[0]['news'] = $this->newsRepo->getNews($list_categories[0]['id']);
-                    endif;
                     $data['list_categories'] = $list_categories;
                 }
 
