@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('/home/{lang?}', [HomeController::class, 'getDataHome']);
 Route::get('/footer/{lang?}', [HomeController::class, 'getDataFooter']);
+Route::get('/{category?}/{slug?}', [HomeController::class, 'index']);
+Route::get('/{lang?}/{category?}/{slug?}', [HomeController::class, 'indexLang']);

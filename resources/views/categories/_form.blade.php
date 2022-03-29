@@ -82,6 +82,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="noi_bat" class="col-sm-3 col-form-label">Nổi bật</label>
+                        <div class="col-sm-9">
+                            <div class="form-check" style="margin-top: 5px;">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input"
+                                           {{isset($category['noi_bat']) ? "checked" : ''}} value="{{$category['noi_bat']}}"
+                                           name="status">
+                                    <i class="input-helper"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group row mb-3">
                         <label for="parent_id" class="col-sm-3 col-form-label">Ngôn ngữ</label>
                         <div class="col-sm-9">

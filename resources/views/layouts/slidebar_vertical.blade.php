@@ -305,10 +305,10 @@
             @can( 'viewAny', \App\Models\News::class)
                 <li class="nav-item menu-items {{ (request()->is('news')) ? 'active' : '' }}">
                     <a class="nav-link" href="{{route('news.index')}}">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
-                        <span class="menu-title">Danh sách</span>
+                          <span class="menu-icon">
+                            <i class="mdi mdi-playlist-play"></i>
+                          </span>
+                            <span class="menu-title">Danh sách</span>
                     </a>
                 </li>
             @endcan

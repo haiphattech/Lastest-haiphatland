@@ -8,7 +8,7 @@ use App\Http\Requests\StoreNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Repositories\CategoryRepository as CategoryRepo;
 use App\Repositories\EventRepository as eventRepo;
-use App\Repositories\NewRepository as NewRepo;
+use App\Repositories\NewsRepository as NewsRepo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -18,7 +18,7 @@ class NewsController extends Controller
     protected $newsRepo;
     protected $categoryRepo;
 
-    public function __construct(NewRepo $newsRepo,  CategoryRepo $categoryRepo)
+    public function __construct(NewsRepo $newsRepo,  CategoryRepo $categoryRepo)
     {
         $this->newsRepo = $newsRepo;
         $this->categoryRepo = $categoryRepo;

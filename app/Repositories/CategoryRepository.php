@@ -37,4 +37,13 @@ class CategoryRepository extends AbstractRepository
         return $query = $this->model->where([['status', $status],['type', $type],['lang', $lang]])->get();
 
     }
+    //Api
+    public function getCategoryBySlug($cate_slug, $lang = 'vi')
+    {
+        return $this->model->where([['status', true], ['lang', $lang], ['slug', $cate_slug]])->first();
+    }
+    public function getCategoryByParentId($parent_id)
+    {
+        return $this->model->where([['status', true], ['parent_id', $parent_id]])->get();
+    }
 }

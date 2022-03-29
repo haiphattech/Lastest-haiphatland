@@ -6,7 +6,7 @@ use App\Models\News;
 use App\Repositories\Support\AbstractRepository;
 use Illuminate\Support\Facades\Auth;
 
-class NewRepository extends AbstractRepository
+class NewsRepository extends AbstractRepository
 {
     public function model(){
         return News::class;
@@ -22,5 +22,10 @@ class NewRepository extends AbstractRepository
     public function checkLangExist($lang, $parent_lang)
     {
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
+    }
+
+    public function getNews($cate_id)
+    {
+        return $this->model->where([['category_id', $cate_id], ['status', true]])->paginate(8);
     }
 }

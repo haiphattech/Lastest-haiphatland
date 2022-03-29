@@ -19,6 +19,7 @@ use App\Repositories\ActivityRepository as ActivityRepo;
 use App\Repositories\EventRepository as EventRepo;
 use App\Repositories\AboutURepository as AboutURepo;
 use App\Repositories\ApplicationRepository as ApplicationRepo;
+use App\Repositories\NewsRepository as NewsRepo;
 
 class HomeController extends Controller
 {
@@ -29,9 +30,10 @@ class HomeController extends Controller
     protected $activityRepo;
     protected $eventRepo;
     protected $aboutURepo;
+    protected $newsRepo;
     protected $applicationRepo;
 
-    public function __construct(ApplicationRepo $applicationRepo, AboutURepo $aboutURepo, EventRepo $eventRepo, ActivityRepo $activityRepo, CategoryRepo $categoryRepo, ImageRepo $imageRepo, MenuRepo $menuRepo, ProjectRepo $projectRepo)
+    public function __construct(NewsRepo $newsRepo,ApplicationRepo $applicationRepo, AboutURepo $aboutURepo, EventRepo $eventRepo, ActivityRepo $activityRepo, CategoryRepo $categoryRepo, ImageRepo $imageRepo, MenuRepo $menuRepo, ProjectRepo $projectRepo)
     {
         $this->categoryRepo = $categoryRepo;
         $this->imageRepo    = $imageRepo;
@@ -40,7 +42,59 @@ class HomeController extends Controller
         $this->activityRepo = $activityRepo;
         $this->eventRepo    = $eventRepo;
         $this->aboutURepo   = $aboutURepo;
+        $this->newsRepo     = $newsRepo;
         $this->applicationRepo   = $applicationRepo;
+    }
+    public function index($cate_slug, $slug = '')
+    {
+        $data = [];
+        $category = $this->categoryRepo->getCategoryBySlug($cate_slug);
+        if(!$category){
+            return response()->json([
+                "success" => 300,
+                "message" => "Dữ liệu trống",
+                "data" =>  []
+            ]);
+        }
+        $data['category'] = $category;
+        switch ($category['type']) {
+            case 'news':
+                if($category['parent_id']){
+                    $list_categories = $this->categoryRepo->getCategoryByParentId($category['parent_id']);
+                }else{
+                    $list_categories = $this->categoryRepo->getCategoryByParentId($category['id']);
+                }
+                if(empty($list_categories)):
+                    return response()->json([
+                        "success" => 300,
+                        "message" => "Dữ liệu trống",
+                        "data" =>  []
+                    ]);
+                endif;
+                $check = false;
+                foreach ($list_categories as $key =>  $cate):
+                    if($cate['noi_bat']){
+                        $list_categories[$key]['news'] = $this->newsRepo->getNews($cate['id']);
+                        $check = true;
+                        break;
+                    }
+                endforeach;
+                if(!$check && isset($list_categories[0])):
+                    $list_categories[0]['news'] = $this->newsRepo->getNews($list_categories[0]['id']);
+                endif;
+                $data['list_categories'] = $list_categories;
+                return response()->json([
+                    "success" => 200,
+                    "message" => "Dữ liệu trống",
+                    "data" =>  $data
+                ]);
+        }
+
+
+    }
+    public function indexLang($lang, $category, $slug = '')
+    {
+        dd($lang);
     }
     public function getDataHome(Request $request, $lang='vi')
     {

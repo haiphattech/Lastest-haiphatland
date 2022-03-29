@@ -27,6 +27,7 @@ class CreateCategoriesTable extends Migration
 
             $table->enum('type', ['news', 'system', 'project', 'recruit', 'application', 'journal', 'open_letter', 'activities', 'introduces','events'])->default('news');
             $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('noi_bat')->default(0);
             $table->unsignedInteger('created_by');
             $table->timestamps();
         });

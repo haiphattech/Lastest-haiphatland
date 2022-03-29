@@ -20,6 +20,7 @@ class Category extends Model
         'parent_lang',
         'type',
         'status',
+        'noi_bat',
         'created_by'
     ];
     public function parent()

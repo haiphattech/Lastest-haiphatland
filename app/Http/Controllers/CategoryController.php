@@ -89,6 +89,7 @@ class CategoryController extends Controller
         $data = $request->only('name', 'parent_id', 'type', 'cover', 'description', 'lang');
         $data['slug'] = Str::slug($request->get('name'), '-');
         $data['status'] = isset($request['status']) ? 1 : 0;
+        $data['noi_bat'] = isset($request['noi_bat']) ? 1 : 0;
         $data['created_by'] = Auth::id();
         if ($data['parent_id'] == null) {
             $children = Category::whereNull('parent_id')->count();
@@ -156,6 +157,7 @@ class CategoryController extends Controller
         $data = $request->only('name', 'parent_id', 'type', 'cover', 'description', 'lang');
         $data['slug'] = Str::slug($request->get('name'), '-');
         $data['status'] = isset($request['status']) ? 1 : 0;
+        $data['noi_bat'] = isset($request['noi_bat']) ? 1 : 0;
         $this->categoryRepo->update($data, $category['id']);
         Image::where('category_id', $category['id'])->delete();
         if($request->gallery && !empty($request->gallery)):
