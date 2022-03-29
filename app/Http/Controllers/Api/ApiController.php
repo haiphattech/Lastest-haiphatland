@@ -21,7 +21,7 @@ use App\Repositories\AboutURepository as AboutURepo;
 use App\Repositories\ApplicationRepository as ApplicationRepo;
 use App\Repositories\NewsRepository as NewsRepo;
 
-class HomeController extends Controller
+class ApiController extends Controller
 {
     protected $categoryRepo;
     protected $imageRepo;
@@ -56,7 +56,6 @@ class HomeController extends Controller
                 "data" =>  []
             ]);
         }
-        $data['category'] = $category;
         switch ($category['type']) {
             case 'news':
                 if($category['parent_id']){
@@ -72,20 +71,35 @@ class HomeController extends Controller
                     ]);
                 endif;
                 $check = false;
-                foreach ($list_categories as $key =>  $cate):
-                    if($cate['noi_bat']){
-                        $list_categories[$key]['news'] = $this->newsRepo->getNews($cate['id']);
-                        $check = true;
-                        break;
+                if($slug) {
+                    $news = $this->newsRepo->getNewsBySlugAndCateId($slug, $category['id']);
+                    if (!$news) {
+                        return response()->json([
+                            "success" => 300,
+                            "message" => "Dữ liệu trống",
+                            "data" => []
+                        ]);
                     }
-                endforeach;
-                if(!$check && isset($list_categories[0])):
-                    $list_categories[0]['news'] = $this->newsRepo->getNews($list_categories[0]['id']);
-                endif;
-                $data['list_categories'] = $list_categories;
+                    $data['news'] = $news;
+                    $list_news = $this->newsRepo->getNewByCategoryId($category['id'], $news['id']);
+                    $data['relates'] = $list_news;
+                }else {
+                    foreach ($list_categories as $key => $cate):
+                        if ($cate['noi_bat']) {
+                            $list_categories[$key]['news'] = $this->newsRepo->getNews($cate['id']);
+                            $check = true;
+                            break;
+                        }
+                    endforeach;
+                    if (!$check && isset($list_categories[0])):
+                        $list_categories[0]['news'] = $this->newsRepo->getNews($list_categories[0]['id']);
+                    endif;
+                    $data['list_categories'] = $list_categories;
+                }
+
                 return response()->json([
                     "success" => 200,
-                    "message" => "Dữ liệu trống",
+                    "message" => "Success",
                     "data" =>  $data
                 ]);
         }
