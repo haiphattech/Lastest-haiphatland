@@ -18,7 +18,7 @@ class CategoryResource extends JsonResource
             "id"            => $this->id,
             "name"          => $this->name,
             "slug"          => $this->slug,
-            "cover"         => $this->cover,
+            "cover"         => $this->cover ? env('APP_URL').$this->cover : '',
             "description"   => $this->description,
             "parent_id"     => $this->parent_id,
             "serial"        => $this->serial,

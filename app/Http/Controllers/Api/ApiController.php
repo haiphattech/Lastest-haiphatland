@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Activies\ActivetyResource;
+use App\Http\Resources\Categories\CategoryResource;
 use App\Http\Resources\Events\EventResource;
+use App\Http\Resources\News\NewsResource;
 use App\Models\Event;
 use App\Models\Menu;
 use App\Http\Resources\Menus\MenuCollection;
@@ -83,13 +85,8 @@ class ApiController extends Controller
                     $list_news = $this->newsRepo->getNewByCategoryId($category['id'], $news['id']);
                     $data['relates'] = $list_news;
                 }else {
-                    foreach ($list_categories as $key => $cate):
-                        if ($cate['slug'] === $cate_slug) {
-                            $list_categories[$key]['news'] = $this->newsRepo->getNews($cate['id']);
-                            break;
-                        }
-                    endforeach;
-                    $data['list_categories'] = $list_categories;
+                    $data['list_categories'] = CategoryResource::collection($list_categories);
+                    $data['list_news'] = NewsResource::collection($this->newsRepo->getNews($category['id']));
                 }
 
                 return response()->json([
@@ -97,9 +94,16 @@ class ApiController extends Controller
                     "message" => "Success",
                     "data" =>  $data
                 ]);
+            case 'activities':
+                $data['category'] = new CategoryResource($category);
+                $activities = $this->activityRepo->getDataApi();
+                $data['list_activities'] = ActivetyResource::collection($activities);
+                return response()->json([
+                    "success" => 200,
+                    "message" => "Success",
+                    "data" =>  $data
+                ]);
         }
-
-
     }
     public function indexLang($lang, $category, $slug = '')
     {
