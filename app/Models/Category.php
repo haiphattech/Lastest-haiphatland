@@ -35,4 +35,8 @@ class Category extends Model
     {
         return $this->belongsTo(Language::class, 'lang', 'key');
     }
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

@@ -11,6 +11,6 @@ class ImageRepository extends AbstractRepository
     }
     public function getImageByCategoryId($cate_id)
     {
-        return $this->model->where('category_id', $cate_id)->get();
+        return $this->model->where('category_id', $cate_id)->orderBy('id', 'DESC')->get();
     }
 }

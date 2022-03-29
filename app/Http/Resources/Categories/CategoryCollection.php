@@ -19,6 +19,7 @@ class CategoryCollection extends ResourceCollection
             "name"          => $this->name,
             "slug"          => $this->slug,
             "cover"         => $this->cover ? env('APP_URL').$this->cover : '',
+            'images'        => $this->images,
             "description"   => $this->description,
             "parent_id"     => $this->parent_id,
             "serial"        => $this->serial,

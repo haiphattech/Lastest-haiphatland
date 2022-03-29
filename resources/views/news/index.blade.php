@@ -36,7 +36,7 @@
                                 <thead>
                                 <tr>
                                     <th scope="col" class="text-center">STT</th>
-                                    <th scope="col" style="width: 100px">Tên bài viết</th>
+                                    <th scope="col" >Tên bài viết</th>
                                     <th scope="col" class="text-center">Danh mục</th>
                                     <th scope="col" class="text-center">Lượt xem</th>
                                     <th scope="col" class="text-center">Ngày tạo</th>
@@ -49,8 +49,8 @@
                                 @foreach($list_news as $item)
                                     <tr role="row">
                                         <td role="cell" class="text-center">{{$loop->iteration}}</td>
-                                        <td style="width: 100px">
-                                            {{$item->name}}
+                                        <td>
+                                            <div class="text-break">{{$item->name}}</div>
                                         </td>
                                         <td class="text-center">
                                             <div class="badge badge-outline-success">{{$item->category->name}}</div>

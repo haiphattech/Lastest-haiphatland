@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Events;
 
 use App\Http\Resources\Categories\CategoryResource;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class EventCollection extends ResourceCollection
@@ -24,9 +25,10 @@ class EventCollection extends ResourceCollection
             'place'     => $this->place,
             'address'   => $this->address,
             'description'=> $this->description,
-            'start_time'=> date('H:i d-m-Y', strtotime($this->start_time)),
-            'end_time'  => date('H:i d-m-Y', strtotime($this->end_time)),
+            'start_time'=> Carbon::parse($this->start_time)->format('H:i d-m-Y'),
+            'end_time'  => Carbon::parse($this->end_time)->format('H:i d-m-Y'),
             'cate_slug' => new CategoryResource($this->category),
+            'created_at'    => Carbon::parse($this->created_at)->format('H:i d-m-Y'),
         ];
     }
 }

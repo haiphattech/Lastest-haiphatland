@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Projects;
 
 use App\Http\Resources\Categories\CategoryResource;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProjectResource extends JsonResource
@@ -23,7 +24,8 @@ class ProjectResource extends JsonResource
             'cover' => env('APP_URL').$this->cover,
             'video' => $this->video,
             'description' => $this->description,
-            'category' => new CategoryResource($this->category)
+            'category' => new CategoryResource($this->category),
+            'created_at'    => Carbon::parse($this->created_at)->format('H:i d-m-Y'),
         ];
     }
 }

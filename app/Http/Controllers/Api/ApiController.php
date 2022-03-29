@@ -98,6 +98,11 @@ class ApiController extends Controller
                 $data['category'] = new CategoryResource($category);
                 $activities = $this->activityRepo->getDataApi();
                 $data['list_activities'] = ActivetyResource::collection($activities);
+                if($slug){
+                    $activity = $this->activityRepo->getDataBuSlug($slug);
+                    $data['activity'] = new ActivetyResource($activity);
+                }
+
                 return response()->json([
                     "success" => 200,
                     "message" => "Success",

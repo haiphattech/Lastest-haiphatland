@@ -4,6 +4,7 @@ namespace App\Http\Resources\News;
 
 use App\Http\Resources\Categories\CategoryResource;
 use App\Http\Resources\Users\UserResource;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class NewsCollection extends ResourceCollection
@@ -25,7 +26,7 @@ class NewsCollection extends ResourceCollection
             'content'       => $this->content,
             'start'         => $this->start,
             'view'          => $this->view,
-            'created_at'    => date('H:i d\m\Y', strtotime($this->created_at)),
+            'created_at'    => Carbon::parse($this->created_at)->format('H:i d-m-Y'),
             'created_by'    => new UserResource($this->user),
             'category'      => new CategoryResource($this->category)
         ];

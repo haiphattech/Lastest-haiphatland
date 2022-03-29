@@ -28,4 +28,12 @@ class ActivityRepository extends AbstractRepository
     {
         return $this->model->where([['lang', $lang], ['status', true],['display_home', true]])->orderBy('id')->get();
     }
+    public function getDataApi($lang = 'vi')
+    {
+        return $this->model->where([['lang', $lang],['status', true]])->get();
+    }
+    public function getDataBuSlug($slug, $lang = 'vi')
+    {
+        return $this->model->where([['lang', $lang],['status', true], ['slug', $slug]])->first();
+    }
 }

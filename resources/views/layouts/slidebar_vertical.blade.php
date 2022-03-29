@@ -323,5 +323,30 @@
                 </li>
             @endcan
         @endcanany
+        @canany(['create', 'viewAny'], \App\Models\Journal::class)
+            <li class="nav-item nav-category  pb-0">
+                <span class="nav-link">Tạp chí</span>
+            </li>
+            @can( 'viewAny', \App\Models\Journal::class)
+                <li class="nav-item menu-items {{ (request()->is('journals')) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('journals.index')}}">
+                          <span class="menu-icon">
+                            <i class="mdi mdi-playlist-play"></i>
+                          </span>
+                        <span class="menu-title">Danh sách</span>
+                    </a>
+                </li>
+            @endcan
+            @can( 'create', \App\Models\Journal::class)
+                <li class="nav-item menu-items {{ (request()->is('journals/create')) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('journals.create')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+                        <span class="menu-title">Thêm mới</span>
+                    </a>
+                </li>
+            @endcan
+        @endcanany
     </ul>
 </nav>

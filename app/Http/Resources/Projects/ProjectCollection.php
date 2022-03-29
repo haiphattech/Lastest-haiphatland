@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Projects;
 
 use App\Http\Resources\Categories\CategoryResource;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProjectCollection extends ResourceCollection
@@ -22,7 +23,8 @@ class ProjectCollection extends ResourceCollection
             'avatar' => env('APP_URL').$this->avatar,
             'cover' => env('APP_URL').$this->cover,
             'video' => $this->video,
-            'category' => new CategoryResource($this->category)
+            'category' => new CategoryResource($this->category),
+            'created_at'    => Carbon::parse($this->created_at)->format('H:i d-m-Y'),
         ];
     }
 }

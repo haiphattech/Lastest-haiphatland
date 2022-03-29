@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Categories;
 
+use App\Http\Resources\Images\ImageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
@@ -19,6 +20,7 @@ class CategoryResource extends JsonResource
             "name"          => $this->name,
             "slug"          => $this->slug,
             "cover"         => $this->cover ? env('APP_URL').$this->cover : '',
+            'images'        => ImageResource::collection($this->images),
             "description"   => $this->description,
             "parent_id"     => $this->parent_id,
             "serial"        => $this->serial,
