@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Thêm mới quyền')
+@section('title', 'Thêm mới')
 @section('content')
     <div class="content-wrapper">
     <div class="page-header">

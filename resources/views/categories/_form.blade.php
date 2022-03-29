@@ -75,7 +75,7 @@
                             <div class="form-check" style="margin-top: 5px;">
                                 <label class="form-check-label">
                                     <input type="checkbox" class="form-check-input"
-                                           {{isset($category['status']) ? "checked" : ''}} value="{{$category['status']}}"
+                                           {{(isset($category['status']) && $category['status']) ? "checked" : ''}} value="{{$category['status']}}"
                                            name="status">
                                     <i class="input-helper"></i>
                                 </label>
@@ -88,7 +88,7 @@
                             <div class="form-check" style="margin-top: 5px;">
                                 <label class="form-check-label">
                                     <input type="checkbox" class="form-check-input"
-                                           {{isset($category['noi_bat']) ? "checked" : ''}} value="{{$category['noi_bat']}}"
+                                           {{(isset($category['noi_bat']) && $category['noi_bat'])  ? "checked" : ''}} value="{{$category['noi_bat']}}"
                                            name="noi_bat">
                                     <i class="input-helper"></i>
                                 </label>
