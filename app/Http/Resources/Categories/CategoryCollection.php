@@ -26,6 +26,7 @@ class CategoryCollection extends ResourceCollection
             "parent_lang"   => $this->parent_lang,
             "type"          => $this->type,
             "status"        => $this->status,
+            "noi_bat"       => $this->noi_bat,
         ];
     }
 }

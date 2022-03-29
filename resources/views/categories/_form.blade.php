@@ -89,7 +89,7 @@
                                 <label class="form-check-label">
                                     <input type="checkbox" class="form-check-input"
                                            {{isset($category['noi_bat']) ? "checked" : ''}} value="{{$category['noi_bat']}}"
-                                           name="status">
+                                           name="noi_bat">
                                     <i class="input-helper"></i>
                                 </label>
                             </div>
