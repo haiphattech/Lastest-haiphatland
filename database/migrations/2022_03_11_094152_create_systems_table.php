@@ -19,7 +19,7 @@ class CreateSystemsTable extends Migration
             $table->string('address');
             $table->string('lang')->nullable();
             $table->integer('parent_lang')->nullable();
-
+            $table->tinyInteger('status')->default(0);
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('category_id');
             $table->timestamps();

@@ -12,6 +12,7 @@ class System extends Model
         'name',
         'address',
         'lang',
+        'status',
         'parent_lang',
         'created_by',
         'category_id',

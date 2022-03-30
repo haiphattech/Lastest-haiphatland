@@ -10,6 +10,7 @@ use App\Models\Permission;
 use App\Models\News;
 use App\Models\Project;
 use App\Models\statusProject;
+use App\Models\System;
 use App\Models\TypePermission;
 use App\Models\TypeProject;
 use App\Models\User;
@@ -73,6 +74,9 @@ class AjaxController extends BaseController
                 break;
             case 'events':
                 $model = Event::find($id);
+                break;
+            case 'systems':
+                $model = System::find($id);
                 break;
             default:
                 break;

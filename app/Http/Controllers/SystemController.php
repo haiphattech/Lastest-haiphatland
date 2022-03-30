@@ -44,7 +44,7 @@ class SystemController extends Controller
      */
     public function create(System $system)
     {
-//        $this->authorize('create', $system);
+        $this->authorize('create', $system);
         $lang = 'vi';
         $parent_lang = 0;
         $categories = $this->categoryRepo->getCategoryByType('system', $lang);
@@ -59,6 +59,25 @@ class SystemController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createLanguage(System $system, $lang, $item_id)
+    {
+        $this->authorize('create', $system);
+        $parent_lang = $item_id;
+        $categories = $this->categoryRepo->getCategoryByType('system', $lang);
+        $system = new System();
+        return view($this->view.'.create',[
+            'system'       => $system,
+            'view'          => $this->view,
+            'lang'          => $lang,
+            'parent_lang'   => $parent_lang,
+            'categories'    => $categories,
+        ]);
+    }
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreSystemRequest  $request
@@ -69,7 +88,6 @@ class SystemController extends Controller
         $data = $request->only('name', 'category_id', 'address', 'lang', 'parent_lang');
         $data['status'] = isset($request['status']) ? 1 : 0;
         $data['created_by'] = Auth::id();
-        $data['slug'] = Str::slug($request->name);
         $this->systemRepo->create($data);
         return redirect(route('systems.index'))->with('success',  'Thêm thành công');
     }
@@ -93,7 +111,17 @@ class SystemController extends Controller
      */
     public function edit(System $system)
     {
-        //
+        $this->authorize('update', $system);
+        $lang = $system['lang'];
+        $parent_lang = $system['parent_lang'];
+        $categories = $this->categoryRepo->getCategoryByType('system', $lang);
+        return view($this->view.'.update', [
+            'system'        =>  $system,
+            'lang'          => $lang,
+            'parent_lang'   => $parent_lang,
+            'view'          => $this->view,
+            'categories'    => $categories,
+        ]);
     }
 
     /**
@@ -105,7 +133,11 @@ class SystemController extends Controller
      */
     public function update(UpdateSystemRequest $request, System $system)
     {
-        //
+        $data = $request->only('name', 'category_id', 'address');
+        $data['status'] = isset($request['status']) ? 1 : 0;
+        $data['created_by'] = Auth::id();
+        $this->systemRepo->update($data, $system['id']);
+        return redirect(route('systems.index'))->with('success',  'Cập nhật thành công');
     }
 
     /**
@@ -116,6 +148,8 @@ class SystemController extends Controller
      */
     public function destroy(System $system)
     {
-        //
+        $this->authorize('delete', $system);
+        $system->delete();
+        return redirect()->route('systems.index')->with('success','Xóa thành công');
     }
 }

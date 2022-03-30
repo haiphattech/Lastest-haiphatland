@@ -23,7 +23,7 @@ class SystemPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('system-views');
     }
 
     /**
@@ -46,7 +46,7 @@ class SystemPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('system-add');
     }
 
     /**
@@ -58,7 +58,8 @@ class SystemPolicy
      */
     public function update(User $user, System $system)
     {
-        //
+        return $user->hasPermission('system-edit');
+
     }
 
     /**
@@ -70,7 +71,8 @@ class SystemPolicy
      */
     public function delete(User $user, System $system)
     {
-        //
+        return $user->hasPermission('system-delete');
+
     }
 
     /**

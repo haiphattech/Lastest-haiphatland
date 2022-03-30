@@ -83,7 +83,7 @@ class ApiController extends Controller
                     }
                     $data['news'] = $news;
                     $list_news = $this->newsRepo->getNewByCategoryId($category['id'], $news['id']);
-                    $data['relates'] = $list_news;
+                    $data['relates'] = NewsResource::collection($list_news);
                 }else {
                     $data['list_categories'] = CategoryResource::collection($list_categories);
                     $data['list_news'] = NewsResource::collection($this->newsRepo->getNews($category['id']));

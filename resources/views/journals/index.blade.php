@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Hệ thống Hải Phát Land')
+@section('title', 'Tạp chí')
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Hệ thống Hải Phát Land</h3>
+            <h3 class="page-title">Tạp chí</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
@@ -25,8 +25,8 @@
                         <div>
                             <h4 class="card-title">
                                 Danh sách
-                                @can('create', \App\Models\System::class)
-                                <a href="{{route('systems.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
+                                @can('create', \App\Models\Journal::class)
+                                <a href="{{route('journals.create')}}" class="btn btn-primary btn-fw float-end">Thêm mới</a>
                                 @endcan
                             </h4>
 
@@ -36,17 +36,16 @@
                                 <thead>
                                 <tr>
                                     <th scope="col" class="text-center">STT</th>
-                                    <th scope="col" >Tên bài viết</th>
-                                    <th scope="col" class="text-center">Danh mục</th>
-                                    <th scope="col" class="text-center">Lượt xem</th>
+                                    <th scope="col" >Tên tạp chí</th>
                                     <th scope="col" class="text-center">Ngày tạo</th>
+                                    <th scope="col" class="text-center">Danh mục</th>
                                     <th scope="col" class="text-center">Ngôn ngữ</th>
                                     <th scope="col" class="text-center">Trạng thái</th>
                                     <th scope="col" class="text-center">Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($systems as $item)
+                                @foreach($journals as $item)
                                     <tr role="row">
                                         <td role="cell" class="text-center">{{$loop->iteration}}</td>
                                         <td>
@@ -94,11 +93,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        @if(!count($systems))
+                        @if(!count($journals))
                             @include('components.data-empty')
                         @endif
                         <div class="text-center mt-3 float-end">
-                            {{ $systems->links() }}
+                            {{ $journals->links() }}
                         </div>
                     </div>
                 </div>
