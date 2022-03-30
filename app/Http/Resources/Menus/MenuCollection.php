@@ -23,7 +23,7 @@ class MenuCollection extends ResourceCollection
             'status'        => $this->status,
             'lang'          => $this->lang,
             'parent_lang'   => $this->parent_lang,
-            'created_at'    => Carbon::parse($this->created_at)->format('H:i d-m-Y'),
+            'created_at'    => $this->created_at,
         ];
     }
 }

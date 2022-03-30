@@ -24,7 +24,7 @@ class ProjectCollection extends ResourceCollection
             'cover' => env('APP_URL').$this->cover,
             'video' => $this->video,
             'category' => new CategoryResource($this->category),
-            'created_at'    => Carbon::parse($this->created_at)->format('H:i d-m-Y'),
+            'created_at'    => $this->created_at,
         ];
     }
 }

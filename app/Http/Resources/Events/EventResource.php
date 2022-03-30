@@ -25,10 +25,10 @@ class EventResource extends JsonResource
             'place'     => $this->place,
             'address'   => $this->address,
             'description'=> $this->description,
-            'start_time'=> Carbon::parse($this->start_time)->format('H:i d-m-Y'),
-            'end_time'  => Carbon::parse($this->end_time)->format('H:i d-m-Y'),
+            'start_time'=> $this->start_time,
+            'end_time'  => $this->end_time,
             'cate_slug' => new CategoryResource($this->category),
-            'created_at'    => Carbon::parse($this->created_at)->format('H:i d-m-Y'),
+            'created_at'    => $this->created_at,
         ];
     }
 }

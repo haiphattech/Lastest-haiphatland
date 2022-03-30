@@ -25,7 +25,7 @@ class ProjectResource extends JsonResource
             'video' => $this->video,
             'description' => $this->description,
             'category' => new CategoryResource($this->category),
-            'created_at'    => Carbon::parse($this->created_at)->format('H:i d-m-Y'),
+            'created_at'    => $this->created_at,
         ];
     }
 }

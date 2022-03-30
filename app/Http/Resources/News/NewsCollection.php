@@ -26,7 +26,7 @@ class NewsCollection extends ResourceCollection
             'content'       => $this->content,
             'start'         => $this->start,
             'view'          => $this->view,
-            'created_at'    => Carbon::parse($this->created_at)->format('H:i d-m-Y'),
+            'created_at'    => $this->created_at,
             'created_by'    => new UserResource($this->user),
             'category'      => new CategoryResource($this->category)
         ];
