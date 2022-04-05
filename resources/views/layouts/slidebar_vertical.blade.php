@@ -373,5 +373,30 @@
                 </li>
             @endcan
         @endcanany
+        @canany(['create', 'viewAny'], \App\Models\Recruit::class)
+            <li class="nav-item nav-category  pb-0">
+                <span class="nav-link">Tuyển dụng</span>
+            </li>
+            @can( 'viewAny', \App\Models\Recruit::class)
+                <li class="nav-item menu-items {{ (request()->is('recruits')) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('recruits.index')}}">
+                          <span class="menu-icon">
+                            <i class="mdi mdi-playlist-play"></i>
+                          </span>
+                        <span class="menu-title">Danh sách</span>
+                    </a>
+                </li>
+            @endcan
+            @can( 'create', \App\Models\Recruit::class)
+                <li class="nav-item menu-items {{ (request()->is('recruits/create')) ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('recruits.create')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+                        <span class="menu-title">Thêm mới</span>
+                    </a>
+                </li>
+            @endcan
+        @endcanany
     </ul>
 </nav>

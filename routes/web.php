@@ -20,6 +20,7 @@ use App\Http\Controllers\AboutUController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\SystemController;
+use App\Http\Controllers\RecruitController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -39,7 +40,8 @@ Route::middleware(['auth'])->group(function () {
         'aboutUs'           => AboutUController::class,
         'news'              => NewsController::class,
         'journals'          => JournalController::class,
-        'systems'           => SystemController::class
+        'systems'           => SystemController::class,
+        'recruits'          => RecruitController::class,
     ]);
     Route::get('/categories/create/{lang}/{category_id}', [CategoryController::class, 'createLanguage'])->name('categories-create.lang');
     Route::get('/menus/create/{lang}/{menu_id}', [MenuController::class, 'createLanguage'])->name('menus-create.lang');
@@ -54,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/news/create/{lang}/{item_id}', [NewsController::class, 'createLanguage'])->name('news-create.lang');
     Route::get('/journals/create/{lang}/{item_id}', [JournalController::class, 'createLanguage'])->name('journals-create.lang');
     Route::get('/systems/create/{lang}/{item_id}', [SystemController::class, 'createLanguage'])->name('systems-create.lang');
+    Route::get('/recruits/create/{lang}/{item_id}', [RecruitController::class, 'createLanguage'])->name('recruits-create.lang');
 
     //Phân quyền cho nhân viên
     Route::get('/role/authorization/{user_id}', [RoleController::class, 'authorization'])->name('authorization-user');

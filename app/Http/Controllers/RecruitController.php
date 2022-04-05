@@ -5,17 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\Recruit;
 use App\Http\Requests\StoreRecruitsRequest;
 use App\Http\Requests\UpdateRecruitsRequest;
+use App\Repositories\CategoryRepository as CategoryRepo;
+use App\Repositories\EventRepository as eventRepo;
+use App\Repositories\RecruitRepository as RecruitRepo;
 
 class RecruitController extends Controller
 {
+    protected $view = 'recruits';
+    protected $recruitRepo;
+    protected $categoryRepo;
+
+    public function __construct(EventRepo $eventRepo, CategoryRepo $categoryRepo,RecruitRepo $recruitRepo)
+    {
+        $this->eventRepo = $eventRepo;
+        $this->categoryRepo = $categoryRepo;
+        $this->recruitRepo = $recruitRepo;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Recruit $recruit)
     {
-        //
+        $this->authorize('viewAny', $recruit);
+        $recruits = $this->recruitRepo->getData();
+        return view($this->view.'.index',[
+            'recruits' => $recruits
+        ]);
     }
 
     /**
@@ -23,9 +40,20 @@ class RecruitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Recruit $recruit)
     {
-        //
+        $this->authorize('create', $recruit);
+        $lang = 'vi';
+        $parent_lang = 0;
+        $categories = $this->categoryRepo->getCategoryByType('recruit', $lang);
+        $recruit = new Recruit();
+        return view($this->view.'.create',[
+            'recruit'      => $recruit,
+            'view'          => $this->view,
+            'lang'          => $lang,
+            'parent_lang'   => $parent_lang,
+            'categories'    => $categories,
+        ]);
     }
 
     /**

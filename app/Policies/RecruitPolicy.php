@@ -23,7 +23,7 @@ class RecruitPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('recruit-views');
     }
 
     /**
@@ -46,7 +46,7 @@ class RecruitPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('recruit-add');
     }
 
     /**
@@ -58,7 +58,7 @@ class RecruitPolicy
      */
     public function update(User $user, Recruit $recruits)
     {
-        //
+        return $user->hasPermission('recruit-edit');
     }
 
     /**
@@ -70,7 +70,7 @@ class RecruitPolicy
      */
     public function delete(User $user, Recruit $recruits)
     {
-        //
+        return $user->hasPermission('recruit-delete');
     }
 
     /**
