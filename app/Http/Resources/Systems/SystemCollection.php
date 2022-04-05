@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Systems;
 
+use App\Http\Resources\Categories\CategoryResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class SystemCollection extends ResourceCollection
@@ -15,11 +16,13 @@ class SystemCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
+            'data' => [
+                parent::toArray($request),
+            ],
             'pagination' => [
                 'total' => $this->total(),
                 'count' => $this->count(),
-                'per_page' => $this->perPage(5),
+                'per_page' => $this->perPage(),
                 'current_page' => $this->currentPage(),
                 'total_pages' => $this->lastPage()
             ],

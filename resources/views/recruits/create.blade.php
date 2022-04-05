@@ -24,9 +24,9 @@
                 </div>
             @endif
         </div>
-        <form class="theme-form" method="POST" action="{{route('journals.store')}}">
+        <form class="theme-form" method="POST" action="{{route('recruits.store')}}">
             @csrf
-            @include($view.'._form',['journal'=> $journal])
+            @include($view.'._form',['recruit'=> $recruit])
         </form>
     </div>
     </div>

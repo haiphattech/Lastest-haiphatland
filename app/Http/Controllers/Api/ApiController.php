@@ -103,9 +103,9 @@ class ApiController extends Controller
                 break;
             case 'system':
                 $data['list_categories'] = CategoryResource::collection($this->categoryRepo->getCategoryByParentId($category['parent_id']));
-                $data['systems'] = new SystemCollection($this->systemRepo->getSystemByCategoryId($category['id']));
+                $data['systems'] = $this->systemRepo->getSystemByCategoryId($category['id']);
+                $data['category'] = new CategoryResource($category);
                 break;
-
         }
         return response()->json([
             "success" => 200,
