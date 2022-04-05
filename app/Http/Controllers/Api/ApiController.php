@@ -7,11 +7,10 @@ use App\Http\Resources\Activies\ActivetyResource;
 use App\Http\Resources\Categories\CategoryResource;
 use App\Http\Resources\Events\EventResource;
 use App\Http\Resources\News\NewsResource;
-use App\Models\Event;
-use App\Models\Menu;
-use App\Http\Resources\Menus\MenuCollection;
 use App\Http\Resources\Menus\MenuResource;
 use App\Http\Resources\Projects\ProjectResource;
+use App\Http\Resources\Systems\SystemCollection;
+use App\Http\Resources\Systems\SystemResource;
 use App\Repositories\CategoryRepository as CategoryRepo;
 use App\Repositories\ImageRepository as ImageRepo;
 use Illuminate\Http\Request;
@@ -22,6 +21,7 @@ use App\Repositories\EventRepository as EventRepo;
 use App\Repositories\AboutURepository as AboutURepo;
 use App\Repositories\ApplicationRepository as ApplicationRepo;
 use App\Repositories\NewsRepository as NewsRepo;
+use App\Repositories\SystemRepository as SystemRepo;
 
 class ApiController extends Controller
 {
@@ -33,9 +33,10 @@ class ApiController extends Controller
     protected $eventRepo;
     protected $aboutURepo;
     protected $newsRepo;
+    protected $systemRepo;
     protected $applicationRepo;
 
-    public function __construct(NewsRepo $newsRepo,ApplicationRepo $applicationRepo, AboutURepo $aboutURepo, EventRepo $eventRepo, ActivityRepo $activityRepo, CategoryRepo $categoryRepo, ImageRepo $imageRepo, MenuRepo $menuRepo, ProjectRepo $projectRepo)
+    public function __construct(SystemRepo $systemRepo, NewsRepo $newsRepo,ApplicationRepo $applicationRepo, AboutURepo $aboutURepo, EventRepo $eventRepo, ActivityRepo $activityRepo, CategoryRepo $categoryRepo, ImageRepo $imageRepo, MenuRepo $menuRepo, ProjectRepo $projectRepo)
     {
         $this->categoryRepo = $categoryRepo;
         $this->imageRepo    = $imageRepo;
@@ -45,6 +46,7 @@ class ApiController extends Controller
         $this->eventRepo    = $eventRepo;
         $this->aboutURepo   = $aboutURepo;
         $this->newsRepo     = $newsRepo;
+        $this->systemRepo   = $systemRepo;
         $this->applicationRepo   = $applicationRepo;
     }
     public function index($cate_slug, $slug = '')
@@ -88,12 +90,7 @@ class ApiController extends Controller
                     $data['list_categories'] = CategoryResource::collection($list_categories);
                     $data['list_news'] = NewsResource::collection($this->newsRepo->getNews($category['id']));
                 }
-
-                return response()->json([
-                    "success" => 200,
-                    "message" => "Success",
-                    "data" =>  $data
-                ]);
+                break;
             case 'activities':
                 $data['category'] = new CategoryResource($category);
                 $activities = $this->activityRepo->getDataApi();
@@ -103,12 +100,18 @@ class ApiController extends Controller
                     $data['activity'] = new ActivetyResource($activity);
                 }
 
-                return response()->json([
-                    "success" => 200,
-                    "message" => "Success",
-                    "data" =>  $data
-                ]);
+                break;
+            case 'system':
+                $data['list_categories'] = CategoryResource::collection($this->categoryRepo->getCategoryByParentId($category['parent_id']));
+                $data['systems'] = new SystemCollection($this->systemRepo->getSystemByCategoryId($category['id']));
+                break;
+
         }
+        return response()->json([
+            "success" => 200,
+            "message" => "Success",
+            "data" =>  $data
+        ]);
     }
     public function indexLang($lang, $category, $slug = '')
     {

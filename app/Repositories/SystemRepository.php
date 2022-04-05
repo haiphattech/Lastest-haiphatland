@@ -25,17 +25,9 @@ class SystemRepository extends AbstractRepository
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
     }
 
-    public function getNews($cate_id)
+    public function getSystemByCategoryId($cate_id)
     {
         return $this->model->where([['category_id', $cate_id], ['status', true]])->paginate(5);
     }
 
-    public function getNewsBySlugAndCateId($slug, $cate_id)
-    {
-        return $this->model->where([['slug', $slug], ['status', true], ['category_id', $cate_id]])->first();
-    }
-    public function getNewByCategoryId($cate_id, $id)
-    {
-        return $this->model->where([['category_id', $cate_id], ['status', true], ['id', '!=', $id]])->orderBy('id', 'DESC')->limit(5)->get();
-    }
 }
