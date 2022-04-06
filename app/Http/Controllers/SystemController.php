@@ -85,7 +85,7 @@ class SystemController extends Controller
      */
     public function store(StoreSystemRequest $request)
     {
-        $data = $request->only('name', 'category_id', 'address', 'lang', 'parent_lang');
+        $data = $request->only('name', 'category_id', 'address', 'lang', 'parent_lang','avatar');
         $data['status'] = isset($request['status']) ? 1 : 0;
         $data['created_by'] = Auth::id();
         $this->systemRepo->create($data);
@@ -133,7 +133,7 @@ class SystemController extends Controller
      */
     public function update(UpdateSystemRequest $request, System $system)
     {
-        $data = $request->only('name', 'category_id', 'address');
+        $data = $request->only('name', 'category_id', 'address','avatar');
         $data['status'] = isset($request['status']) ? 1 : 0;
         $data['created_by'] = Auth::id();
         $this->systemRepo->update($data, $system['id']);

@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Systems;
 
 use App\Http\Resources\Categories\CategoryResource;
+use App\Models\Category;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class SystemCollection extends ResourceCollection
@@ -16,9 +17,8 @@ class SystemCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => [
-                parent::toArray($request),
-            ],
+            'data' => $this->collection,
+
             'pagination' => [
                 'total' => $this->total(),
                 'count' => $this->count(),
@@ -27,5 +27,12 @@ class SystemCollection extends ResourceCollection
                 'total_pages' => $this->lastPage()
             ],
         ];
+//        return [
+//            'id'            => $this->id,
+//            'name'          => $this->name,
+//            'avatar'        => env('APP_URL').$this->avatar,
+//            'address'       => $this->address,
+//            'category'      => new CategoryResource($this->category)
+//        ];
     }
 }

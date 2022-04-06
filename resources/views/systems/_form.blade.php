@@ -70,6 +70,23 @@
                 </div>
             </div>
         </div>
-
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Ảnh đại diện</h5>
+                <hr>
+                <div class="form-group">
+                    <div class="upload_image" data-name="avatar">
+                        <input type="hidden" class="avatar" name="avatar" value="{{old('avatar', $system['avatar'])}}">
+                        <img src="{{$system['avatar'] ? $system['avatar'] : '/assets/images/department.jpg'}}" width="180px" alt="" class="image-avatar">
+                    </div>
+                    @if ($errors->has('avatar'))
+                        <div class="mt-1 notification-error">
+                            {{$errors->first('avatar')}}
+                        </div>
+                    @endif
+                </div>
+            </div>
         </div>
+    </div>
+
 </div>

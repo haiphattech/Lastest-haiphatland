@@ -10,6 +10,7 @@ class System extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'avatar',
         'address',
         'lang',
         'status',
