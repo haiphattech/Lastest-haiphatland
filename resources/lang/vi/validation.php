@@ -160,7 +160,10 @@ return [
         'avatar' => 'Ảnh đại diện',
         'cover'  => 'Ảnh bìa',
         'url'  => 'Đường dẫn',
-        'address' => 'Địa chỉ'
+        'address' => 'Địa chỉ',
+        'date_end' => 'Hạn nộp hồ sơ',
+        'location' => 'Nơi làm việc',
+        'content' => 'Nội dung'
     ],
 
 ];

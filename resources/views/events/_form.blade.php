@@ -115,7 +115,7 @@
                     <label for="">Ảnh đại diện</label>
                     <div class="upload_image" data-name="avatar">
                         <input type="hidden" class="avatar" name="avatar" value="{{old('avatar', $event['avatar'])}}">
-                        <img src="{{$event['avatar'] ? $event['avatar'] : '/assets/images/department.jpg'}}" width="180px" alt="" class="image-avatar">
+                        <img src="{{$event['avatar'] ? old('avatar', $event['avatar']) : old('avatar', '/assets/images/department.jpg')}}" width="180px" alt="" class="image-avatar">
                     </div>
                     @if ($errors->has('avatar'))
                         <div class="mt-1 notification-error">

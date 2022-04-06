@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Tạp chí')
+@section('title', 'Tuyển dụng')
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
@@ -36,10 +36,11 @@
                                 <thead>
                                 <tr>
                                     <th scope="col" class="text-center">STT</th>
-                                    <th scope="col" >Tên tạp chí</th>
-                                    <th scope="col" class="text-center">Ngày tạo</th>
+                                    <th scope="col" >Vị trí</th>
+                                    <th scope="col" class="text-center">Hạn nộp hồ sơ</th>
                                     <th scope="col" class="text-center">Danh mục</th>
                                     <th scope="col" class="text-center">Ngôn ngữ</th>
+                                    <th scope="col" class="text-center">Ngày tạo</th>
                                     <th scope="col" class="text-center">Trạng thái</th>
                                     <th scope="col" class="text-center">Hành động</th>
                                 </tr>
@@ -49,21 +50,21 @@
                                     <tr role="row">
                                         <td role="cell" class="text-center">{{$loop->iteration}}</td>
                                         <td>
-                                            <div class="text-break">{{$item->name}}</div>
+                                            <div class="text-break">{{$item['name']}}</div>
                                         </td>
+                                        <td class="text-center">{{date('d/m/Y', strtotime($item['date_end']))}}</td>
                                         <td class="text-center">
                                             <div class="badge badge-outline-success">{{$item->category->name}}</div>
 
                                         </td>
-                                        <td class="text-center">
-                                            {{$item->view}}
-                                        </td>
-                                        <td role="cell" class="text-center">{{date('H:i d/m/Y', strtotime($item->created_at))}}</td>
+
                                         <td role="cell" class="text-center"><img src="{{$item->langs->icon}}" alt="icon"></td>
+
+                                        <td role="cell" class="text-center">{{date('H:i d/m/Y', strtotime($item->created_at))}}</td>
                                         <td role="cell" class="text-center">
                                             <div class="form-check form-switch" style="display: inline-block">
                                                 <input name="my-checkbox" type="checkbox" class="form-check-input css-switch" data-id="{{$item['id']}}"
-                                                       data-api="{{route('enable-column')}}" data-table="systems" data-column="status"
+                                                       data-api="{{route('enable-column')}}" data-table="recruits" data-column="status"
                                                     {{ $item['status'] ? 'checked="checked"' : '' }}>
                                             </div>
 
@@ -81,7 +82,7 @@
                                             @endcan
                                             @can('create', $item)
                                             @if(!$item['parent_lang'])
-                                                @if(\App\Helpers\FunctionHelpers::checkLangSystemsExist('en', $item['id']))
+                                                @if(\App\Helpers\FunctionHelpers::checkLangRecruitsExist('en', $item['id']))
                                                     <a href="{{route('recruits-create.lang',['lang'=> 'en', 'item_id' => $item['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
                                                 @endif
                                             @endif

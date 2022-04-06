@@ -20,6 +20,7 @@ class CreateRecruitsTable extends Migration
             $table->string('image')->nullable();
             $table->string('location');
             $table->text('content');
+            $table->text('file')->nullable();
             $table->date('date_end')->nullable();
             $table->date('time_published')->nullable();
             $table->tinyInteger('published')->default(0);

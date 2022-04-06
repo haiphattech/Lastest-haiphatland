@@ -50,15 +50,41 @@
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="location" placeholder="" name="location"
                                value="{{old('location', $recruit['location'])}}">
+                        @if ($errors->has('location'))
+                            <div class="mt-1 notification-error">
+                                {{$errors->first('location')}}
+                            </div>
+                        @endif
                     </div>
                 </div>
 
                 <div class="form-group row mb-3">
                     <label for="date_end" class="col-sm-3 col-form-label">Hạn nộp hồ sơ</label>
                     <div class="col-sm-9">
-                        <input type="datetime-local" class="form-control" id="date_end" placeholder="" name="date_end"
-                               value="{{old('date_end', $recruit['date_end'] ? date('Y-m-d\TH:i:s', strtotime($recruit['date_end'])) : $recruit['date_end'])}}">
+                        <input type="date" class="form-control" id="date_end" placeholder="" name="date_end"
+                               value="{{old('date_end', $recruit['date_end'] ? date('Y-m-d', strtotime($recruit['date_end'])) : '')}}">
+                        @if ($errors->has('date_end'))
+                            <div class="mt-1 notification-error">
+                                {{$errors->first('date_end')}}
+                            </div>
+                        @endif
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Nội dung</h5>
+                <hr>
+
+                <div class="form-group">
+                    <textarea  rows="9" cols="70" id="content" class="form-control"
+                               name="content">{!! $recruit['content'] !!}</textarea>
+                    @if ($errors->has('content'))
+                        <div class="mt-1 notification-error">
+                            {{$errors->first('content')}}
+                        </div>
+                    @endif
                 </div>
 
             </div>
@@ -69,7 +95,6 @@
             <div class="card-body">
                 <h5 class="card-title">Chức năng</h5>
                 <hr>
-
                 <div class="form-check form-check-flat form-check-primary mb-4">
                     <label class="form-check-label">
                         <input type="checkbox" class="form-check-input" {{$recruit['status'] ? "checked" : ''}} value="{{$recruit['status']}}" name="status"> Trạng thái <i class="input-helper"></i></label>
@@ -77,7 +102,7 @@
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary me-2" value="save&exit">Lưu</button>
-                    <a href="{{route('journals.index')}}" class="btn btn-dark">Quay lại</a>
+                    <a href="{{route('recruits.index')}}" class="btn btn-dark">Quay lại</a>
                 </div>
             </div>
         </div>

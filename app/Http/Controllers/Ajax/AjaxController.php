@@ -9,6 +9,7 @@ use App\Models\Menu;
 use App\Models\Permission;
 use App\Models\News;
 use App\Models\Project;
+use App\Models\Recruit;
 use App\Models\statusProject;
 use App\Models\System;
 use App\Models\TypePermission;
@@ -77,6 +78,9 @@ class AjaxController extends BaseController
                 break;
             case 'systems':
                 $model = System::find($id);
+                break;
+            case 'recruits':
+                $model = Recruit::find($id);
                 break;
             default:
                 break;

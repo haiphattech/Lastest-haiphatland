@@ -26,6 +26,7 @@ class StoreSystemRequest extends FormRequest
         return [
             'name'  => 'required|max:255',
             'address' => 'required',
+            'avatar' => 'required',
         ];
     }
 }

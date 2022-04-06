@@ -77,7 +77,7 @@
                 <div class="form-group">
                     <div class="upload_image" data-name="avatar">
                         <input type="hidden" class="avatar" name="avatar" value="{{old('avatar', $system['avatar'])}}">
-                        <img src="{{$system['avatar'] ? $system['avatar'] : '/assets/images/department.jpg'}}" width="180px" alt="" class="image-avatar">
+                        <img src="{{$system['avatar'] ? old('avatar', $system['avatar']) : old('avatar', '/assets/images/department.jpg')}}" width="180px" alt="" class="image-avatar">
                     </div>
                     @if ($errors->has('avatar'))
                         <div class="mt-1 notification-error">

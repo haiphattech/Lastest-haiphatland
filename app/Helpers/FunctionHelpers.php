@@ -10,6 +10,7 @@ use App\Models\Investor;
 use App\Models\Menu;
 use App\Models\Activity;
 use App\Models\News;
+use App\Models\Recruit;
 use App\Models\StatusProject;
 use App\Models\System;
 use App\Models\TypeProject;
@@ -193,6 +194,13 @@ class FunctionHelpers
     public static function checkLangSystemsExist($lang, $parent_lang)
     {
         $query = System::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangRecruitsExist($lang, $parent_lang)
+    {
+        $query = Recruit::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
         if($query)
             return false;
         return true;

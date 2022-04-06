@@ -9,6 +9,8 @@ use App\Http\Resources\Events\EventResource;
 use App\Http\Resources\News\NewsResource;
 use App\Http\Resources\Menus\MenuResource;
 use App\Http\Resources\Projects\ProjectResource;
+use App\Http\Resources\Recruits\RecruitCollection;
+use App\Http\Resources\Recruits\RecruitResource;
 use App\Http\Resources\Systems\SystemCollection;
 use App\Http\Resources\Systems\SystemResource;
 use App\Repositories\CategoryRepository as CategoryRepo;
@@ -22,6 +24,7 @@ use App\Repositories\AboutURepository as AboutURepo;
 use App\Repositories\ApplicationRepository as ApplicationRepo;
 use App\Repositories\NewsRepository as NewsRepo;
 use App\Repositories\SystemRepository as SystemRepo;
+use App\Repositories\RecruitRepository as RecruitRepo;
 
 class ApiController extends Controller
 {
@@ -35,8 +38,9 @@ class ApiController extends Controller
     protected $newsRepo;
     protected $systemRepo;
     protected $applicationRepo;
+    protected $recruitRepo;
 
-    public function __construct(SystemRepo $systemRepo, NewsRepo $newsRepo,ApplicationRepo $applicationRepo, AboutURepo $aboutURepo, EventRepo $eventRepo, ActivityRepo $activityRepo, CategoryRepo $categoryRepo, ImageRepo $imageRepo, MenuRepo $menuRepo, ProjectRepo $projectRepo)
+    public function __construct(RecruitRepo $recruitRepo, SystemRepo $systemRepo, NewsRepo $newsRepo,ApplicationRepo $applicationRepo, AboutURepo $aboutURepo, EventRepo $eventRepo, ActivityRepo $activityRepo, CategoryRepo $categoryRepo, ImageRepo $imageRepo, MenuRepo $menuRepo, ProjectRepo $projectRepo)
     {
         $this->categoryRepo = $categoryRepo;
         $this->imageRepo    = $imageRepo;
@@ -48,6 +52,7 @@ class ApiController extends Controller
         $this->newsRepo     = $newsRepo;
         $this->systemRepo   = $systemRepo;
         $this->applicationRepo   = $applicationRepo;
+        $this->recruitRepo   = $recruitRepo;
     }
     public function index($cate_slug, $slug = '')
     {
@@ -105,6 +110,14 @@ class ApiController extends Controller
                 $data['list_categories'] = CategoryResource::collection($this->categoryRepo->getCategoryByParentId($category['parent_id']));
                 $data['systems'] =  new SystemCollection($this->systemRepo->getSystemByCategoryId($category['id']));
                 $data['category'] = new CategoryResource($category);
+                break;
+            case 'recruit':
+                $data['list_recruits'] = new RecruitCollection($this->recruitRepo->getDataApi());
+                if($slug){
+                    $data['recruit'] = new RecruitResource($this->recruitRepo->getDataBuSlug($slug));
+                    $data['relates'] = $this->recruitRepo->getDataByCategoryId($category['id'], $data['recruit']['id']);
+                    unset($data['list_recruits']);
+                }
                 break;
         }
         return response()->json([

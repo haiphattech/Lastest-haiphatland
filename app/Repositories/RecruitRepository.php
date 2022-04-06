@@ -31,10 +31,14 @@ class RecruitRepository extends AbstractRepository
     }
     public function getDataApi($lang = 'vi')
     {
-        return $this->model->where([['lang', $lang],['status', true]])->get();
+        return $this->model->where([['lang', $lang],['status', true]])->paginate(5);
     }
     public function getDataBuSlug($slug, $lang = 'vi')
     {
         return $this->model->where([['lang', $lang],['status', true], ['slug', $slug]])->first();
+    }
+    public function getDataByCategoryId($cate_id, $id)
+    {
+        return $this->model->where([['category_id', $cate_id], ['status', true], ['id', '!=', $id]])->orderBy('id', 'DESC')->limit(5)->get();
     }
 }
