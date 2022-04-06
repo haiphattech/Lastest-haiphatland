@@ -115,7 +115,7 @@ class ApiController extends Controller
                 $data['list_recruits'] = new RecruitCollection($this->recruitRepo->getDataApi());
                 if($slug){
                     $data['recruit'] = new RecruitResource($this->recruitRepo->getDataBuSlug($slug));
-                    $data['relates'] = $this->recruitRepo->getDataByCategoryId($category['id'], $data['recruit']['id']);
+                    $data['relates'] = RecruitResource::collection($this->recruitRepo->getDataByCategoryId($category['id'], $data['recruit']['id']));
                     unset($data['list_recruits']);
                 }
                 break;
