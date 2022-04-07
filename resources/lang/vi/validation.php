@@ -82,8 +82,8 @@ return [
         'string' => 'The :attribute may not be greater than :max characters.',
         'array' => 'The :attribute may not have more than :max items.',
     ],
-    'mimes' => 'The :attribute must be a file of type: :values.',
-    'mimetypes' => 'The :attribute must be a file of type: :values.',
+    'mimes' => ':attribute định dạng là: :values.',
+    'mimetypes' => ':attribute định dạng là: :values.',
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
@@ -163,7 +163,7 @@ return [
         'address' => 'Địa chỉ',
         'date_end' => 'Hạn nộp hồ sơ',
         'location' => 'Nơi làm việc',
-        'content' => 'Nội dung'
+        'content' => 'Nội dung',
     ],
 
 ];
