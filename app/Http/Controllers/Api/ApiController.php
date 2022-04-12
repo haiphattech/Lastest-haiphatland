@@ -69,6 +69,7 @@ class ApiController extends Controller
                 "data" =>  []
             ]);
         }
+        $data['category'] =  new CategoryResource($category);
         switch ($category['type']) {
             case 'news':
                 if($category['parent_id']){
