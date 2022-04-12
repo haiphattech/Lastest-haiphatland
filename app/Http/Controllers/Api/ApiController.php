@@ -124,8 +124,12 @@ class ApiController extends Controller
                 }
                 break;
             case 'introduces':
-                $data['category'] =  new CategoryResource($category);
-                $data['introduces'] = IntroduceResource::collection($this->introduceRepo->getDataApi());
+                if($category['slug'] == 'thu-ngo'){
+                    $data['category'] =  new CategoryResource($category);
+                }else{
+                    $data['category'] =  new CategoryResource($category);
+                    $data['introduces'] = IntroduceResource::collection($this->introduceRepo->getDataApi());
+                }
                 break;
         }
         return response()->json([

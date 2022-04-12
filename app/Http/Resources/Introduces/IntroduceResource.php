@@ -24,6 +24,7 @@ class IntroduceResource extends JsonResource
             'avatar'    => $this->avatar ? env('APP_URL').$this->avatar : '',
             'description'=> $this->description,
             'created_at' => $this->created_at,
+            'serial'    => $this->serial,
             'cate_slug'  => new CategoryResource($this->category),
             'details'    => IntroduceDetailResource::collection($this->introduceDetails)
         ];

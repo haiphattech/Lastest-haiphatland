@@ -22,6 +22,7 @@ class IntroduceCollection extends ResourceCollection
             'title'      => $this->title,
             'avatar'    => $this->avatar ? env('APP_URL').$this->avatar : '',
             'description'=> $this->description,
+            'serial'    => $this->serial,
             'created_at' => $this->created_at,
             'cate_slug'  => new CategoryResource($this->category),
             'details'    => IntroduceDetailRepository::collection($this->introduceDetails)
