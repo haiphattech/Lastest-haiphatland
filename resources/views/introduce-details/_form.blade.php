@@ -66,7 +66,7 @@
                 <hr>
                 <div class="form-group">
                     <div class="upload_image" data-name="avatar">
-                        <input type="hidden" class="avatar" name="avatar" value="{{old('avatar', $introduce['avatar'])}}">
+                        <input type="hidden" class="avatar" name="avatar" value="{{old('avatar', $introduceDetail['avatar'])}}">
                         <img src="{{$introduceDetail['avatar'] ? old('avatar', $introduceDetail['avatar']) : old('avatar', '/assets/images/department.jpg')}}" width="180px" alt="" class="image-avatar">
                     </div>
                 </div>
