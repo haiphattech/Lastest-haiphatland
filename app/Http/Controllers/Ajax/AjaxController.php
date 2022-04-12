@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Introduce;
+use App\Models\IntroduceDetail;
 use App\Models\Investor;
 use App\Models\Menu;
 use App\Models\Permission;
@@ -81,6 +83,12 @@ class AjaxController extends BaseController
                 break;
             case 'recruits':
                 $model = Recruit::find($id);
+                break;
+            case 'introduces':
+                $model = Introduce::find($id);
+                break;
+            case 'introduce_details':
+                $model = IntroduceDetail::find($id);
                 break;
             default:
                 break;

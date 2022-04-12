@@ -6,6 +6,7 @@ use App\Models\Application;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\General;
+use App\Models\Introduce;
 use App\Models\Investor;
 use App\Models\Menu;
 use App\Models\Activity;
@@ -201,6 +202,13 @@ class FunctionHelpers
     public static function checkLangRecruitsExist($lang, $parent_lang)
     {
         $query = Recruit::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
+        if($query)
+            return false;
+        return true;
+    }
+    public static function checkLangIntroducesExist($lang, $parent_lang)
+    {
+        $query = Introduce::where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
         if($query)
             return false;
         return true;

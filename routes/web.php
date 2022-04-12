@@ -21,6 +21,8 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\RecruitController;
+use App\Http\Controllers\IntroduceController;
+use App\Http\Controllers\IntroduceDetailController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -42,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
         'journals'          => JournalController::class,
         'systems'           => SystemController::class,
         'recruits'          => RecruitController::class,
+        'introduces'        => IntroduceController::class,
     ]);
     Route::get('/categories/create/{lang}/{category_id}', [CategoryController::class, 'createLanguage'])->name('categories-create.lang');
     Route::get('/menus/create/{lang}/{menu_id}', [MenuController::class, 'createLanguage'])->name('menus-create.lang');
@@ -57,6 +60,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/journals/create/{lang}/{item_id}', [JournalController::class, 'createLanguage'])->name('journals-create.lang');
     Route::get('/systems/create/{lang}/{item_id}', [SystemController::class, 'createLanguage'])->name('systems-create.lang');
     Route::get('/recruits/create/{lang}/{item_id}', [RecruitController::class, 'createLanguage'])->name('recruits-create.lang');
+    Route::get('/introduces/create/{lang}/{item_id}', [IntroduceController::class, 'createLanguage'])->name('introduces-create.lang');
+
+    //Introducate Detail
+    Route::get('/introduce-detail/{introduce}', [IntroduceDetailController::class, 'index'])->name('introduce_detail_list');
+    Route::get('/introduce-detail/create/{introduce}', [IntroduceDetailController::class, 'create'])->name('introduce_detail_create');
+    Route::post('/introduce-detail/create/{introduce}', [IntroduceDetailController::class, 'store'])->name('introduce_detail_store');
+    Route::get('/introduce-detail/edit/{introduce}/{introduceDetail}', [IntroduceDetailController::class, 'edit'])->name('introduce_detail_edit');
+    Route::patch('/introduce-detail/edit/{introduce}/{introduceDetail}', [IntroduceDetailController::class, 'update'])->name('introduce_detail_update');
+    Route::delete('/introduce-detail/{introduce}/{introduceDetail}', [IntroduceDetailController::class, 'destroy'])->name('introduce_detail_destroy');
+
 
     //Phân quyền cho nhân viên
     Route::get('/role/authorization/{user_id}', [RoleController::class, 'authorization'])->name('authorization-user');

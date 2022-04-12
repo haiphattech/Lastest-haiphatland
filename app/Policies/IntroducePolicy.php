@@ -23,7 +23,7 @@ class IntroducePolicy
      */
     public function viewAny(User $user)
     {
-        //
+
     }
 
     /**

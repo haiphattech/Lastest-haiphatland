@@ -18,10 +18,12 @@ class CreateIntroducesTable extends Migration
             $table->string('title_font')->nullable();
             $table->string('title');
             $table->string('avatar');
-            $table->string('description');
+            $table->string('description')->nullable();
 
             $table->string('lang')->nullable();
             $table->integer('parent_lang')->nullable();
+            $table->tinyInteger('serial')->nullable();
+            $table->tinyInteger('status')->default(0);
 
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('category_id');

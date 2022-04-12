@@ -26,7 +26,7 @@ class NewsRepository extends AbstractRepository
 
     public function getNews($cate_id)
     {
-        return $this->model->where([['category_id', $cate_id], ['status', true]])->paginate(8);
+        return $this->model->where([['category_id', $cate_id], ['status', true]])->orderBy('id', 'DESC')->paginate(8);
     }
 
     public function getNewsBySlugAndCateId($slug, $cate_id)

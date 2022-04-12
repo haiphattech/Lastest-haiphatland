@@ -14,6 +14,8 @@ class Introduce extends Model
         'avatar',
         'description',
         'lang',
+        'serial',
+        'status',
         'parent_lang',
         'created_by',
         'category_id',
@@ -21,5 +23,13 @@ class Introduce extends Model
     public function langs()
     {
         return $this->belongsTo(Language::class, 'lang', 'key');
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function introduceDetails()
+    {
+        return $this->hasMany(IntroduceDetail::class);
     }
 }

@@ -17,11 +17,11 @@ class CreateIntroduceDetailsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('avatar');
-            $table->string('description');
+            $table->string('description')->nullable();
 
             $table->string('lang')->nullable();
             $table->integer('parent_lang')->nullable();
-
+            $table->tinyInteger('status')->default(0);
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('introduce_id');
             $table->timestamps();

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Activies\ActivetyResource;
 use App\Http\Resources\Categories\CategoryResource;
 use App\Http\Resources\Events\EventResource;
+use App\Http\Resources\Introduces\IntroduceResource;
 use App\Http\Resources\News\NewsResource;
 use App\Http\Resources\Menus\MenuResource;
 use App\Http\Resources\Projects\ProjectResource;
@@ -25,6 +26,7 @@ use App\Repositories\ApplicationRepository as ApplicationRepo;
 use App\Repositories\NewsRepository as NewsRepo;
 use App\Repositories\SystemRepository as SystemRepo;
 use App\Repositories\RecruitRepository as RecruitRepo;
+use App\Repositories\IntroduceRepository as IntroduceRepo;
 
 class ApiController extends Controller
 {
@@ -39,8 +41,9 @@ class ApiController extends Controller
     protected $systemRepo;
     protected $applicationRepo;
     protected $recruitRepo;
+    protected $introduceRepo;
 
-    public function __construct(RecruitRepo $recruitRepo, SystemRepo $systemRepo, NewsRepo $newsRepo,ApplicationRepo $applicationRepo, AboutURepo $aboutURepo, EventRepo $eventRepo, ActivityRepo $activityRepo, CategoryRepo $categoryRepo, ImageRepo $imageRepo, MenuRepo $menuRepo, ProjectRepo $projectRepo)
+    public function __construct(IntroduceRepo $introduceRepo, RecruitRepo $recruitRepo, SystemRepo $systemRepo, NewsRepo $newsRepo,ApplicationRepo $applicationRepo, AboutURepo $aboutURepo, EventRepo $eventRepo, ActivityRepo $activityRepo, CategoryRepo $categoryRepo, ImageRepo $imageRepo, MenuRepo $menuRepo, ProjectRepo $projectRepo)
     {
         $this->categoryRepo = $categoryRepo;
         $this->imageRepo    = $imageRepo;
@@ -53,6 +56,7 @@ class ApiController extends Controller
         $this->systemRepo   = $systemRepo;
         $this->applicationRepo   = $applicationRepo;
         $this->recruitRepo   = $recruitRepo;
+        $this->introduceRepo = $introduceRepo;
     }
     public function index($cate_slug, $slug = '')
     {
@@ -118,6 +122,10 @@ class ApiController extends Controller
                     $data['relates'] = RecruitResource::collection($this->recruitRepo->getDataByCategoryId($category['id'], $data['recruit']['id']));
                     unset($data['list_recruits']);
                 }
+                break;
+            case 'introduces':
+                $data['category'] =  new CategoryResource($category);
+                $data['introduces'] = IntroduceResource::collection($this->introduceRepo->getDataApi());
                 break;
         }
         return response()->json([

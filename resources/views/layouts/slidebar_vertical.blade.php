@@ -141,6 +141,31 @@
                 </ul>
             </div>
         </li>
+        @canany(['create', 'viewAny'], \App\Models\Introduce::class)
+        <li class="nav-item nav-category  pb-0">
+            <span class="nav-link">Giới thiệu chung</span>
+        </li>
+        @can( 'viewAny', \App\Models\Introduce::class)
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{route('introduces.index')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+                <span class="menu-title">Danh sách</span>
+            </a>
+        </li>
+        @endcanany
+        @canany(['create', 'viewAny'], \App\Models\Introduce::class)
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{route('introduces.create')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+                <span class="menu-title">Thêm mới</span>
+            </a>
+        </li>
+        @endcanany
+        @endcanany
         <li class="nav-item nav-category  pb-0">
             <span class="nav-link">Dự án</span>
         </li>
