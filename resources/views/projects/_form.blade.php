@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="form-group row mb-3">
-                    <label for="parent_id" class="col-sm-3 col-form-label">Danh mục</label>
+                    <label for="parent_id" class="col-sm-3 col-form-label">Loại hình dự án</label>
                     <div class="col-sm-9">
                         <select name="category_id" id="category_id" class="form-control">
                             @php \App\Helpers\FunctionHelpers::showCategorySelect($categories,  $project['category_id']) @endphp

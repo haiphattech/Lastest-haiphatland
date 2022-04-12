@@ -21,6 +21,7 @@ class RecruitResource extends JsonResource
             'slug'          => $this->slug,
             'date_end'      => $this->date_end,
             'address'       => $this->location,
+            'content'       => $this->content,
             'file'          => env('APP_URL').'/file/mau-ho-so.doc',
             'category'      => new CategoryResource($this->category)
         ];

@@ -227,27 +227,27 @@
             </div>
         </li>
         @endcanany
-        @canany(['create', 'viewAny'], \App\Models\TypeProject::class)
-        <li class="nav-item menu-items {{ (request()->is('type-projects')||request()->is('type-projects/*')) ? 'active' : '' }}">
-            <a class="nav-link" data-bs-toggle="collapse" href="#typeProject" aria-expanded="false" aria-controls="typeProject">
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
-                <span class="menu-title">Loại hình dự án</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse {{ (request()->is('type-projects') || request()->is('type-projects/create') ||request()->is('type-projects/*')) ? 'show' : ''}}" id="typeProject">
-                <ul class="nav flex-column sub-menu">
-                    @can('viewAny', \App\Models\TypeProject::class)
-                    <li class="nav-item"> <a class="nav-link" href="{{route('type-projects.index')}}"> Danh sách</a></li>
-                    @endcan
-                    @can('create', App\Models\TypeProject::class)
-                    <li class="nav-item"> <a class="nav-link" href="{{route('type-projects.create')}}"> Thêm mới </a></li>
-                    @endcan
-                </ul>
-            </div>
-        </li>
-        @endcanany
+{{--        @canany(['create', 'viewAny'], \App\Models\TypeProject::class)--}}
+{{--        <li class="nav-item menu-items {{ (request()->is('type-projects')||request()->is('type-projects/*')) ? 'active' : '' }}">--}}
+{{--            <a class="nav-link" data-bs-toggle="collapse" href="#typeProject" aria-expanded="false" aria-controls="typeProject">--}}
+{{--              <span class="menu-icon">--}}
+{{--                <i class="mdi mdi-security"></i>--}}
+{{--              </span>--}}
+{{--                <span class="menu-title">Loại hình dự án</span>--}}
+{{--                <i class="menu-arrow"></i>--}}
+{{--            </a>--}}
+{{--            <div class="collapse {{ (request()->is('type-projects') || request()->is('type-projects/create') ||request()->is('type-projects/*')) ? 'show' : ''}}" id="typeProject">--}}
+{{--                <ul class="nav flex-column sub-menu">--}}
+{{--                    @can('viewAny', \App\Models\TypeProject::class)--}}
+{{--                    <li class="nav-item"> <a class="nav-link" href="{{route('type-projects.index')}}"> Danh sách</a></li>--}}
+{{--                    @endcan--}}
+{{--                    @can('create', App\Models\TypeProject::class)--}}
+{{--                    <li class="nav-item"> <a class="nav-link" href="{{route('type-projects.create')}}"> Thêm mới </a></li>--}}
+{{--                    @endcan--}}
+{{--                </ul>--}}
+{{--            </div>--}}
+{{--        </li>--}}
+{{--        @endcanany--}}
         @canany(['create', 'viewAny'], \App\Models\Activity::class)
         <li class="nav-item nav-category  pb-0">
             <span class="nav-link">Lĩnh vực hoạt động</span>
