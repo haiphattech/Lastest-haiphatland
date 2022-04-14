@@ -24,11 +24,14 @@ class NewsRepository extends AbstractRepository
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
     }
 
-    public function getNews($cate_id)
+    public function getNews($cate_id, $lang= 'vi')
     {
-        return $this->model->where([['category_id', $cate_id], ['status', true]])->orderBy('id', 'DESC')->paginate(8);
+        return $this->model->where([['category_id', $cate_id], ['status', true], ['lang', $lang]])->orderBy('id', 'DESC')->paginate(8);
     }
-
+    public function getNewsProjects($lang= 'vi')
+    {
+        return $this->model->where([['status', true], ['lang', $lang]])->orderBy('id', 'DESC')->get();
+    }
     public function getNewsBySlugAndCateId($slug, $cate_id)
     {
         return $this->model->where([['slug', $slug], ['status', true], ['category_id', $cate_id]])->first();

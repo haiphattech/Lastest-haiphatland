@@ -15,6 +15,8 @@ class Manager extends Model
         'email',
         'status',
         'created_by',
+        'lang',
+        'parent_lang'
     ];
     public function langs()
     {

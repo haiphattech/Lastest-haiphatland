@@ -9,11 +9,9 @@ class ProjectDetail extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
+        'title',
+        'icon',
         'content',
-        'lang',
-        'parent_lang',
-        'status',
         'created_by',
         'project_id',
     ];

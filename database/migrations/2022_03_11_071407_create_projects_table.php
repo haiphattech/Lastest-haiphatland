@@ -24,9 +24,12 @@ class CreateProjectsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('address')->nullable();
+            $table->string('province')->nullable();
 
-            $table->text('description')->nullable();
-            $table->text('quy_mo')->nullable();
+            $table->string('quy_mo')->nullable();
+            $table->text('design')->nullable();
+            $table->text('sales_policy')->nullable();
+            $table->text('list_video')->nullable();
 
             $table->string('lang')->nullable();
             $table->integer('parent_lang')->nullable();
@@ -38,10 +41,8 @@ class CreateProjectsTable extends Migration
             $table->tinyInteger('published')->default(0);
             $table->date('time_published')->nullable();
 
-
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('manager_id');
-            $table->unsignedInteger('type_project_id');
             $table->unsignedInteger('status_project_id');
             $table->unsignedInteger('category_id');
             $table->timestamps();

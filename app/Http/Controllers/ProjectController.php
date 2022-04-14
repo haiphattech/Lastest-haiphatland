@@ -9,6 +9,10 @@ use App\Repositories\InvestorRepository as InvestorRepo;
 use App\Repositories\ProjectRepository as ProjectRepo;
 use App\Repositories\CategoryRepository as CategoryRepo;
 use App\Repositories\StatusProjectRepository as StatusProjectRepo;
+use App\Repositories\ManagerRepository as ManagerRepo;
+use App\Repositories\NewsRepository as NewsRepo;
+use App\Repositories\ProjectNewsRepository as ProjectNewsRepo;
+use App\Repositories\ProjectDetailRepository as ProjectDetailRepo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -19,14 +23,22 @@ class ProjectController extends Controller
     protected $investorRepo;
     protected $projectRepo;
     protected $categoryRepo;
+    protected $managerRepo;
+    protected $newsRepo;
+    protected $projectNewsRepo;
+    protected $projectDetailRepo;
     protected $statusProjectRepo;
 
-    public function __construct(StatusProjectRepo $statusProjectRepo, InvestorRepo $investorRepo, ProjectRepo $projectRepo, CategoryRepo $categoryRepo)
+    public function __construct(ProjectDetailRepo $projectDetailRepo, ProjectNewsRepo $projectNewsRepo, NewsRepo $newsRepo, ManagerRepo $managerRepo, StatusProjectRepo $statusProjectRepo, InvestorRepo $investorRepo, ProjectRepo $projectRepo, CategoryRepo $categoryRepo)
     {
-        $this->projectRepo = $projectRepo;
+        $this->projectRepo  = $projectRepo;
         $this->investorRepo = $investorRepo;
         $this->categoryRepo = $categoryRepo;
+        $this->managerRepo  = $managerRepo;
+        $this->newsRepo     = $newsRepo;
+        $this->projectNewsRepo   = $projectNewsRepo;
         $this->statusProjectRepo = $statusProjectRepo;
+        $this->projectDetailRepo = $projectDetailRepo;
     }
     /**
      * Display a listing of the resource.
@@ -51,14 +63,18 @@ class ProjectController extends Controller
     public function create(Project $project)
     {
         $this->authorize('create', $project);
-        $investors = $this->projectRepo->getByStatus();
         $lang = 'vi';
         $parent_lang = 0;
         $categories = $this->categoryRepo->getCategoryByType('project', $lang);
+        $investors = $this->investorRepo->getInvestorProjects($lang);
+        $news = $this->newsRepo->getNewsProjects($lang);
+        $managers  = $this->managerRepo->getManagerProjects($lang);
         $statusProjects = $this->statusProjectRepo->getByStatus($lang);
         $project = new Project();
         return view($this->view.'.create',[
             'investors' => $investors,
+            'news'      => $news,
+            'managers'  => $managers,
             'project'   => $project,
             'view'      => $this->view,
             'lang'      => $lang,
@@ -76,12 +92,16 @@ class ProjectController extends Controller
     public function createLanguage(Project $project, $lang, $item_id)
     {
         $this->authorize('create', $project);
-        $investors = $this->projectRepo->getByStatus();
         $parent_lang = $item_id;
         $categories = $this->categoryRepo->getCategoryByType('project', $lang);
+        $investors = $this->investorRepo->getInvestorProjects($lang);
+        $news = $this->newsRepo->getNewsProjects($lang);
+        $managers  = $this->managerRepo->getManagerProjects($lang);
         $statusProjects = $this->statusProjectRepo->getByStatus($lang);
         $project = new Project();
         return view($this->view.'.create',[
+            'news'      => $news,
+            'managers'  => $managers,
             'investors' => $investors,
             'project'   => $project,
             'view'      => $this->view,
@@ -100,7 +120,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectsRequest $request)
     {
-        $data = $request->only('name', 'category_id', 'status_project_id', 'avatar', 'cover', 'description', 'lang', 'parent_lang', 'phone');
+        $data = $request->only('name', 'category_id', 'status_project_id', 'avatar', 'cover', 'lang', 'parent_lang', 'phone', 'email', 'address', 'province','quy_mo', 'investor_id', 'design', 'sales_policy', 'list_video');
         $data['status'] = isset($request['status']) ? 1 : 0;
         $data['tien_phong'] = isset($request['tien_phong']) ? 1 : 0;
         $data['tieu_bieu'] = isset($request['tieu_bieu']) ? 1 : 0;
@@ -108,9 +128,22 @@ class ProjectController extends Controller
         $data['created_by'] = Auth::id();
         $data['slug'] = Str::slug($request->name);
         $result = $this->projectRepo->create($data);
+        $result->news()->attach($request['list_news']);
         $data = [];
         $data['slug'] = Str::slug($request->name).'-'.$result['id'];
         $this->projectRepo->update($data, $result['id']);
+        $news_projects = $request['news_projects'];
+        foreach ($news_projects as $item):
+            $data = [];
+            if($item['title'] && $item['icon'] && $item['content']):
+                $data['title']      = $item['title'];
+                $data['icon']       = $item['icon'];
+                $data['content']    = $item['content'];
+                $data['project_id'] = $result['id'];
+                $data['created_by'] = Auth::id();
+                $this->projectDetailRepo->create($data);
+            endif;
+        endforeach;
         return redirect(route('projects.index'))->with('success',  'Thêm thành công');
     }
 
@@ -134,19 +167,27 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $this->authorize('create', $project);
-        $investors = $this->projectRepo->getByStatus();
         $lang = $project['lang'];
         $parent_lang = $project['parent_lang'];
+        $investors = $this->investorRepo->getInvestorProjects($lang);
         $categories = $this->categoryRepo->getCategoryByType('project', $lang);
         $statusProjects = $this->statusProjectRepo->getByStatus($lang);
+        $news = $this->newsRepo->getNewsProjects($lang);
+        $managers  = $this->managerRepo->getManagerProjects($lang);
+        $list_news = $this->projectNewsRepo->getData($project['id']);
+        $news_projects = $this->projectDetailRepo->getProjectDetailByProjectId($project['id']);
         return view($this->view.'.update',[
+            'news'      => $news,
+            'managers'  => $managers,
             'investors' => $investors,
             'project'   => $project,
             'view'      => $this->view,
             'lang'      => $lang,
             'parent_lang' => $parent_lang,
             'categories' => $categories,
-            'statusProjects' => $statusProjects
+            'statusProjects' => $statusProjects,
+            'list_news' => $list_news,
+            'news_projects' => $news_projects,
         ]);
     }
 

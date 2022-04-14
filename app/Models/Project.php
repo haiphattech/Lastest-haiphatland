@@ -19,6 +19,9 @@ class Project extends Model
         'address',
         'description',
         'quy_mo',
+        'design',
+        'sales_policy',
+        'list_video',
         'lang',
         'parent_lang',
         'tien_phong',
@@ -27,12 +30,14 @@ class Project extends Model
         'status',
         'published',
         'time_published',
+        'province',
 
         'created_by',
         'manager_id',
         'type_project_id',
         'status_project_id',
         'category_id',
+        'investor_id'
     ];
     public function langs()
     {
@@ -41,5 +46,17 @@ class Project extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function news()
+    {
+        return $this->belongsToMany(News::class, 'project_news');
+    }
+    public function manager()
+    {
+        return $this->belongsTo(Manager::class);
+    }
+    public function statusProject()
+    {
+        return $this->belongsTo(statusProject::class);
     }
 }

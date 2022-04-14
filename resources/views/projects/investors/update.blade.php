@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Cập nhập loại hình dự án')
+@section('title', 'Cập nhập chủ đầu tư')
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">

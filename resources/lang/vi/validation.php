@@ -164,6 +164,8 @@ return [
         'date_end' => 'Hạn nộp hồ sơ',
         'location' => 'Nơi làm việc',
         'content' => 'Nội dung',
+        'investor_id' => 'Chủ đầu tư',
+        'province' => 'Khu vực',
     ],
 
 ];

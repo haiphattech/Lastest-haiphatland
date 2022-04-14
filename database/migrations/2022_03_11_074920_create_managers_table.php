@@ -21,6 +21,10 @@ class CreateManagersTable extends Migration
             $table->string('email')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->unsignedInteger('created_by');
+
+            $table->string('lang')->nullable();
+            $table->integer('parent_lang')->nullable();
+
             $table->timestamps();
         });
     }

@@ -84,7 +84,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Nội dung</label>
-                    <textarea  rows="5" cols="70" id="content" class="form-control"
+                    <textarea  rows="5" cols="70" id="content" class="form-control content"
                                name="content">{!! old('content', $news['content']) !!}</textarea>
                     @if ($errors->has('content'))
                         <div class="mt-1 notification-error">

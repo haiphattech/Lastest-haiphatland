@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Loại hình dự án')
+@section('title', 'Chủ đầu tư')
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Loại hình dự án</h3>
+            <h3 class="page-title">Chủ đầu tư</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>

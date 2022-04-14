@@ -1,5 +1,6 @@
 <script src="{{asset('assets/vendors/js/vendor.bundle.base.js')}}"></script>
 <script src="{{asset('assets/vendors/chart.js/Chart.min.js')}}"></script>
+<script src="{{asset('assets/vendors/select2/select2.min.js')}}"></script>
 <script src="{{asset('assets/vendors/progressbar.js/progressbar.min.js')}}"></script>
 <script src="{{asset('assets/vendors/jvectormap/jquery-jvectormap.min.js')}}"></script>
 <script src="{{asset('assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
@@ -58,15 +59,20 @@
 
     });
 </script>
-</script>
-@stack('scripts')
 <script src="{{url('ckeditor/ckeditor.js')}}"></script>
 <script>
     CKEDITOR.replace('content', {
         filebrowserBrowseUrl: '{{route('ckfinder_browser')}}'
     })
+    CKEDITOR.replaceAll('content', {
+        filebrowserBrowseUrl: '{{route('ckfinder_browser')}}'
+    })
     CKEDITOR.on('content', function(e) {
         e.editor.addCss( 'body { background-color: red; }' );
     });
+    $('.js-example-basic-multiple').select2({
+        placeholder: '--Chọn--'
+    });
 </script>
 @include('ckfinder::setup')
+@stack('scripts')

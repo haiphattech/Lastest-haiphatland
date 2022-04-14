@@ -73,9 +73,8 @@
                         <input type="checkbox" class="form-check-input" {{$investor['status'] ? "checked" : ''}} value="{{$investor['status']}}" name="status"> Kích hoạt <i class="input-helper"></i></label>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary me-2" name="submit" value="save&exit">Lưu và Thoát</button>
-                    <button type="submit" class="btn btn-danger me-2" name="submit" value="save&continue">Lưu và Tiếp tục</button>
-                    <a href="{{route('investors.index')}}" class="btn btn-dark mt-4">Quay lại</a>
+                    <button type="submit" class="btn btn-primary me-2" name="submit" value="save&exit">Lưu</button>
+                    <a href="{{route('investors.index')}}" class="btn btn-dark">Quay lại</a>
                 </div>
             </div>
         </div>

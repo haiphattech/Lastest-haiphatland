@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeProjectsTable extends Migration
+class CreateProjectNewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateTypeProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('type_projects', function (Blueprint $table) {
+        Schema::create('project_news', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('lang')->nullable();
-            $table->integer('parent_lang')->nullable();
-            $table->tinyInteger('status')->default(0);
-            $table->unsignedInteger('created_by');
+            $table->unsignedInteger('project_id');
+            $table->unsignedInteger('news_id');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateTypeProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_projects');
+        Schema::dropIfExists('project_news');
     }
 }

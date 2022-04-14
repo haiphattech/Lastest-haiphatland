@@ -66,7 +66,7 @@
                 <h5 class="card-title">Mô tả</h5>
                 <hr>
                 <div class="form-group">
-                    <textarea  rows="9" cols="70" id="content" class="form-control"
+                    <textarea  rows="9" cols="70" id="content" class="form-control content"
                               name="description">{!! $aboutU['description'] !!}</textarea>
                     @if ($errors->has('description'))
                         <div class="mt-1 notification-error">

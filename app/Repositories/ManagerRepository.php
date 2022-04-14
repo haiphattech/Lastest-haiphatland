@@ -1,14 +1,14 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Investor;
-    use App\Repositories\Support\AbstractRepository;
+use App\Models\Manager;
+use App\Repositories\Support\AbstractRepository;
 use Illuminate\Support\Facades\Auth;
 
-class InvestorRepository extends AbstractRepository
+class ManagerRepository extends AbstractRepository
 {
     public function model(){
-        return Investor::class;
+        return Manager::class;
     }
     public function getData()
     {
@@ -19,7 +19,7 @@ class InvestorRepository extends AbstractRepository
         return $query = $this->model->where('status', $status)->get();
 
     }
-    public function getInvestorProjects($lang = 'vi')
+    public function getManagerProjects($lang = 'vi')
     {
         return $this->model->where([['status', true],['lang', $lang]])->get();
 
