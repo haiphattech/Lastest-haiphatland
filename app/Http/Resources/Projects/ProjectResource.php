@@ -41,7 +41,7 @@ class ProjectResource extends JsonResource
             'contents' => ProjectDetailResource::collection($this->projectDetails),
             'category' => new CategoryResource($this->category),
             'investor' => $this->investor ? new InvestorResource($this->investor) : '',
-            'manager' => $this->manager ? new InvestorResource($this->manager) : '',
+//            'manager' => $this->manager ? new InvestorResource($this->manager) : '',
             'created_at'    => $this->created_at,
         ];
     }

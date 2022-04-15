@@ -37,6 +37,7 @@
                                 <tr>
                                     <th scope="col" class="text-center">STT</th>
                                     <th scope="col">Thông tin</th>
+                                    <th scope="col">Hình ảnh</th>
                                     <th scope="col" class="text-center">Ngày tạo</th>
                                     <th scope="col" class="text-center">Ngôn ngữ</th>
                                     <th scope="col" class="text-center">Trạng thái</th>
@@ -59,6 +60,7 @@
                                                 <p><i class="mdi mdi-map-marker-radius"></i>  {{$item->address}}</p>
                                             @endif
                                         </td>
+                                        <td role="cell" class="text-center"><img src="{{$item['avatar'] ? $item['avatar'] : '/assets/images/team.png'}}" alt=""></td>
                                         <td role="cell" class="text-center">{{date('H:i d/m/Y', strtotime($item->created_at))}}</td>
                                         <td role="cell" class="text-center"><img src="{{$item->langs->icon}}" alt="icon"></td>
                                         <td role="cell" class="text-center">

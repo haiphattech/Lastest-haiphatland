@@ -83,10 +83,18 @@
                 <h5 class="card-title">Ảnh đại diện</h5>
                 <hr>
                 <div class="form-group">
+                    <label for="">Ảnh đại diện</label>
                     <div class="upload_image" data-name="avatar">
-                        <input type="hidden" class="avatar" name="avatar" value="">
-                        <img src="/assets/images/department.jpg" width="180px" alt="" class="image-avatar">
+                        <input type="hidden" class="avatar" name="avatar" value="{{old('avatar', $investor['avatar'])}}">
+                        <img
+                            src="{{$investor['avatar'] ? old('avatar', $investor['avatar']) : old('avatar', '/assets/images/department.jpg')}}"
+                            width="180px" alt="" class="image-avatar">
                     </div>
+                    @if ($errors->has('avatar'))
+                        <div class="mt-1 notification-error">
+                            {{$errors->first('avatar')}}
+                        </div>
+                    @endif
                 </div>
 
             </div>

@@ -131,19 +131,19 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group row mb-3">
-                    <label for="manager_id" class="col-sm-3 col-form-label">Quản lý dự án</label>
-                    <div class="col-sm-9">
-                        <select name="manager_id" id="manager_id" class="form-control">
-                            <option value="">--Chọn--</option>
-                            @foreach($managers as $manager)
-                                <option value="{{$manager['id']}}">{{$manager['fullname']}} - {{$manager['position']}}
-                                    - {{$manager['phone']}}</option>
-                            @endforeach
-                        </select>
+{{--                <div class="form-group row mb-3">--}}
+{{--                    <label for="manager_id" class="col-sm-3 col-form-label">Quản lý dự án</label>--}}
+{{--                    <div class="col-sm-9">--}}
+{{--                        <select name="manager_id" id="manager_id" class="form-control">--}}
+{{--                            <option value="">--Chọn--</option>--}}
+{{--                            @foreach($managers as $manager)--}}
+{{--                                <option value="{{$manager['id']}}">{{$manager['fullname']}} - {{$manager['position']}}--}}
+{{--                                    - {{$manager['phone']}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
 
-                    </div>
-                </div>
+{{--                    </div>--}}
+{{--                </div>--}}
                 <div class="form-group row mb-3">
                     <label for="phone" class="col-sm-3 col-form-label">Quy mô dự án </label>
                     <div class="col-sm-9">
