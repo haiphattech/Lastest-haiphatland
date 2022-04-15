@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectsRequest;
 use App\Http\Requests\UpdateProjectsRequest;
+use App\Models\ProjectDetail;
 use App\Repositories\InvestorRepository as InvestorRepo;
 use App\Repositories\ProjectRepository as ProjectRepo;
 use App\Repositories\CategoryRepository as CategoryRepo;
@@ -215,6 +216,8 @@ class ProjectController extends Controller
         }else{
             $project->news()->attach($request['list_news']);
         }
+        if($request['list_id_remove_project_details'])
+            ProjectDetail::destroy($request['list_id_remove_project_details']);
         foreach ($news_projects as $item):
             $data = [];
             $data['title']      = $item['title'];

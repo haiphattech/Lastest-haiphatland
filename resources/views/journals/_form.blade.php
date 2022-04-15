@@ -44,28 +44,20 @@
             <div class="card-body">
                 <h5 class="card-title">Hình ảnh</h5>
                 <hr>
-                <div class="form-group mt-4">
-                    <label for="firstname">Ảnh khác</label>
-                    <div class="multiple_images row">
-                        @if(isset($images) && !empty($images))
-                            @foreach($images as $image)
-                                <div class="img col-md-2 col-sm-6 col-xs-6">
-                                    <div class="box-image-show">
-                                        <img src="{{$image['url']}}" width="100%" alt="">
-                                        <a href="javascript:;" class="remove-image">
-                                            <i class="mdi mdi-delete btn-icon-prepend"></i>
-                                        </a>
-                                        <input type="hidden" name="gallery[]" value="{{$image['url']}}">
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
-                        <div class="col-md-2 col-sm-6 col-xs-6">
-                            <div class="box-image">
-                                <i size="40" class="mdi mdi-plus"></i>
-                            </div>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="box-image-show">
+                            <img src="{{$image['url']}}" width="100%" alt="">
+                            <a href="javascript:;" class="remove-image">
+                                <i class="mdi mdi-delete btn-icon-prepend"></i>
+                            </a>
+                            <input type="hidden" name="gallery[]" value="{{$image['url']}}">
                         </div>
                     </div>
+                    <div class="col-md-4">2</div>
+                    <div class="col-md-4">3</div>
+                    <div class="col-md-4">3</div>
+                    <div class="col-md-4">3</div>
 
                 </div>
             </div>

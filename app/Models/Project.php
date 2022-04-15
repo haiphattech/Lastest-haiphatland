@@ -63,5 +63,8 @@ class Project extends Model
     {
         return $this->hasMany(ProjectDetail::class,'project_id', 'id');
     }
-
+    public function investor()
+    {
+        return $this->belongsTo(Investor::class);
+    }
 }

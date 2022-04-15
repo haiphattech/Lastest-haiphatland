@@ -30,7 +30,7 @@ class NewsRepository extends AbstractRepository
     }
     public function getNewsProjects($lang= 'vi')
     {
-        return $this->model->where([['status', true], ['lang', $lang]])->orderBy('id', 'DESC')->get();
+        return $this->model->where([['status', true], ['lang', $lang],['slug', 'tin-du-an']])->orderBy('id', 'DESC')->get();
     }
     public function getNewsBySlugAndCateId($slug, $cate_id)
     {

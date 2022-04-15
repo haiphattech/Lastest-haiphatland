@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Projects;
 
 use App\Http\Resources\Categories\CategoryResource;
+use App\Http\Resources\Investors\InvestorResource;
 use App\Http\Resources\News\NewsResource;
 use App\Http\Resources\ProjectDetails\ProjectDetailResource;
 use App\Models\ProjectDetail;
@@ -39,6 +40,8 @@ class ProjectResource extends JsonResource
             'news_projects' => NewsResource::collection($this->news),
             'contents' => ProjectDetailResource::collection($this->projectDetails),
             'category' => new CategoryResource($this->category),
+            'investor' => $this->investor ? new InvestorResource($this->investor) : '',
+            'manager' => $this->manager ? new InvestorResource($this->manager) : '',
             'created_at'    => $this->created_at,
         ];
     }

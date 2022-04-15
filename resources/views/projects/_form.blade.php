@@ -211,6 +211,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                        <input type="hidden" name="list_id_remove_project_details" class="list_id_remove_project_details">
                         @if(isset($news_projects) && count($news_projects)>0)
                             <input type="hidden" class="stt" value="{{count($news_projects)}}">
                             <div class="overview">
@@ -243,7 +244,7 @@
                                                           name="news_projects[0][content]">{!! $value['content'] !!}</textarea>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-sm btn-danger"><i class="mdi mdi-delete"></i> Xóa</button>
+                                        <button type="button" class="btn btn-sm btn-danger remove-overview-one" data-id="{{$value['id']}}"><i class="mdi mdi-delete"></i> Xóa</button>
                                         <hr>
                                     </div>
                                 @endforeach
@@ -279,8 +280,8 @@
                                               name="news_projects[0][content]"></textarea>
                                         </div>
                                     </div>
+                                    <button type="button" class="btn btn-sm btn-danger remove-overview-one" data-id="0"><i class="mdi mdi-delete"></i> Xóa</button>
                                     <hr>
-
                                 </div>
                             </div>
                         @endif
@@ -425,7 +426,7 @@
 
                         </div>
                     </div>
-                    <button type="button" class="btn btn-sm btn-danger remove-overview-one"><i class="mdi mdi-delete"></i> Xóa</button>
+                    <button type="button" class="btn btn-sm btn-danger remove-overview-one" data-id="0"><i class="mdi mdi-delete"></i> Xóa</button>
                     <hr>
                 <div>
             `;
@@ -458,6 +459,15 @@
         jQuery(document).on('click', '.remove-overview-one', function (e) {
             let r = confirm('Bạn có muốn xóa cái này')
             if(r){
+                var id_project_detail = $(this).data("id");
+                var list_id_remove_project_details = $('.list_id_remove_project_details').val();
+                if(id_project_detail > 0){
+                    if(!list_id_remove_project_details){
+                        $('.list_id_remove_project_details').val(id_project_detail)
+                    }else{
+                        $('.list_id_remove_project_details').val(list_id_remove_project_details+','+id_project_detail)
+                    }
+                }
                 var $this = jQuery(this);
                 var $parent = $this.parent('.overview-one');
                 $parent.remove();
