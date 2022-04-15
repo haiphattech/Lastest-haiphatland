@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="form-group row mb-3">
-                    <label for="status_project_id" class="col-sm-3 col-form-label">Trạng thái <span class="text-danger">(*)</span></label>
+                    <label for="status_project_id" class="col-sm-3 col-form-label">Trạng thái</label>
                     <div class="col-sm-9">
                         <select name="status_project_id" id="status_project_id" class="form-control">
                             <option value="">--Chọn--</option>
@@ -60,8 +60,7 @@
                 <h5 class="card-title">Thông tin liên hệ</h5>
                 <hr>
                 <div class="form-group row mb-3">
-                    <label for="phone" class="col-sm-3 col-form-label">Số điện thoại <span
-                            class="text-danger">(*)</span></label>
+                    <label for="phone" class="col-sm-3 col-form-label">Số điện thoại </label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="phone" placeholder="" name="phone"
                                value="{{old('phone', $project['phone'])}}">
@@ -73,8 +72,7 @@
                     </div>
                 </div>
                 <div class="form-group row mb-3">
-                    <label for="email" class="col-sm-3 col-form-label">Email <span
-                            class="text-danger">(*)</span></label>
+                    <label for="email" class="col-sm-3 col-form-label">Email </label>
                     <div class="col-sm-9">
                         <input type="email" class="form-control" id="email" placeholder="" name="email"
                                value="{{old('email', $project['email'])}}">
@@ -86,8 +84,7 @@
                     </div>
                 </div>
                 <div class="form-group row mb-3">
-                    <label for="province" class="col-sm-3 col-form-label">Khu vực <span
-                            class="text-danger">(*)</span></label>
+                    <label for="province" class="col-sm-3 col-form-label">Khu vực </label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="province" placeholder="" name="province"
                                value="{{old('province', $project['province'])}}">
@@ -99,8 +96,7 @@
                     </div>
                 </div>
                 <div class="form-group row mb-3">
-                    <label for="phone" class="col-sm-3 col-form-label">Vị trí <span
-                            class="text-danger">(*)</span></label>
+                    <label for="phone" class="col-sm-3 col-form-label">Vị trí </label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="address" placeholder="" name="address"
                                value="{{old('address', $project['address'])}}">
@@ -118,8 +114,7 @@
                 <h5 class="card-title">Thông tin dự án</h5>
                 <hr>
                 <div class="form-group row mb-3">
-                    <label for="investor_id" class="col-sm-3 col-form-label">Chủ đầu tư <span
-                            class="text-danger">(*)</span></label>
+                    <label for="investor_id" class="col-sm-3 col-form-label">Chủ đầu tư </label>
                     <div class="col-sm-9">
                         <select name="investor_id" id="investor_id" class="form-control">
                             <option value="">--Chọn--</option>
