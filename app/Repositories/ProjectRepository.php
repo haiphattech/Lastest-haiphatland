@@ -41,5 +41,16 @@ class ProjectRepository extends AbstractRepository
     {
         return $this->model->where([['lang', $lang], ['tieu_bieu', true]])->orderBy('id', 'DESC')->limit(6)->get();
     }
-
+    public function getAllProjects($status = true, $lang = 'vi')
+    {
+        return $this->model->where([['status', $status],['lang', $lang]])->orderBy('id', 'DESC')->paginate(8);
+    }
+    public function getAllProjectByCategoryId($category_id, $status = true, $lang = 'vi')
+    {
+        return $this->model->where([['status', $status],['lang', $lang],['category_id', $category_id]])->orderBy('id', 'DESC')->paginate(8);
+    }
+    public function getProjectBySlugAndCategoryId($slug, $category_id, $lang = 'vi')
+    {
+        return $this->model->where([['status', true],['lang', $lang],['slug', $slug], ['category_id', $category_id]])->first();
+    }
 }

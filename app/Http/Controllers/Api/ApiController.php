@@ -9,6 +9,7 @@ use App\Http\Resources\Events\EventResource;
 use App\Http\Resources\Introduces\IntroduceResource;
 use App\Http\Resources\News\NewsResource;
 use App\Http\Resources\Menus\MenuResource;
+use App\Http\Resources\Projects\ProjectCollection;
 use App\Http\Resources\Projects\ProjectResource;
 use App\Http\Resources\Recruits\RecruitCollection;
 use App\Http\Resources\Recruits\RecruitResource;
@@ -64,8 +65,8 @@ class ApiController extends Controller
         $category = $this->categoryRepo->getCategoryBySlug($cate_slug);
         if(!$category){
             return response()->json([
-                "success" => 300,
-                "message" => "Dữ liệu trống",
+                "success" => 404,
+                "message" => "Not Found...",
                 "data" =>  []
             ]);
         }
@@ -79,8 +80,8 @@ class ApiController extends Controller
                 }
                 if(empty($list_categories)):
                     return response()->json([
-                        "success" => 300,
-                        "message" => "Dữ liệu trống",
+                        "success" => 404,
+                        "message" => "Not Found...",
                         "data" =>  []
                     ]);
                 endif;
@@ -88,8 +89,8 @@ class ApiController extends Controller
                     $news = $this->newsRepo->getNewsBySlugAndCateId($slug, $category['id']);
                     if (!$news) {
                         return response()->json([
-                            "success" => 300,
-                            "message" => "Dữ liệu trống",
+                            "success" => 404,
+                            "message" => "Not Found...",
                             "data" => []
                         ]);
                     }
@@ -109,7 +110,6 @@ class ApiController extends Controller
                     $activity = $this->activityRepo->getDataBuSlug($slug);
                     $data['activity'] = new ActivetyResource($activity);
                 }
-
                 break;
             case 'system':
                 $data['list_categories'] = CategoryResource::collection($this->categoryRepo->getCategoryByParentId($category['parent_id']));
@@ -130,6 +130,24 @@ class ApiController extends Controller
                 }else{
                     $data['category'] =  new CategoryResource($category);
                     $data['introduces'] = IntroduceResource::collection($this->introduceRepo->getDataApi());
+                }
+                break;
+            case 'project':
+                $data['category'] =  new CategoryResource($category);
+                if($category['slug'] == 'du-an'){
+                    $data['list_categories'] =  CategoryResource::collection($this->categoryRepo->getCategoryByParentId($category['id']));
+                    $data['projects'] = new ProjectCollection($this->projectRepo->getAllProjects());
+                }else{
+                    $data['list_categories'] =  CategoryResource::collection($this->categoryRepo->getCategoryByParentId($category['parent_id']));
+                    $data['projects'] = new ProjectCollection($this->projectRepo->getAllProjectByCategoryId($category['id']));
+                }
+                if($slug){
+                    unset($data['projects']);
+                    unset($data['list_categories']);
+                    $project = $this->projectRepo->getProjectBySlugAndCategoryId($slug, $category['id']);
+                    $data['project'] = [];
+                    if($project)
+                        $data['project'] = new ProjectResource($this->projectRepo->getProjectBySlugAndCategoryId($slug, $category['id']));
                 }
                 break;
         }

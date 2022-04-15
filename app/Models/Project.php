@@ -59,4 +59,9 @@ class Project extends Model
     {
         return $this->belongsTo(statusProject::class);
     }
+    public function projectDetails()
+    {
+        return $this->hasMany(ProjectDetail::class,'project_id', 'id');
+    }
+
 }

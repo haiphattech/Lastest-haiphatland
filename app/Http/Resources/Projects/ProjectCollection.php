@@ -17,14 +17,15 @@ class ProjectCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'slug' => $this->slug,
-            'avatar' => env('APP_URL').$this->avatar,
-            'cover' => env('APP_URL').$this->cover,
-            'video' => $this->video,
-            'category' => new CategoryResource($this->category),
-            'created_at'    => $this->created_at,
+            'data' => $this->collection,
+
+            'pagination' => [
+                'total' => $this->total(),
+                'count' => $this->count(),
+                'per_page' => $this->perPage(),
+                'current_page' => $this->currentPage(),
+                'total_pages' => $this->lastPage()
+            ],
         ];
     }
 }
