@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Cập nhập loại hình dự án')
+@section('title', 'Cập nhật dự án')
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Thêm mới</h3>
+            <h3 class="page-title">Cập nhật</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">

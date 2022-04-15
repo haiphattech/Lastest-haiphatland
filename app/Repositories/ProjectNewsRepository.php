@@ -14,6 +14,9 @@ class ProjectNewsRepository extends AbstractRepository
     {
         return $this->model->where('project_id', $project_id)->pluck('news_id')->toArray();
     }
-
+    public function checkExistNewsByProjectId($project_id)
+    {
+        return $this->model->where('project_id', $project_id)->get();
+    }
 
 }

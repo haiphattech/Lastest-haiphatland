@@ -176,6 +176,7 @@ class ProjectController extends Controller
         $managers  = $this->managerRepo->getManagerProjects($lang);
         $list_news = $this->projectNewsRepo->getData($project['id']);
         $news_projects = $this->projectDetailRepo->getProjectDetailByProjectId($project['id']);
+
         return view($this->view.'.update',[
             'news'      => $news,
             'managers'  => $managers,
@@ -200,13 +201,33 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectsRequest $request, Project $project)
     {
-        $data = $request->only('name', 'category_id', 'status_project_id', 'avatar', 'cover', 'description', 'phone');
+        $data = $request->only('name', 'category_id', 'status_project_id', 'avatar', 'cover', 'lang', 'parent_lang', 'phone', 'email', 'address', 'province','quy_mo', 'investor_id', 'design', 'sales_policy', 'list_video');
         $data['status'] = isset($request['status']) ? 1 : 0;
         $data['tien_phong'] = isset($request['tien_phong']) ? 1 : 0;
         $data['tieu_bieu'] = isset($request['tieu_bieu']) ? 1 : 0;
         $data['display_home'] = isset($request['display_home']) ? 1 : 0;
         $data['slug'] = Str::slug($request->name).'-'.$project['id'];
         $this->projectRepo->update($data, $project['id']);
+        $news_projects = $request['news_projects'];
+        $checkProjectNews = $this->projectNewsRepo->checkExistNewsByProjectId($project['id']);
+        if(count($checkProjectNews) > 0){
+            $project->news()->sync($request['list_news']);
+        }else{
+            $project->news()->attach($request['list_news']);
+        }
+        foreach ($news_projects as $item):
+            $data = [];
+            $data['title']      = $item['title'];
+            $data['icon']       = $item['icon'];
+            $data['content']    = $item['content'];
+            if(isset($item['id']) && $item['id'] > 0){
+                $this->projectDetailRepo->update($data, $item['id']);
+            }else{
+                $data['project_id'] = $project['id'];
+                $data['created_by'] = Auth::id();
+                $this->projectDetailRepo->create($data);
+            }
+        endforeach;
         return redirect(route('projects.index'))->with('success',  'Thêm thành công');
     }
 

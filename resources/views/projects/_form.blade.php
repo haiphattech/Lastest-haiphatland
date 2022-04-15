@@ -208,7 +208,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="overview" role="tabpanel" aria-labelledby="overview-tab">
-                        @if(isset($news_projects))
+                        @if(isset($news_projects) && count($news_projects)>0)
                             <input type="hidden" class="stt" value="{{count($news_projects)}}">
                             <div class="overview">
                                 @foreach($news_projects as $key => $value)

@@ -25,10 +25,14 @@ class UpdateProjectsRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'phone' => 'required|max:255',
+            'address' => 'required|max:255',
             'status_project_id' => 'required',
             'avatar' => 'required',
             'cover' => 'required',
-            'description' => 'required'
+            'investor_id' => 'required',
+            'province' => 'required',
         ];
     }
 }
