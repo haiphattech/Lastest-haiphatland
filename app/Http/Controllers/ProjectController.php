@@ -120,7 +120,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectsRequest $request)
     {
-        $data = $request->only('name', 'category_id', 'status_project_id', 'avatar', 'cover', 'lang', 'parent_lang', 'phone', 'email', 'address', 'province','quy_mo', 'investor_id', 'design', 'sales_policy', 'list_video');
+        $data = $request->only('name', 'category_id', 'status_project_id', 'avatar', 'cover', 'lang', 'description', 'parent_lang', 'phone', 'email', 'address', 'province','quy_mo', 'investor_id', 'design', 'sales_policy', 'list_video');
         $data['status'] = isset($request['status']) ? 1 : 0;
         $data['tien_phong'] = isset($request['tien_phong']) ? 1 : 0;
         $data['tieu_bieu'] = isset($request['tieu_bieu']) ? 1 : 0;
@@ -201,7 +201,7 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectsRequest $request, Project $project)
     {
-        $data = $request->only('name', 'category_id', 'status_project_id', 'avatar', 'cover', 'lang', 'parent_lang', 'phone', 'email', 'address', 'province','quy_mo', 'investor_id', 'design', 'sales_policy', 'list_video');
+        $data = $request->only('name', 'category_id', 'status_project_id', 'avatar', 'cover', 'lang', 'parent_lang', 'description', 'phone', 'email', 'address', 'province','quy_mo', 'investor_id', 'design', 'sales_policy', 'list_video');
         $data['status'] = isset($request['status']) ? 1 : 0;
         $data['tien_phong'] = isset($request['tien_phong']) ? 1 : 0;
         $data['tieu_bieu'] = isset($request['tieu_bieu']) ? 1 : 0;

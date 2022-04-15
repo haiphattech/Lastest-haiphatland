@@ -109,6 +109,7 @@
                 </div>
             </div>
         </div>
+
         <div class="card mt-4">
             <div class="card-body">
                 <h5 class="card-title">Thông tin dự án</h5>
@@ -177,6 +178,13 @@
                                 @endforeach
                             </select>
                         @endif
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="phone" class="col-sm-3 col-form-label">Mô tả</label>
+                    <div class="col-sm-9">
+                        <textarea rows="9" cols="70" id="description" class="form-control"
+                                  name="description">{!! $project['description'] !!}</textarea>
                     </div>
                 </div>
             </div>
