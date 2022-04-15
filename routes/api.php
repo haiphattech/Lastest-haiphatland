@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\RecruitController;
+use App\Http\Controllers\Api\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,4 @@ Route::get('/footer/{lang?}', [ApiController::class, 'getDataFooter']);
 Route::get('/{category?}/{slug?}', [ApiController::class, 'index']);
 Route::get('/{lang?}/{category?}/{slug?}', [ApiController::class, 'indexLang']);
 Route::post('/ung-tuyen', [RecruitController::class, 'store']);
+Route::post('/contact', [ContactController::class, 'store']);
