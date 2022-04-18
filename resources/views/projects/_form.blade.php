@@ -398,7 +398,6 @@
     <script>
         function addForm() {
             let stt = $('.stt').val();
-            console.log(stt)
             let html = `
                 <div class='overview-one'>
                     <input type="hidden" name="pro[${stt}][id]" value="0">

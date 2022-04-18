@@ -13,4 +13,8 @@ class ImageRepository extends AbstractRepository
     {
         return $this->model->where('category_id', $cate_id)->orderBy('id', 'DESC')->get();
     }
+    public function getImagePageByJournalId($journal_id)
+    {
+        return $this->model->where('journal_id', $journal_id)->orderBy('page', 'ASC')->get();
+    }
 }

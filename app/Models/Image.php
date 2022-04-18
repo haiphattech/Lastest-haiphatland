@@ -13,6 +13,7 @@ class Image extends Model
         'project_id',
         'journal_id',
         'category_id',
+        'page',
     ];
     public function langs()
     {

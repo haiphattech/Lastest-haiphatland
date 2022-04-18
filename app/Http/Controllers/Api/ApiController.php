@@ -7,6 +7,7 @@ use App\Http\Resources\Activies\ActivetyResource;
 use App\Http\Resources\Categories\CategoryResource;
 use App\Http\Resources\Events\EventResource;
 use App\Http\Resources\Introduces\IntroduceResource;
+use App\Http\Resources\Journals\JournalResource;
 use App\Http\Resources\News\NewsResource;
 use App\Http\Resources\Menus\MenuResource;
 use App\Http\Resources\Projects\ProjectCollection;
@@ -28,6 +29,7 @@ use App\Repositories\NewsRepository as NewsRepo;
 use App\Repositories\SystemRepository as SystemRepo;
 use App\Repositories\RecruitRepository as RecruitRepo;
 use App\Repositories\IntroduceRepository as IntroduceRepo;
+use App\Repositories\JournalRepository as JournalRepo;
 
 class ApiController extends Controller
 {
@@ -43,8 +45,9 @@ class ApiController extends Controller
     protected $applicationRepo;
     protected $recruitRepo;
     protected $introduceRepo;
+    protected $journalRepo;
 
-    public function __construct(IntroduceRepo $introduceRepo, RecruitRepo $recruitRepo, SystemRepo $systemRepo, NewsRepo $newsRepo,ApplicationRepo $applicationRepo, AboutURepo $aboutURepo, EventRepo $eventRepo, ActivityRepo $activityRepo, CategoryRepo $categoryRepo, ImageRepo $imageRepo, MenuRepo $menuRepo, ProjectRepo $projectRepo)
+    public function __construct(JournalRepo $journalRepo, IntroduceRepo $introduceRepo, RecruitRepo $recruitRepo, SystemRepo $systemRepo, NewsRepo $newsRepo,ApplicationRepo $applicationRepo, AboutURepo $aboutURepo, EventRepo $eventRepo, ActivityRepo $activityRepo, CategoryRepo $categoryRepo, ImageRepo $imageRepo, MenuRepo $menuRepo, ProjectRepo $projectRepo)
     {
         $this->categoryRepo = $categoryRepo;
         $this->imageRepo    = $imageRepo;
@@ -58,6 +61,7 @@ class ApiController extends Controller
         $this->applicationRepo   = $applicationRepo;
         $this->recruitRepo   = $recruitRepo;
         $this->introduceRepo = $introduceRepo;
+        $this->journalRepo  = $journalRepo;
     }
     public function index($cate_slug, $slug = '')
     {
@@ -150,6 +154,13 @@ class ApiController extends Controller
                         $data['project'] = new ProjectResource($this->projectRepo->getProjectBySlugAndCategoryId($slug, $category['id']));
                 }
                 break;
+            case 'journal':
+                $data['category'] =  new CategoryResource($category);
+                if($slug):
+                    $data['journal'] = new JournalResource($this->journalRepo->getJournalBySlug($slug));
+                else:
+                    $data['list_journals'] =  JournalResource::collection($this->journalRepo->getListJournals());
+                endif;
         }
         return response()->json([
             "success" => 200,

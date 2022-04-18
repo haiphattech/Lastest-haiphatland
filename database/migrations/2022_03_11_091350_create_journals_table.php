@@ -17,6 +17,7 @@ class CreateJournalsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('avatar');
+            $table->string('slug')->unique();
 
             $table->tinyInteger('display_home')->default(0);
             $table->tinyInteger('status')->default(0);

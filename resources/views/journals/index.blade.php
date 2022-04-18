@@ -70,22 +70,22 @@
                                         </td>
                                         <td class="text-center">
                                             @can('update', $item)
-                                                <a href="{{route('systems.edit', $item['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
+                                                <a href="{{route('journals.edit', $item['id'])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend icon-mr"></i> Sửa</a>
                                             @endcan
                                             @can('delete', $item)
-                                                <form class="d-inline-block" action="{{ route('systems.destroy', $item['id']) }}" method="POST" >
+                                                <form class="d-inline-block" action="{{ route('journals.destroy', $item['id']) }}" method="POST" >
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không?')"><i class="mdi mdi-delete btn-icon-prepend icon-mr"></i> Xóa</button>
                                             </form>
                                             @endcan
-                                            @can('create', $item)
-                                            @if(!$item['parent_lang'])
-                                                @if(\App\Helpers\FunctionHelpers::checkLangSystemsExist('en', $item['id']))
-                                                    <a href="{{route('systems-create.lang',['lang'=> 'en', 'item_id' => $item['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>
-                                                @endif
-                                            @endif
-                                            @endcan
+{{--                                            @can('create', $item)--}}
+{{--                                            @if(!$item['parent_lang'])--}}
+{{--                                                @if(\App\Helpers\FunctionHelpers::checkLangSystemsExist('en', $item['id']))--}}
+{{--                                                    <a href="{{route('systems-create.lang',['lang'=> 'en', 'item_id' => $item['id']])}}" class="btn btn-primary btn-icon-text"><i class="mdi mdi-flag icon-mr"></i> Ngôn ngữ</a>--}}
+{{--                                                @endif--}}
+{{--                                            @endif--}}
+{{--                                            @endcan--}}
 
                                         </td>
                                     </tr>

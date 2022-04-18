@@ -17,6 +17,7 @@ class ImageCollection extends ResourceCollection
         return [
             'id'     => $this->id,
             'url'    => $this->url ? env('APP_URL').$this->url : '',
+            'page'   => $this->page,
         ];
     }
 }
