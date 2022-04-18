@@ -4,7 +4,5 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	// Define changes to default configuration here. For example:
-	// config.language = 'fr';
-	// config.uiColor = '#AADC6E';
+    config.filebrowserBrowseUrl = '/ckfinder/browser?CKEditor=content&CKEditorFuncNum=3&langCode=vi';
 };
