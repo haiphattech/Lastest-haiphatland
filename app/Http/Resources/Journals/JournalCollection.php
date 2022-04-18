@@ -18,12 +18,14 @@ class JournalCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'id'            => $this->id,
-            'name'          => $this->name,
-            'slug'          => $this->slug,
-            'avatar'        => env('APP_URL').$this->avatar,
-            'list_pages'    => ImageResource::collection($this->images),
-            'category'      => new CategoryResource($this->category)
+            'data' => $this->collection,
+            'pagination' => [
+                'total' => $this->total(),
+                'count' => $this->count(),
+                'per_page' => $this->perPage(),
+                'current_page' => $this->currentPage(),
+                'total_pages' => $this->lastPage()
+            ],
         ];
     }
 }
