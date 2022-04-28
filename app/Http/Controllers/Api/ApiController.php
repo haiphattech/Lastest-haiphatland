@@ -131,6 +131,8 @@ class ApiController extends Controller
             case 'introduces':
                 if($category['slug'] == 'thu-ngo'){
                     $data['category'] =  new CategoryResource($category);
+                }else if($category['slug'] == 'lien-he') {
+                    $data['category'] = new CategoryResource($category);
                 }else{
                     $data['category'] =  new CategoryResource($category);
                     $data['introduces'] = IntroduceResource::collection($this->introduceRepo->getDataApi());
