@@ -29,14 +29,14 @@
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item preview-item">
+                    <a href="{{route('changePasswordGet')}}" class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
                             <div class="preview-icon bg-dark rounded-circle">
                                 <i class="mdi mdi-onepassword  text-info"></i>
                             </div>
                         </div>
                         <div class="preview-item-content">
-                            <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                            <p class="preview-subject ellipsis mb-1 text-small">Thay đổi mật khẩu</p>
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>

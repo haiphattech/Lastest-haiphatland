@@ -26,6 +26,8 @@ use App\Http\Controllers\IntroduceDetailController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/thay-doi-mat-khau',[HomeController::class, 'showChangePasswordGet'])->name('changePasswordGet');
+    Route::post('/changePassword',[HomeController::class, 'changePasswordPost'])->name('changePasswordPost');
     Route::resources([
         'type-permissions'  => TypePermissionController::class,
         'permissions'       => PermissionController::class,
