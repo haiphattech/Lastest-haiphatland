@@ -23,7 +23,11 @@ class ProjectRepository extends AbstractRepository
     {
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
     }
-
+    //Thống kê
+    public function projectAll($lang)
+    {
+        return $this->model->where([['lang', $lang]])->orderBy('id', 'DESC')->get();
+    }
     //API FRONTEND
     public function getProjectShowHome($lang)
     {

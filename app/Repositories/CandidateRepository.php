@@ -23,7 +23,10 @@ class CandidateRepository extends AbstractRepository
     {
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();
     }
-
+    public function candidateAll()
+    {
+        return $this->model->orderBy('id', 'DESC')->get();
+    }
     //API FRONTEND
 
 }

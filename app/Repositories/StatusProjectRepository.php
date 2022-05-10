@@ -19,6 +19,10 @@ class StatusProjectRepository extends AbstractRepository
         return $this->model->where([['status', $status],['lang', $lang]])->get();
 
     }
+    public function statusProjectAll($lang = 'vi')
+    {
+        return $this->model->orderBy('ID', 'DESC')->get();
+    }
     public function checkLangExist($lang, $parent_lang)
     {
         return $this->model->where([['lang', $lang], ['parent_lang', $parent_lang]])->first();

@@ -23,6 +23,8 @@ use App\Http\Controllers\SystemController;
 use App\Http\Controllers\RecruitController;
 use App\Http\Controllers\IntroduceController;
 use App\Http\Controllers\IntroduceDetailController;
+use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\ContactController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -47,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
         'systems'           => SystemController::class,
         'recruits'          => RecruitController::class,
         'introduces'        => IntroduceController::class,
+        'candidates'        => CandidateController::class,
+        'contacts'          => ContactController::class,
     ]);
     Route::get('/categories/create/{lang}/{category_id}', [CategoryController::class, 'createLanguage'])->name('categories-create.lang');
     Route::get('/menus/create/{lang}/{menu_id}', [MenuController::class, 'createLanguage'])->name('menus-create.lang');

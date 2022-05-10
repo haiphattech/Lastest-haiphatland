@@ -5,17 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
-
+use App\Repositories\ContactRepository as ContactRepo;
 class ContactController extends Controller
 {
+    protected $view = 'contacts';
+    protected $contactRepo;
+    public function __construct(ContactRepo $contactRepo)
+    {
+        $this->contactRepo = $contactRepo;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Contact $contact)
     {
-        //
+        $this->authorize('viewAny', $contact);
+        $contacts = $this->contactRepo->getData();
+        return view($this->view.'.index',[
+            'contacts' => $contacts
+        ]);
     }
 
     /**
@@ -47,7 +57,12 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        $this->authorize('view', $contact);
+        if(!$contact) abort(404);
+        return view($this->view.'.show', [
+            'contact' =>  $contact,
+            'view'      => $this->view,
+        ]);
     }
 
     /**

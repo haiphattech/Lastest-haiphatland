@@ -23,19 +23,19 @@ class CandidatePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('candidate_views');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Candidate  $candidates
+     * @param  \App\Models\Candidate  $candidate
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Candidate $candidates)
+    public function view(User $user, Candidate $candidate)
     {
-        //
+        return $user->hasPermission('candidate_show');
     }
 
     /**
@@ -53,10 +53,10 @@ class CandidatePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Candidate  $candidates
+     * @param  \App\Models\Candidate  $candidate
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Candidate $candidates)
+    public function update(User $user, Candidate $candidate)
     {
         //
     }
@@ -65,10 +65,10 @@ class CandidatePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Candidate  $candidates
+     * @param  \App\Models\Candidate  $candidate
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Candidate $candidates)
+    public function delete(User $user, Candidate $candidate)
     {
         //
     }
@@ -77,10 +77,10 @@ class CandidatePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Candidate  $candidates
+     * @param  \App\Models\Candidate  $candidate
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Candidate $candidates)
+    public function restore(User $user, Candidate $candidate)
     {
         //
     }
@@ -92,7 +92,7 @@ class CandidatePolicy
      * @param  \App\Models\Candidate  $candidates
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Candidate $candidates)
+    public function forceDelete(User $user, Candidate $candidate)
     {
         //
     }

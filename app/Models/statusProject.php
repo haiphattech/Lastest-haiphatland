@@ -23,4 +23,8 @@ class statusProject extends Model
     {
         return $this->belongsTo(statusProject::class, 'parent_lang', 'id');
     }
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

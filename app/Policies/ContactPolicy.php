@@ -23,7 +23,7 @@ class ContactPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('contact_view');
     }
 
     /**
@@ -35,7 +35,7 @@ class ContactPolicy
      */
     public function view(User $user, Contact $contact)
     {
-        //
+        return $user->hasPermission('contact_show');
     }
 
     /**
