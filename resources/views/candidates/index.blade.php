@@ -50,7 +50,7 @@
                                             <p title="Thời gian"><i class="mdi mdi-timer"></i>  {{date('H:i d/m/Y', strtotime($item['created_at']))}}</p>
                                         </td>
                                         <td class="text-center">
-                                            {{$item->recruit->name}}
+                                            {{($item->recruit && isset($item->recruit->name)) ? $item->recruit->name : ''}}
                                         </td>
                                         <td class="text-center">
                                             <a href="{{$item['url_cv']}}">Tải xuống</a>
