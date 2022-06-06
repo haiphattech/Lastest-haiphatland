@@ -46,7 +46,7 @@ class ProjectPolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermission('Project-add');
+        return $user->hasPermission('project-add');
     }
 
     /**
