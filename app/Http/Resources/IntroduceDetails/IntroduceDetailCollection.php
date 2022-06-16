@@ -17,7 +17,7 @@ class IntroduceDetailCollection extends ResourceCollection
         return [
             'id'         => $this->id,
             'title'      => $this->title,
-            'avatar'    => $this->avatar ? env('APP_URL').$this->avatar : '',
+            'avatar'     => $this->avatar,
             'description'=> $this->description,
             'created_at' => $this->created_at,
         ];
